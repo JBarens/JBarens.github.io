@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#05060d"/>
+      <stop offset="0.5" stop-color="#070810"/>
+      <stop offset="1" stop-color="#04050c"/>
+    </linearGradient>
+    <radialGradient id="glowB" cx="0.82" cy="0.1" r="0.6">
+      <stop offset="0" stop-color="#5aa9ff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#5aa9ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="earth" cx="0.36" cy="0.3" r="0.75">
+      <stop offset="0" stop-color="#3a7bd5"/>
+      <stop offset="0.45" stop-color="#1f4f9c"/>
+      <stop offset="0.75" stop-color="#11203f"/>
+      <stop offset="1" stop-color="#050a16"/>
+    </radialGradient>
+    <radialGradient id="sat" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#9affc8"/>
+      <stop offset="0.4" stop-color="#50ffa0"/>
+      <stop offset="1" stop-color="#50ffa0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glowB)"/>
+
+  <!-- stars -->
+  <g fill="#ffffff">
+    <circle cx="120" cy="90" r="1.4" opacity="0.7"/>
+    <circle cx="300" cy="160" r="1" opacity="0.45"/>
+    <circle cx="520" cy="70" r="1.2" opacity="0.55"/>
+    <circle cx="700" cy="130" r="1" opacity="0.4"/>
+    <circle cx="980" cy="60" r="1.5" opacity="0.7"/>
+    <circle cx="1080" cy="200" r="1" opacity="0.5"/>
+    <circle cx="180" cy="320" r="1" opacity="0.4"/>
+    <circle cx="60" cy="470" r="1.3" opacity="0.6"/>
+    <circle cx="420" cy="540" r="1" opacity="0.4"/>
+    <circle cx="1130" cy="430" r="1.2" opacity="0.55"/>
+    <circle cx="860" cy="520" r="1" opacity="0.4"/>
+  </g>
+  <circle cx="250" cy="240" r="1.6" fill="#8cffc8" opacity="0.6"/>
+  <circle cx="1010" cy="350" r="1.6" fill="#9ac3ff" opacity="0.6"/>
+
+  <!-- Earth limb (bottom-right, partly off-canvas) -->
+  <g transform="translate(1090, 690)">
+    <circle r="360" fill="url(#earth)"/>
+    <circle r="362" fill="none" stroke="#5aa9ff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+
+  <!-- orbit + satellite -->
+  <ellipse cx="760" cy="250" rx="430" ry="150" fill="none" stroke="#50ffa0" stroke-opacity="0.30" stroke-width="2" transform="rotate(-18 760 250)"/>
+  <g transform="translate(1148, 196)">
+    <circle r="20" fill="url(#sat)"/>
+    <circle r="6" fill="#9affc8"/>
+  </g>
+
+  <!-- text -->
+  <text x="80" y="150" font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="22" letter-spacing="7" fill="#50ffa0">JBARENS.GITHUB.IO</text>
+
+  <text x="76" y="300" font-family="'Chakra Petch','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="116" letter-spacing="-1" fill="#ffffff">JASPER</text>
+  <text x="76" y="408" font-family="'Chakra Petch','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="116" letter-spacing="-1" fill="#ffffff">BARE<tspan fill="#50ffa0">NS</tspan></text>
+
+  <text x="80" y="476" font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="25" fill="rgba(255,255,255,0.65)">Aerospace engineer → AI engineering · full-stack builder</text>
+
+  <!-- tag row -->
+  <g font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="18" letter-spacing="2" fill="rgba(255,255,255,0.45)">
+    <text x="80" y="548">ORBITAL MECHANICS</text>
+    <text x="360" y="548">·</text>
+    <text x="384" y="548">REACT</text>
+    <text x="486" y="548">·</text>
+    <text x="510" y="548">FASTAPI</text>
+    <text x="640" y="548">·</text>
+    <text x="664" y="548">THREE.JS</text>
+    <text x="812" y="548">·</text>
+    <text x="836" y="548">PYTHON</text>
+  </g>
+</svg>
