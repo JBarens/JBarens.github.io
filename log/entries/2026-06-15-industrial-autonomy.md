@@ -5,8 +5,8 @@ tags: space, ai, industry
 slug: industrial-autonomy
 ---
 
-People talk about Mars colonization as a rocket problem. It isn't. The rockets more or less work. The bottleneck is everything that happens after you land — building, mining, manufacturing, maintaining systems — in an environment where you cannot send a human to fix it and a signal takes up to 24 minutes each way.
+Everyone talks about the rocket. Nobody talks about what happens after you land.
 
-That's an industrial autonomy problem. And we haven't solved it on Earth yet.
+Getting to Mars is a solved problem in the sense that we know how to do it. The hard part is building something there — mining, manufacturing, maintaining systems — in an environment where you can't send a technician and a radio signal takes up to 24 minutes each way.
 
-Placeholder — replace this with the real entry.
+That's not a propulsion problem. That's an industrial autonomy problem. And we haven't solved it on Earth yet.
