@@ -1,0 +1,12 @@
+---
+title: Why industrial autonomy is the real bottleneck for space colonization
+date: 2026-06-15
+tags: space, ai, industry
+slug: industrial-autonomy
+---
+
+People talk about Mars colonization as a rocket problem. It isn't. The rockets more or less work. The bottleneck is everything that happens after you land — building, mining, manufacturing, maintaining systems — in an environment where you cannot send a human to fix it and a signal takes up to 24 minutes each way.
+
+That's an industrial autonomy problem. And we haven't solved it on Earth yet.
+
+Placeholder — replace this with the real entry.

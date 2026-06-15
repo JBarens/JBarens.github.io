@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log — Jasper Barens</title>
+    <meta name="description" content="Writing by Jasper Barens — space, AI, engineering, industry." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js" integrity="sha384-odPBjvtXVM/5hOYIr3A1dB+flh0c3wAT3bSesIOqEGmyUA4JoKf/YTWy0XKOYAY7" crossorigin="anonymous"></script>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg: #04040a;
+        --ink-1: rgba(255,255,255,0.92);
+        --ink-2: rgba(255,255,255,0.5);
+        --ink-3: rgba(255,255,255,0.26);
+        --ink-4: rgba(255,255,255,0.12);
+        --line: rgba(255,255,255,0.08);
+        --green: #50ffa0;
+        --blue: #5aa9ff;
+        --amber: #ffb454;
+        --disp: "Chakra Petch", sans-serif;
+        --mono: "JetBrains Mono", monospace;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: var(--bg);
+        color: var(--ink-1);
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      ::selection { background: rgba(80,255,160,0.22); color: #fff; }
+
+      /* ─── Starfield ─────────────────────────────────────────── */
+      #stars {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(1200px 800px at 78% -10%, rgba(90,169,255,0.06), transparent 60%),
+          radial-gradient(900px 700px at 10% 110%, rgba(80,255,160,0.04), transparent 55%),
+          linear-gradient(180deg, #04040a 0%, #060710 50%, #04050c 100%);
+      }
+
+      /* ─── Header ────────────────────────────────────────────── */
+      header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 40px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(4,4,10,0.82);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .brand {
+        font-family: var(--disp);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-1);
+        text-decoration: none;
+      }
+      .brand .b-dot { color: var(--green); }
+      nav { display: flex; gap: 26px; }
+      nav a {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      nav a:hover, nav a.active { color: var(--ink-1); }
+      .telemetry {
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        color: var(--ink-3);
+      }
+      .telemetry b { color: var(--green); font-weight: 500; }
+      .telemetry a {
+        color: var(--green);
+        text-decoration: none;
+        letter-spacing: 0.1em;
+      }
+
+      /* ─── Page shell ────────────────────────────────────────── */
+      main {
+        position: relative;
+        z-index: 10;
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 140px 40px 120px;
+      }
+
+      /* ─── Page header ───────────────────────────────────────── */
+      .page-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 9px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 56px;
+      }
+      .page-eyebrow .e-num { color: var(--green); }
+      .page-eyebrow::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      /* ─── Entries ───────────────────────────────────────────── */
+      .entry {
+        padding: 48px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .entry:first-child { padding-top: 0; }
+
+      .e-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .e-id {
+        font-size: 9px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--green);
+      }
+      .e-date {
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        color: var(--ink-3);
+        white-space: nowrap;
+      }
+
+      .e-title {
+        font-family: var(--disp);
+        font-size: clamp(20px, 3.5vw, 28px);
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: var(--ink-1);
+        margin-bottom: 28px;
+      }
+
+      .e-body {
+        color: var(--ink-2);
+        font-size: 13px;
+        line-height: 1.85;
+      }
+      .e-body p { margin-bottom: 18px; }
+      .e-body p:last-child { margin-bottom: 0; }
+      .e-body strong { color: var(--ink-1); font-weight: 500; }
+      .e-body em { color: var(--ink-2); font-style: italic; }
+      .e-body a { color: var(--blue); text-decoration: none; }
+      .e-body a:hover { text-decoration: underline; }
+      .e-body h2, .e-body h3 {
+        font-family: var(--disp);
+        color: var(--ink-1);
+        margin: 28px 0 12px;
+      }
+      .e-body code {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--green);
+        background: rgba(80,255,160,0.06);
+        padding: 2px 6px;
+        border-radius: 2px;
+      }
+
+      .e-tags {
+        margin-top: 28px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .e-tag {
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        color: var(--ink-3);
+        border: 1px solid var(--line);
+        padding: 4px 10px;
+      }
+      .e-tag::before { content: "#"; color: var(--green); }
+
+      /* ─── Empty / loading state ─────────────────────────────── */
+      .log-status {
+        color: var(--ink-3);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 40px 0;
+      }
+
+      /* ─── Footer ────────────────────────────────────────────── */
+      footer {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 40px;
+        border-top: 1px solid var(--line);
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        color: var(--ink-3);
+      }
+
+      @media (max-width: 600px) {
+        header { padding: 16px 20px; }
+        nav { gap: 16px; }
+        main { padding: 120px 24px 80px; }
+        footer { padding: 16px 20px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <canvas id="stars"></canvas>
+
+    <header>
+      <a class="brand" href="/">JT<span class="b-dot">·</span>BARENS</a>
+      <nav>
+        <a href="/#signal">Signal</a>
+        <a href="/#missions">Missions</a>
+        <a href="/log" class="active">Log</a>
+        <a href="/#systems">Systems</a>
+        <a href="/#about">About</a>
+        <a href="/#uplink">Uplink</a>
+      </nav>
+      <div class="telemetry">
+        MET <b id="met">T+00:00:00</b> &nbsp;·&nbsp;
+        <a href="https://github.com/JBarens" target="_blank" rel="noopener">GH ↗</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="page-eyebrow">
+        <span class="e-num">LOG</span> Flight Log · Writing
+      </div>
+      <div id="entries"><div class="log-status">Loading entries...</div></div>
+    </main>
+
+    <footer>
+      <div>Jasper Barens · Amsterdam, NL</div>
+      <div id="utc">UTC —</div>
+    </footer>
+
+    <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ─── Starfield ──────────────────────────────────────────── */
+      var cv = document.getElementById('stars');
+      var ctx = cv.getContext('2d');
+      var W, H, DPR, stars = [];
+      var STAR_N = 320;
+
+      function size() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth; H = window.innerHeight;
+        cv.width = W * DPR; cv.height = H * DPR;
+        cv.style.width = W + 'px'; cv.style.height = H + 'px';
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      }
+
+      function seed() {
+        stars = [];
+        for (var i = 0; i < STAR_N; i++) {
+          var depth = Math.random();
+          stars.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: 0.3 + depth * 1.2,
+            base: 0.2 + depth * 0.6,
+            tw: Math.random() * Math.PI * 2,
+            tws: 0.5 + Math.random() * 1.2,
+            hue: Math.random() < 0.12 ? (Math.random() < 0.5 ? 'b' : 'g') : 'w'
+          });
+        }
+      }
+
+      window.addEventListener('resize', function () { size(); seed(); });
+      size(); seed();
+
+      var mTX = 0, mTY = 0, mouseX = 0, mouseY = 0;
+      if (!reduce) {
+        window.addEventListener('mousemove', function (e) {
+          mTX = e.clientX / W - 0.5;
+          mTY = e.clientY / H - 0.5;
+        }, { passive: true });
+      }
+
+      function frame() {
+        if (!reduce) { mouseX += (mTX - mouseX) * 0.06; mouseY += (mTY - mouseY) * 0.06; }
+        ctx.clearRect(0, 0, W, H);
+        var t = performance.now() * 0.001;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var tw = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * s.tws + s.tw);
+          var a = s.base * tw;
+          ctx.beginPath();
+          ctx.arc(s.x + mouseX * 8, s.y + mouseY * 8, s.r, 0, 6.2832);
+          if (s.hue === 'b') ctx.fillStyle = 'rgba(150,195,255,' + a + ')';
+          else if (s.hue === 'g') ctx.fillStyle = 'rgba(140,255,200,' + a + ')';
+          else ctx.fillStyle = 'rgba(255,255,255,' + a + ')';
+          ctx.fill();
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+
+      /* ─── MET clock ──────────────────────────────────────────── */
+      var metEl = document.getElementById('met');
+      var utcEl = document.getElementById('utc');
+      var epoch = new Date('2025-05-01T00:00:00Z').getTime();
+      function tick() {
+        var now = Date.now();
+        var s = Math.floor((now - epoch) / 1000);
+        var hh = Math.floor(s / 3600) % 24;
+        var mm = Math.floor(s / 60) % 60;
+        var ss = s % 60;
+        function p(n) { return String(n).padStart(2, '0'); }
+        if (metEl) metEl.textContent = 'T+' + p(hh) + ':' + p(mm) + ':' + p(ss);
+        if (utcEl) utcEl.textContent = 'UTC ' + new Date(now).toISOString().slice(11, 19);
+      }
+      setInterval(tick, 1000); tick();
+
+      /* ─── Frontmatter parser ─────────────────────────────────── */
+      function parseFrontmatter(raw) {
+        var match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+        if (!match) return { meta: {}, body: raw };
+        var meta = {};
+        match[1].split('\n').forEach(function (line) {
+          var idx = line.indexOf(':');
+          if (idx < 0) return;
+          var k = line.slice(0, idx).trim();
+          var v = line.slice(idx + 1).trim();
+          meta[k] = v;
+        });
+        return { meta: meta, body: match[2].trim() };
+      }
+
+      function parseTags(str) {
+        if (!str) return [];
+        return str.replace(/[\[\]]/g, '').split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+      }
+
+      function formatDate(str) {
+        if (!str) return '';
+        var d = new Date(str + 'T00:00:00Z');
+        return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
+      }
+
+      /* ─── Render entries ─────────────────────────────────────── */
+      function renderEntry(data, index) {
+        var parsed = parseFrontmatter(data);
+        var meta = parsed.meta;
+        var body = parsed.body;
+        var tags = parseTags(meta.tags);
+        var id = 'ENTRY-' + String(index + 1).padStart(2, '0');
+
+        var tagsHtml = tags.map(function (t) {
+          return '<span class="e-tag">' + t + '</span>';
+        }).join('');
+
+        var el = document.createElement('article');
+        el.className = 'entry';
+        el.innerHTML =
+          '<div class="e-header">' +
+            '<span class="e-id">' + id + '</span>' +
+            '<span class="e-date">' + formatDate(meta.date) + '</span>' +
+          '</div>' +
+          '<h2 class="e-title">' + (meta.title || 'Untitled') + '</h2>' +
+          '<div class="e-body">' + marked.parse(body) + '</div>' +
+          (tags.length ? '<div class="e-tags">' + tagsHtml + '</div>' : '');
+        return el;
+      }
+
+      /* ─── Fetch and mount ────────────────────────────────────── */
+      var container = document.getElementById('entries');
+
+      fetch('./manifest.json')
+        .then(function (r) { return r.json(); })
+        .then(function (manifest) {
+          var filenames = manifest.entries || [];
+          if (!filenames.length) {
+            container.innerHTML = '<div class="log-status">No entries yet.</div>';
+            return;
+          }
+          return Promise.all(filenames.map(function (f) {
+            return fetch('./entries/' + f).then(function (r) { return r.text(); });
+          })).then(function (texts) {
+            container.innerHTML = '';
+            texts.forEach(function (text, i) {
+              container.appendChild(renderEntry(text, i));
+            });
+          });
+        })
+        .catch(function () {
+          container.innerHTML = '<div class="log-status">Failed to load entries.</div>';
+        });
+    })();
+    </script>
+  </body>
+</html>
