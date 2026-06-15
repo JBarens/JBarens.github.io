@@ -617,7 +617,7 @@
         <article class="mission reveal">
           <div class="m-meta">
             <span class="status live"><span class="s-dot"></span>Live</span>
-            <div class="m-id">MSN-01</div>
+            <div class="m-id">MSN-01 · 2026</div>
           </div>
           <div>
             <h3 class="m-title">Orbital Mechanics Simulator</h3>
@@ -877,7 +877,7 @@
             <div class="c-item soon">Azure (AZ-900 in progress)</div>
           </div>
         </div>
-        <div class="cell dim">
+        <div class="cell">
           <div class="c-label">Consulting</div>
           <div class="c-list">
             <div class="c-item hi">Stakeholder management</div>
@@ -1086,11 +1086,6 @@
       if (ph !== lastPhase) {
         lastPhase = ph;
         phaseEl.textContent = ph;
-        if (scanEl && prog > 0.02) {
-          scanEl.classList.remove('fire');
-          void scanEl.offsetWidth;
-          scanEl.classList.add('fire');
-        }
       }
     }
     if (hudProg) hudProg.style.height = (prog * 100) + '%';
