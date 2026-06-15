@@ -472,9 +472,50 @@
     .reveal { opacity: 1; transform: none; transition: none; }
     .scroll-cue .bar::after, .pre .live-dot, .status .s-dot { animation: none; }
   }
+
+  /* ─── Mission preview image ─────────────────────────── */
+  .m-preview {
+    margin-bottom: 18px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    position: relative;
+  }
+  .m-preview img {
+    width: 100%; display: block;
+    opacity: 0.78; filter: brightness(0.9) contrast(1.05);
+    transition: opacity .3s, filter .3s;
+  }
+  .mission:hover .m-preview img { opacity: 1; filter: brightness(1) contrast(1); }
+
+  /* ─── Status: published research ───────────────────── */
+  .status.done { color: var(--amber); }
+  .status.done .s-dot { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+
+  /* ─── Systems grid hierarchy ────────────────────────── */
+  .cell.dim .c-label { color: var(--ink-3); }
+  .cell.dim .c-item { color: var(--ink-3); }
+  .cell.dim .c-item.hi { color: var(--ink-3); }
+
+  /* ─── Phase scan-line flash ─────────────────────────── */
+  .scan-line {
+    position: fixed; left: 0; right: 0; top: 50%;
+    height: 1px; z-index: 200; pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, var(--green) 20%, var(--green) 80%, transparent 100%);
+    opacity: 0; transform: scaleX(0); transform-origin: left;
+  }
+  @keyframes scan-sweep {
+    0%   { opacity: 0;   transform: scaleX(0); }
+    15%  { opacity: 0.9; transform: scaleX(1); }
+    75%  { opacity: 0.4; transform: scaleX(1); }
+    100% { opacity: 0;   transform: scaleX(1); }
+  }
+  .scan-line.fire { animation: scan-sweep 0.4s cubic-bezier(.2,.7,.2,1) forwards; }
 </style>
 </head>
 <body>
+
+<!-- ═══ Cosmic backdrop ═══ -->
+<div class="scan-line" aria-hidden="true"></div>
 
 <!-- ═══ Cosmic backdrop ═══ -->
 <div class="space" aria-hidden="true">
@@ -547,11 +588,10 @@
       </h1>
 
       <p class="hero-sub reveal d2">
-        &ldquo;Humans need to go to space — and AI is central to how we get there.&rdquo;
-        That conviction took me through an <b>MSc in spaceflight dynamics</b> at TU Delft and
-        space-situational-awareness work at <b>Airbus</b> and <b>Ecosmic</b>. Now I put
-        <b>AI</b> to work for industrial clients at <b>Accenture</b>, and build full-stack
-        software on the side.
+        Aerospace engineer who codes. <b>MSc spaceflight dynamics · TU Delft</b> —
+        GNC work at <b>Airbus D&amp;S</b> and <b>Ecosmic</b> — now building AI-powered
+        software at <b>Accenture</b> and full-stack on the side.
+        The goal: <b>AI at the intersection of space.</b>
       </p>
 
       <div class="scroll-cue reveal d3">
@@ -560,7 +600,7 @@
 
       <div class="facts reveal d3">
         <div class="fact"><div class="v">8.0<small> /10</small></div><div class="k">MSc GPA · TU Delft</div></div>
-        <div class="fact"><div class="v">46</div><div class="k">Countries</div></div>
+        <div class="fact"><div class="v">200+</div><div class="k">IAC audience · Milan</div></div>
         <div class="fact"><div class="v">4</div><div class="k">Build missions</div></div>
         <div class="fact"><div class="v">€50k</div><div class="k">EU grant led · Cassini</div></div>
       </div>
@@ -599,6 +639,9 @@
               <span class="chip">Skyfield · SGP4</span><span class="chip">PostgreSQL</span>
               <span class="chip">Supabase</span><span class="chip">Docker</span><span class="chip">Railway</span>
             </div>
+            <div class="m-preview">
+              <img src="msn-01.png" alt="Orbital Simulator — GOES-18 at GEO with conjunction detection active" loading="lazy" />
+            </div>
             <div class="m-links">
               <a class="m-link" href="https://orbital-simulator.up.railway.app/" target="_blank" rel="noopener">↗ Live demo</a>
               <a class="m-link muted" href="https://github.com/JBarens/orbital-simulator" target="_blank" rel="noopener">↗ Source</a>
@@ -610,7 +653,7 @@
         <article class="mission reveal">
           <div class="m-meta">
             <span class="status build"><span class="s-dot"></span>Build</span>
-            <div class="m-id">MSN-02</div>
+            <div class="m-id">MSN-02 · Started Jun 2026</div>
           </div>
           <div>
             <h3 class="m-title">Geopolitical Risk Map</h3>
@@ -631,7 +674,7 @@
         <article class="mission reveal">
           <div class="m-meta">
             <span class="status build"><span class="s-dot"></span>Build</span>
-            <div class="m-id">MSN-03</div>
+            <div class="m-id">MSN-03 · Started Jun 2026</div>
           </div>
           <div>
             <h3 class="m-title">Space Race Strategy Game</h3>
@@ -672,6 +715,33 @@
             </div>
           </div>
         </article>
+        <!-- RES-01 -->
+        <article class="mission reveal">
+          <div class="m-meta">
+            <span class="status done"><span class="s-dot"></span>Published</span>
+            <div class="m-id">RES-01 · 2025</div>
+          </div>
+          <div>
+            <h3 class="m-title">Admissible Regions for Untracked LEO Debris</h3>
+            <p class="m-desc">
+              MSc thesis at Airbus Defence &amp; Space, Friedrichshafen. Developed admissible-region
+              methods to generate initial orbit catalogues for untracked LEO objects detected by
+              ground-based optical telescopes — bridging astrodynamics, estimation theory, and
+              sensor geometry to address a live problem in space situational awareness.
+            </p>
+            <p class="m-note">
+              Supervised jointly by TU Delft and Airbus D&amp;S · Published in TU Delft repository · MSc GPA 8.0 / 10
+            </p>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">MATLAB</span>
+              <span class="chip">Astrodynamics</span><span class="chip">Estimation theory</span>
+              <span class="chip">Orekit</span><span class="chip">Space situational awareness</span>
+            </div>
+            <div class="m-links">
+              <a class="m-link" href="https://repository.tudelft.nl/record/uuid:0a7bc86a-ce91-4c85-901b-5bea3856b40a" target="_blank" rel="noopener">↗ TU Delft Repository</a>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -690,7 +760,7 @@
             <ul class="e-list">
               <li>Help industrial &amp; manufacturing clients navigate complex transformations — from AI adoption to supply-chain redesign</li>
               <li>Operate across the full stack: data analysis, client communications, and building AI-powered tools that create operational value</li>
-              <li>Scope problems, structure solutions, deliver outputs that drive decisions</li>
+              <li>Building AI tools that automate analysis and generate client-ready outputs — engineering the work, not just advising on it</li>
             </ul>
           </div>
         </div>
@@ -748,7 +818,7 @@
           <div class="ico">▲</div>
           <div>
             <div class="a-name">EC Space Career Voucher</div>
-            <div class="a-body">Selected by a European Commission jury from 500+ applicants — leadership potential and contribution to the European space ecosystem</div>
+            <div class="a-body">Chosen from 500+ applicants across Europe — one of roughly 20 early-career space professionals recognised by the European Commission as a rising contributor to the sector</div>
           </div>
           <div class="a-yr">2025</div>
         </div>
@@ -762,6 +832,24 @@
       <div class="eyebrow reveal"><span class="e-num">04</span> Systems</div>
 
       <div class="stack reveal">
+        <div class="cell">
+          <div class="c-label">Domain</div>
+          <div class="c-list">
+            <div class="c-item hi">Orbital mechanics</div>
+            <div class="c-item hi">Space situational awareness</div>
+            <div class="c-item hi">GNC · estimation theory</div>
+            <div class="c-item soon">ML for space autonomy</div>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="c-label">AI / Data</div>
+          <div class="c-list">
+            <div class="c-item soon">RAG · LangChain</div>
+            <div class="c-item soon">LangGraph · Agents</div>
+            <div class="c-item soon">PyTorch · fast.ai</div>
+            <div class="c-item hi">SQL · data modelling</div>
+          </div>
+        </div>
         <div class="cell">
           <div class="c-label">Frontend</div>
           <div class="c-list">
@@ -789,31 +877,13 @@
             <div class="c-item soon">Azure (AZ-900 in progress)</div>
           </div>
         </div>
-        <div class="cell">
-          <div class="c-label">AI / Data</div>
-          <div class="c-list">
-            <div class="c-item soon">RAG · LangChain</div>
-            <div class="c-item soon">LangGraph · Agents</div>
-            <div class="c-item soon">PyTorch · fast.ai</div>
-            <div class="c-item hi">SQL · data modelling</div>
-          </div>
-        </div>
-        <div class="cell">
-          <div class="c-label">Domain</div>
-          <div class="c-list">
-            <div class="c-item hi">Orbital mechanics</div>
-            <div class="c-item hi">Space situational awareness</div>
-            <div class="c-item hi">GNC · estimation theory</div>
-            <div class="c-item soon">ML for space autonomy</div>
-          </div>
-        </div>
-        <div class="cell">
+        <div class="cell dim">
           <div class="c-label">Consulting</div>
           <div class="c-list">
-            <div class="c-item">Stakeholder management</div>
-            <div class="c-item">Financial modelling</div>
-            <div class="c-item">EU grant writing</div>
-            <div class="c-item">Go-to-market strategy</div>
+            <div class="c-item hi">Stakeholder management</div>
+            <div class="c-item hi">Financial modelling</div>
+            <div class="c-item hi">EU grant writing</div>
+            <div class="c-item hi">Go-to-market strategy</div>
           </div>
         </div>
       </div>
@@ -841,7 +911,7 @@
 
       <div class="row reveal">
         <div class="r-k">Countries</div>
-        <div class="r-v">46 visited. Lived and worked in NL · DE · IT · ES.</div>
+        <div class="r-v">46 visited. Lived and worked in NL · DE · IT · ES. IAC Milan · presented to 200+ space professionals.</div>
       </div>
 
       <div class="row reveal">
@@ -851,7 +921,7 @@
 
       <div class="row reveal">
         <div class="r-k">How I work</div>
-        <div class="r-v">Clean, direct, empirical. Consistent beats intensive — compound everything.</div>
+        <div class="r-v">Clean, direct, empirical. Consistent beats intensive — compound everything. I approach code the same way I'd approach a trajectory problem: get the model right first, then optimise. Ship something real and imperfect before you architect the perfect thing on paper.</div>
       </div>
     </div>
   </section>
@@ -892,7 +962,7 @@
   var cv = document.getElementById('stars');
   var ctx = cv.getContext('2d');
   var W, H, DPR, stars = [];
-  var STAR_N = 320;
+  var STAR_N = 500;
 
   function size() {
     DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -908,7 +978,7 @@
       var depth = Math.random();           // 0 far → 1 near
       stars.push({
         x: Math.random() * W,
-        y: Math.random() * (H * 3),        // span beyond viewport for parallax
+        y: Math.random() * (H * 6),        // span beyond viewport for parallax
         z: depth,
         r: 0.3 + depth * 1.4,
         base: 0.25 + depth * 0.65,
@@ -935,6 +1005,8 @@
   var altEl = document.getElementById('alt');
   var phaseEl = document.getElementById('phase');
   var hudProg = document.getElementById('hud-progress');
+  var scanEl = document.querySelector('.scan-line');
+  var lastPhase = '';
 
   /* altitude phases */
   var GEO = 35786;
@@ -968,12 +1040,13 @@
     for (var i = 0; i < stars.length; i++) {
       var s = stars[i];
       // parallax: nearer stars move faster against scroll
-      var py = ((s.y - smoothY * (0.15 + s.z * 0.9)) % (H * 3));
-      if (py < 0) py += H * 3;
+      var py = ((s.y - smoothY * (0.15 + s.z * 0.9)) % (H * 6));
+      if (py < 0) py += H * 6;
       var yy = py - H;                      // center band in viewport
       if (yy < -20 || yy > H + 20) continue;
       var tw = reduce ? 1 : (0.7 + 0.3 * Math.sin(t * s.tws + s.tw));
-      var a = s.base * tw;
+      var starFade = Math.max(0, 1 - Math.max(0, prog - 0.7) / 0.3);
+      var a = s.base * tw * starFade;
       ctx.beginPath();
       ctx.arc(s.x + mTX * (4 + s.z * 26), yy, s.r, 0, 6.2832);
       if (s.hue === 'b') ctx.fillStyle = 'rgba(150,195,255,' + a + ')';
@@ -989,17 +1062,19 @@
       el.style.transform = 'translateY(' + (smoothY * d) + 'px)';
     }
 
-    /* mouse parallax on hero name */
-    if (!reduce && pxEls.length) {
+    /* mouse smoothing — always run */
+    if (!reduce) {
       mouseX += (mTX - mouseX) * 0.06;
       mouseY += (mTY - mouseY) * 0.06;
     }
 
-    /* ── Earth rises & grows on descent ── */
+    /* ── Earth rises, grows, and floats with mouse ── */
     if (earth) {
-      var rise = 92 - prog * 78;            // 92% (hidden) → 14% (limb fills lower screen)
+      var rise = 92 - prog * 78;
       var scale = 1 + prog * 0.5;
-      earth.style.transform = 'translate(-50%, ' + rise + '%) scale(' + scale + ')';
+      var emx = !reduce ? (mouseX * 6).toFixed(2) : 0;
+      var emy = !reduce ? (mouseY * 6).toFixed(2) : 0;
+      earth.style.transform = 'translate(calc(-50% + ' + emx + 'px), calc(' + rise + '% + ' + emy + 'px)) scale(' + scale + ')';
     }
 
     /* ── Altitude HUD (ease-in so most of the journey is high) ── */
@@ -1008,7 +1083,15 @@
     if (altEl) altEl.textContent = fmt(alt);
     if (phaseEl) {
       var ph = phaseFor(alt);
-      if (phaseEl.textContent !== ph) phaseEl.textContent = ph;
+      if (ph !== lastPhase) {
+        lastPhase = ph;
+        phaseEl.textContent = ph;
+        if (scanEl && prog > 0.02) {
+          scanEl.classList.remove('fire');
+          void scanEl.offsetWidth;
+          scanEl.classList.add('fire');
+        }
+      }
     }
     if (hudProg) hudProg.style.height = (prog * 100) + '%';
 
