@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jasper Barens — Aerospace → AI Engineering</title>
+    <title>Jasper Barens � Aerospace � AI � Consulting</title>
     <meta
       name="description"
-      content="Jasper Barens · Building toward AI engineering · full-stack software with an aerospace edge (orbital mechanics, TU Delft, Airbus D&S)."
+      content="Jasper Barens � Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X. Building at the intersection of space and AI."
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -15,11 +15,11 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Jasper Barens — Aerospace → AI Engineering"
+      content="Jasper Barens � Aerospace � AI � Consulting"
     />
     <meta
       property="og:description"
-      content="Full-stack builder with an aerospace edge. MSc spaceflight dynamics (TU Delft), space-situational-awareness work at Airbus & Ecosmic, now AI at Accenture."
+      content="Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X."
     />
     <meta property="og:url" content="https://jbarens.github.io/" />
     <meta property="og:image" content="https://jbarens.github.io/og.png" />
@@ -28,11 +28,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Jasper Barens — Aerospace → AI Engineering"
+      content="Jasper Barens � Aerospace � AI � Consulting"
     />
     <meta
       name="twitter:description"
-      content="Full-stack builder with an aerospace edge. Orbital mechanics, full-stack software, AI engineering."
+      content="Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X."
     />
     <meta name="twitter:image" content="https://jbarens.github.io/og.png" />
 
@@ -91,7 +91,6 @@
         color: #fff;
       }
 
-      /* ─── Fixed cosmic backdrop ──────────────────────────── */
       .space {
         position: fixed;
         inset: 0;
@@ -119,7 +118,6 @@
         height: 100%;
       }
 
-      /* faint engineering grid */
       .grid-overlay {
         position: absolute;
         inset: 0;
@@ -143,7 +141,6 @@
         );
       }
 
-      /* The Earth that rises as you descend */
       .earth-wrap {
         position: fixed;
         left: 50%;
@@ -172,7 +169,6 @@
           inset -60px -50px 160px rgba(0, 0, 0, 0.85),
           inset 50px 40px 120px rgba(90, 169, 255, 0.18);
       }
-      /* atmosphere rim */
       .earth::before {
         content: "";
         position: absolute;
@@ -183,7 +179,6 @@
           0 0 140px 30px rgba(90, 169, 255, 0.18);
         z-index: 3;
       }
-      /* landmasses */
       .earth-land {
         position: absolute;
         inset: 0;
@@ -197,7 +192,6 @@
         display: block;
         opacity: 0.9;
       }
-      /* terminator + day-side highlight, painted over land + ocean */
       .earth-shade {
         position: absolute;
         inset: 0;
@@ -222,7 +216,6 @@
           );
       }
 
-      /* ─── Altitude HUD (left rail) ───────────────────────── */
       .hud {
         position: fixed;
         top: 0;
@@ -269,7 +262,6 @@
         text-transform: uppercase;
         min-height: 12px;
       }
-      /* vertical tape */
       .hud-tape {
         position: absolute;
         right: 0;
@@ -294,7 +286,6 @@
         height: 0;
       }
 
-      /* ─── Top status bar ─────────────────────────────────── */
       header {
         position: fixed;
         top: 0;
@@ -335,7 +326,6 @@
         color: var(--ink-3);
         text-decoration: none;
         transition: color 0.2s;
-        position: relative;
       }
       nav a:hover {
         color: var(--ink-1);
@@ -350,7 +340,6 @@
         font-weight: 500;
       }
 
-      /* ─── Content shell ──────────────────────────────────── */
       .shell {
         position: relative;
         z-index: 10;
@@ -387,7 +376,6 @@
         background: var(--line);
       }
 
-      /* ─── HERO ───────────────────────────────────────────── */
       #signal {
         padding-top: 44px;
       }
@@ -478,7 +466,6 @@
         }
       }
 
-      /* fact strip */
       .facts {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -511,7 +498,6 @@
         color: var(--ink-3);
       }
 
-      /* ─── MISSIONS ───────────────────────────────────────── */
       .missions {
         display: flex;
         flex-direction: column;
@@ -568,7 +554,6 @@
         letter-spacing: 0.2em;
         color: var(--ink-3);
       }
-
       .m-title {
         font-family: var(--disp);
         font-weight: 600;
@@ -641,9 +626,6 @@
         border-color: var(--line);
       }
 
-      /* ─── FLIGHT LOG ─────────────────────────────────────── */
-      .log {
-      }
       .entry {
         display: grid;
         grid-template-columns: 200px 1fr;
@@ -693,7 +675,7 @@
         margin-bottom: 3px;
       }
       .e-list li::before {
-        content: "—";
+        content: "�";
         position: absolute;
         left: 0;
         color: var(--ink-4);
@@ -734,7 +716,6 @@
         letter-spacing: 0.06em;
       }
 
-      /* ─── SYSTEMS ────────────────────────────────────────── */
       .stack {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -766,7 +747,7 @@
         color: var(--ink-1);
       }
       .cell .c-item.soon::after {
-        content: " ◦";
+        content: " ?";
         color: var(--amber);
         font-size: 10px;
       }
@@ -780,7 +761,6 @@
         color: var(--amber);
       }
 
-      /* ─── ABOUT ──────────────────────────────────────────── */
       .row {
         display: grid;
         grid-template-columns: 150px 1fr;
@@ -846,7 +826,6 @@
         letter-spacing: 0.04em;
       }
 
-      /* ─── UPLINK ─────────────────────────────────────────── */
       #uplink {
         text-align: left;
         padding-bottom: 200px;
@@ -927,7 +906,6 @@
         color: var(--ink-3);
       }
 
-      /* ─── Reveal ─────────────────────────────────────────── */
       .reveal {
         opacity: 0;
         transform: translateY(26px);
@@ -949,7 +927,6 @@
         transition-delay: 0.24s;
       }
 
-      /* ─── Responsive ─────────────────────────────────────── */
       @media (max-width: 880px) {
         .panel {
           padding: 110px 26px 110px 26px;
@@ -1024,7 +1001,6 @@
         }
       }
 
-      /* ─── Mission preview image ─────────────────────────── */
       .m-preview {
         margin-bottom: 18px;
         border: 1px solid var(--line);
@@ -1045,7 +1021,6 @@
         filter: brightness(1) contrast(1);
       }
 
-      /* ─── Status: published research ───────────────────── */
       .status.done {
         color: var(--amber);
       }
@@ -1054,7 +1029,6 @@
         box-shadow: 0 0 8px var(--amber);
       }
 
-      /* ─── Systems grid hierarchy ────────────────────────── */
       .cell.dim .c-label {
         color: var(--ink-3);
       }
@@ -1065,7 +1039,6 @@
         color: var(--ink-3);
       }
 
-      /* ─── Phase scan-line flash ─────────────────────────── */
       .scan-line {
         position: fixed;
         left: 0;
@@ -1109,10 +1082,8 @@
     </style>
   </head>
   <body>
-    <!-- ═══ Cosmic backdrop ═══ -->
     <div class="scan-line" aria-hidden="true"></div>
 
-    <!-- ═══ Cosmic backdrop ═══ -->
     <div class="space" aria-hidden="true">
       <canvas id="stars"></canvas>
       <div class="grid-overlay"></div>
@@ -1150,11 +1121,10 @@
       </div>
     </div>
 
-    <!-- ═══ Altitude HUD ═══ -->
     <aside class="hud" aria-hidden="true">
       <div class="hud-label">Altitude</div>
       <div class="hud-alt"><span id="alt">35,786</span></div>
-      <div class="hud-unit">KM · AGL</div>
+      <div class="hud-unit">KM � AGL</div>
       <div class="hud-phase" id="phase">Geostationary</div>
       <div class="hud-tape">
         <div class="hud-tick" style="top: 10%"></div>
@@ -1166,19 +1136,18 @@
       </div>
     </aside>
 
-    <!-- ═══ Top bar ═══ -->
     <header>
-      <div class="brand">JT<span class="b-dot">·</span>BARENS</div>
+      <div class="brand">JT<span class="b-dot">�</span>BARENS</div>
       <nav>
         <a href="#signal">Signal</a>
         <a href="#missions">Missions</a>
-        <a href="/log">Log</a>
+        <a href="#log">Log</a>
         <a href="#systems">Systems</a>
         <a href="#about">About</a>
         <a href="#uplink">Uplink</a>
       </nav>
       <div class="telemetry">
-        MET <b id="met">T+00:00:00</b> &nbsp;·&nbsp;
+        MET <b id="met">T+00:00:00</b> &nbsp;�&nbsp;
         <a
           href="https://github.com/JBarens"
           target="_blank"
@@ -1188,17 +1157,17 @@
             text-decoration: none;
             letter-spacing: 0.1em;
           "
-          >GH ↗</a
+          >GH ?</a
         >
       </div>
     </header>
 
     <main class="shell">
-      <!-- ═══════════ 01 · SIGNAL ═══════════ -->
+      <!-- 01 � SIGNAL -->
       <section class="panel" id="signal">
         <div class="inner">
           <div class="pre reveal">
-            <span class="live-dot"></span>Inbound from geostationary orbit
+            <span class="live-dot"></span>Amsterdam � Active
           </div>
 
           <h1 class="hero-name reveal d1">
@@ -1207,39 +1176,39 @@
           </h1>
 
           <p class="hero-sub reveal d2">
-            Aerospace engineer who codes.
-            <b>MSc spaceflight dynamics · TU Delft</b> — GNC work at
-            <b>Airbus D&amp;S</b> and <b>Ecosmic</b> — now building AI-powered
-            software at <b>Accenture</b> and full-stack on the side. The goal:
-            <b>AI at the intersection of space.</b>
+            Aerospace engineer turned AI builder.
+            <b>MSc spaceflight dynamics � TU Delft</b> � orbital mechanics
+            research at <b>Airbus D&S</b>, GNC at <b>Ecosmic</b>, now building
+            AI systems for industry at <b>Accenture</b>. Long-term bet:
+            <b>space.</b>
           </p>
 
           <div class="scroll-cue reveal d3">
-            <span class="bar"></span> Scroll to begin descent
+            <span class="bar"></span> Keep reading
           </div>
 
           <div class="facts reveal d3">
             <div class="fact">
               <div class="v">8.0<small> /10</small></div>
-              <div class="k">MSc GPA · TU Delft</div>
+              <div class="k">MSc GPA � TU Delft</div>
             </div>
             <div class="fact">
               <div class="v">200+</div>
-              <div class="k">IAC audience · Milan</div>
+              <div class="k">IAC audience � Milan</div>
             </div>
             <div class="fact">
               <div class="v">4</div>
               <div class="k">Build missions</div>
             </div>
             <div class="fact">
-              <div class="v">€50k</div>
-              <div class="k">EU grant led · Cassini</div>
+              <div class="v">�50k</div>
+              <div class="k">EU grant led � Cassini</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ═══════════ 02 · MISSIONS ═══════════ -->
+      <!-- 02 � MISSIONS -->
       <section class="panel" id="missions">
         <div class="inner">
           <div class="eyebrow reveal">
@@ -1251,7 +1220,7 @@
             <article class="mission reveal">
               <div class="m-meta">
                 <span class="status live"><span class="s-dot"></span>Live</span>
-                <div class="m-id">MSN-01 · 2026</div>
+                <div class="m-id">MSN-01 � 2026</div>
               </div>
               <div>
                 <h3 class="m-title">Orbital Mechanics Simulator</h3>
@@ -1259,13 +1228,13 @@
                   Real-time 3D satellite propagation on a photorealistic globe.
                   Add any object by NORAD ID and watch live SGP4 physics:
                   ground-track trails, day/night terminator shading, a time
-                  scrubber (T±hh:mm:ss), orbital-elements readout, conjunction
+                  scrubber (T�hh:mm:ss), orbital-elements readout, conjunction
                   detection (CDM), and a true-scale Sun and Moon.
                 </p>
                 <p class="m-note">
                   Browser-side TLE fetch to route around Railway's outbound
-                  network limits · ES256 JWKS authentication written from
-                  scratch · per-user data isolation · satellites rendered at
+                  network limits � ES256 JWKS authentication written from
+                  scratch � per-user data isolation � satellites rendered at
                   true orbital altitude.
                 </p>
                 <div class="chips">
@@ -1275,7 +1244,7 @@
                   ><span class="chip">R3F</span>
                   <span class="chip">FastAPI</span
                   ><span class="chip">Python</span>
-                  <span class="chip">Skyfield · SGP4</span
+                  <span class="chip">Skyfield � SGP4</span
                   ><span class="chip">PostgreSQL</span>
                   <span class="chip">Supabase</span
                   ><span class="chip">Docker</span
@@ -1284,7 +1253,7 @@
                 <div class="m-preview">
                   <img
                     src="msn-01.png"
-                    alt="Orbital Simulator — GOES-18 at GEO with conjunction detection active"
+                    alt="Orbital Simulator � GOES-18 at GEO with conjunction detection active"
                     loading="lazy"
                   />
                 </div>
@@ -1294,14 +1263,14 @@
                     href="https://orbital-simulator.up.railway.app/"
                     target="_blank"
                     rel="noopener"
-                    >↗ Live demo</a
+                    >? Live demo</a
                   >
                   <a
                     class="m-link muted"
                     href="https://github.com/JBarens/orbital-simulator"
                     target="_blank"
                     rel="noopener"
-                    >↗ Source</a
+                    >? Source</a
                   >
                 </div>
               </div>
@@ -1313,12 +1282,12 @@
                 <span class="status build"
                   ><span class="s-dot"></span>Build</span
                 >
-                <div class="m-id">MSN-02 · Started Jun 2026</div>
+                <div class="m-id">MSN-02 � Started Jun 2026</div>
               </div>
               <div>
                 <h3 class="m-title">Geopolitical Risk Map</h3>
                 <p class="m-desc">
-                  An interactive world map — click any country to surface a live
+                  An interactive world map � click any country to surface a live
                   risk profile: conflict history, alliances, trade flows, and an
                   instability index. Built on live data pipelines from GDELT,
                   the World Bank, and SIPRI.
@@ -1339,7 +1308,7 @@
                 <span class="status build"
                   ><span class="s-dot"></span>Build</span
                 >
-                <div class="m-id">MSN-03 · Started Jun 2026</div>
+                <div class="m-id">MSN-03 � Started Jun 2026</div>
               </div>
               <div>
                 <h3 class="m-title">Space Race Strategy Game</h3>
@@ -1362,25 +1331,25 @@
             <article class="mission reveal">
               <div class="m-meta">
                 <span class="status plan"><span class="s-dot"></span>Plan</span>
-                <div class="m-id">MSN-04 · 2027</div>
+                <div class="m-id">MSN-04 � 2027</div>
               </div>
               <div>
-                <h3 class="m-title">OrbitIQ — Mission Feasibility SaaS</h3>
+                <h3 class="m-title">OrbitIQ � Mission Feasibility SaaS</h3>
                 <p class="m-desc">
                   An AI feasibility analyser for smallsat teams and NewSpace
-                  startups. Natural-language input → a structured report:
+                  startups. Natural-language input ? a structured report:
                   delta-v budget, launch windows, risk flags, and cost
                   benchmarking against historical missions.
                 </p>
                 <p class="m-note">
-                  Moat: MSc-level orbital-mechanics expertise paired with a
-                  curated NASA/ESA RAG knowledge base.
+                  Moat: MSc-level orbital mechanics paired with a curated
+                  NASA/ESA RAG knowledge base.
                 </p>
                 <div class="chips">
                   <span class="chip">React</span
                   ><span class="chip">FastAPI</span>
                   <span class="chip">Azure OpenAI</span
-                  ><span class="chip">RAG · LangChain</span>
+                  ><span class="chip">RAG � LangChain</span>
                   <span class="chip">LangGraph</span
                   ><span class="chip">Supabase</span>
                   <span class="chip">Stripe</span
@@ -1388,13 +1357,14 @@
                 </div>
               </div>
             </article>
+
             <!-- RES-01 -->
             <article class="mission reveal">
               <div class="m-meta">
                 <span class="status done"
                   ><span class="s-dot"></span>Published</span
                 >
-                <div class="m-id">RES-01 · 2025</div>
+                <div class="m-id">RES-01 � 2025</div>
               </div>
               <div>
                 <h3 class="m-title">
@@ -1404,18 +1374,18 @@
                   MSc thesis at Airbus Defence &amp; Space, Friedrichshafen.
                   Developed admissible-region methods to generate initial orbit
                   catalogues for untracked LEO objects detected by ground-based
-                  optical telescopes — bridging astrodynamics, estimation
+                  optical telescopes � bridging astrodynamics, estimation
                   theory, and sensor geometry to address a live problem in space
                   situational awareness.
                 </p>
                 <p class="m-note">
-                  Supervised jointly by TU Delft and Airbus D&amp;S · Published
-                  in TU Delft repository · MSc GPA 8.0 / 10
+                  Supervised jointly by TU Delft and Airbus D&amp;S � Published
+                  in TU Delft repository � MSc GPA 8.0 / 10
                 </p>
                 <div class="chips">
                   <span class="chip">Python</span
                   ><span class="chip">PowerShell</span>
-                  <span class="chip">Skyfield · SGP4</span
+                  <span class="chip">Skyfield � SGP4</span
                   ><span class="chip">Kalman filters</span>
                   <span class="chip">Optical telescope data</span
                   ><span class="chip">Estimation theory</span>
@@ -1427,7 +1397,7 @@
                     href="https://repository.tudelft.nl/record/uuid:0a7bc86a-ce91-4c85-901b-5bea3856b40a"
                     target="_blank"
                     rel="noopener"
-                    >↗ TU Delft Repository</a
+                    >? TU Delft Repository</a
                   >
                 </div>
               </div>
@@ -1436,7 +1406,7 @@
         </div>
       </section>
 
-      <!-- ═══════════ 03 · FLIGHT LOG ═══════════ -->
+      <!-- 03 � FLIGHT LOG -->
       <section class="panel" id="log">
         <div class="inner">
           <div class="eyebrow reveal">
@@ -1445,58 +1415,53 @@
 
           <div class="log">
             <div class="entry reveal">
-              <div class="e-when"><b>May 2026 →</b>Amsterdam, NL</div>
+              <div class="e-when"><b>May 2026 ?</b>Amsterdam, NL</div>
               <div>
                 <div class="e-co">Accenture Netherlands</div>
                 <div class="e-role">
-                  Manufacturing &amp; Operations Consulting Analyst · Industry X
+                  Manufacturing &amp; Operations Consulting Analyst � Industry X
                 </div>
                 <ul class="e-list">
                   <li>
-                    Help industrial &amp; manufacturing clients navigate complex
-                    transformations — from AI adoption to supply-chain redesign
+                    Embedded with industrial clients � currently Tata Steel �
+                    working across data integration, stakeholder alignment, and
+                    AI tooling
                   </li>
                   <li>
-                    Operate across the full stack: data analysis, client
-                    communications, and building AI-powered tools that create
-                    operational value
+                    Translating messy operational data into structured models
+                    that engineering and AI teams can actually use
                   </li>
                   <li>
-                    Building AI tools that automate analysis and generate
-                    client-ready outputs — engineering the work, not just
-                    advising on it
+                    Building the consulting muscle: client management, workshop
+                    facilitation, turning ambiguity into a plan
                   </li>
                 </ul>
               </div>
             </div>
 
             <div class="entry reveal">
-              <div class="e-when"><b>Apr – Sep 2025</b>Friedrichshafen, DE</div>
+              <div class="e-when"><b>Apr � Sep 2025</b>Friedrichshafen, DE</div>
               <div>
                 <div class="e-co">Airbus Defence &amp; Space</div>
                 <div class="e-role">
-                  MSc Thesis · Space Situational Awareness
+                  MSc Thesis � Space Situational Awareness
                 </div>
                 <ul class="e-list">
                   <li>
-                    Researched admissible-region methods to generate catalogues
-                    of untracked LEO objects from ground-based optical
-                    telescopes
+                    Developed admissible-region methods to catalogue untracked
+                    LEO objects from ground-based optical telescopes
                   </li>
                   <li>
-                    Work at the intersection of orbital mechanics, sensor
-                    geometry, and estimation theory
+                    Orbital mechanics, sensor geometry, and estimation theory �
+                    applied to a real SSA problem inside Airbus
                   </li>
-                  <li>
-                    Bridged academic rigour with an active industrial problem
-                    inside Airbus D&amp;S
-                  </li>
+                  <li>Published. GPA 8.0.</li>
                 </ul>
               </div>
             </div>
 
             <div class="entry reveal">
-              <div class="e-when"><b>Aug 2024 – Jan 2025</b>Turin, IT</div>
+              <div class="e-when"><b>Aug 2024 � Jan 2025</b>Turin, IT</div>
               <div>
                 <div class="e-co">
                   Ecosmic
@@ -1506,47 +1471,41 @@
                       font-weight: 400;
                       font-size: 11px;
                     "
-                    >· deep-tech space startup</span
+                    >� deep-tech space startup</span
                   >
                 </div>
                 <div class="e-role">GNC Engineer</div>
                 <ul class="e-list">
                   <li>
-                    Guidance, navigation &amp; control for
-                    space-situational-awareness and collision-avoidance systems
+                    GNC systems for space situational awareness and collision
+                    avoidance � 8-person team, real ownership from day one
                   </li>
-                  <li>
-                    Early-stage development at an 8-person startup — broad
-                    scope, real ownership
-                  </li>
-                  <li>
-                    Led a €50k Cassini Challenge EU grant application ·
-                    presented at IAC Milan to 200+ professionals
-                  </li>
+                  <li>Led a �50k Cassini Challenge EU grant application</li>
+                  <li>Presented at IAC Milan to 200+ professionals</li>
                 </ul>
               </div>
             </div>
 
             <div class="entry reveal">
-              <div class="e-when"><b>2020 – 2025</b>Delft, NL</div>
+              <div class="e-when"><b>2020 � 2025</b>Delft, NL</div>
               <div>
                 <div class="e-co">TU Delft</div>
                 <div class="e-role">
-                  MSc Spaceflight Dynamics · BSc Aerospace Engineering · MSc GPA
-                  8.0 / 10
+                  MSc Spaceflight Dynamics � BSc Aerospace Engineering � GPA 8.0
+                  / 10
                 </div>
                 <ul class="e-list">
                   <li>
-                    Specialised in spaceflight dynamics — orbital mechanics,
-                    estimation, space situational awareness
+                    Specialised in orbital mechanics, estimation theory, and
+                    space situational awareness
                   </li>
                   <li>
-                    Coursework: Space Systems Engineering, Orbital Dynamics,
-                    Entrepreneurship &amp; Start-Ups
+                    Minor in Economics &amp; Finance � Universidad Carlos III de
+                    Madrid � Athens Programme (Big Data)
                   </li>
                   <li>
-                    Minor in Economics &amp; Finance · Universidad Carlos III de
-                    Madrid · Athens Programme (Big Data)
+                    Entrepreneurship coursework alongside the technical track �
+                    deliberate, not accidental
                   </li>
                 </ul>
               </div>
@@ -1555,25 +1514,25 @@
 
           <div class="awards">
             <div class="award reveal">
-              <div class="ico">▲</div>
+              <div class="ico">?</div>
               <div>
                 <div class="a-name">Roland Berger Jury Prize</div>
                 <div class="a-body">
-                  €5k · TU Delft Ready to Startup · EV-battery repurposing for
-                  residential energy storage — led financial modelling and
+                  �5k � TU Delft Ready to Startup � EV-battery repurposing for
+                  residential energy storage � led financial modelling and
                   market analysis
                 </div>
               </div>
               <div class="a-yr">2024</div>
             </div>
             <div class="award reveal">
-              <div class="ico">▲</div>
+              <div class="ico">?</div>
               <div>
                 <div class="a-name">EC Space Career Voucher</div>
                 <div class="a-body">
-                  Chosen from 500+ applicants across Europe — one of roughly 20
+                  Chosen from 500+ applicants across Europe � one of roughly 20
                   early-career space professionals recognised by the European
-                  Commission as a rising contributor to the sector
+                  Commission
                 </div>
               </div>
               <div class="a-yr">2025</div>
@@ -1582,7 +1541,7 @@
         </div>
       </section>
 
-      <!-- ═══════════ 04 · SYSTEMS ═══════════ -->
+      <!-- 04 � SYSTEMS -->
       <section class="panel" id="systems">
         <div class="inner">
           <div class="eyebrow reveal">
@@ -1595,43 +1554,43 @@
               <div class="c-list">
                 <div class="c-item hi">Orbital mechanics</div>
                 <div class="c-item hi">Space situational awareness</div>
-                <div class="c-item hi">GNC · estimation theory</div>
+                <div class="c-item hi">GNC � estimation theory</div>
                 <div class="c-item soon">ML for space autonomy</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">AI / Data</div>
               <div class="c-list">
-                <div class="c-item soon">RAG · LangChain</div>
-                <div class="c-item soon">LangGraph · Agents</div>
-                <div class="c-item soon">PyTorch · fast.ai</div>
-                <div class="c-item hi">SQL · data modelling</div>
+                <div class="c-item soon">RAG � LangChain</div>
+                <div class="c-item soon">LangGraph � Agents</div>
+                <div class="c-item soon">PyTorch � fast.ai</div>
+                <div class="c-item hi">SQL � data modelling</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">Frontend</div>
               <div class="c-list">
-                <div class="c-item hi">React · TypeScript</div>
-                <div class="c-item hi">Three.js · React Three Fiber</div>
-                <div class="c-item hi">Vite · HTML / CSS</div>
+                <div class="c-item hi">React � TypeScript</div>
+                <div class="c-item hi">Three.js � React Three Fiber</div>
+                <div class="c-item hi">Vite � HTML / CSS</div>
                 <div class="c-item soon">D3.js</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">Backend</div>
               <div class="c-list">
-                <div class="c-item hi">Python · FastAPI</div>
-                <div class="c-item hi">SQLAlchemy · PostgreSQL</div>
-                <div class="c-item hi">Supabase · JWT / JWKS</div>
-                <div class="c-item hi">Skyfield · SGP4</div>
+                <div class="c-item hi">Python � FastAPI</div>
+                <div class="c-item hi">SQLAlchemy � PostgreSQL</div>
+                <div class="c-item hi">Supabase � JWT / JWKS</div>
+                <div class="c-item hi">Skyfield � SGP4</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">Infrastructure</div>
               <div class="c-list">
-                <div class="c-item hi">Docker · Docker Compose</div>
+                <div class="c-item hi">Docker � Docker Compose</div>
                 <div class="c-item hi">Railway</div>
-                <div class="c-item hi">Git · Linux · Bash</div>
+                <div class="c-item hi">Git � Linux � Bash</div>
                 <div class="c-item soon">Azure (AZ-900 in progress)</div>
               </div>
             </div>
@@ -1646,12 +1605,12 @@
             </div>
           </div>
           <div class="stack-note reveal">
-            Items marked <span>◦</span> are in active study.
+            Items marked <span>?</span> are in active study.
           </div>
         </div>
       </section>
 
-      <!-- ═══════════ 05 · ABOUT ═══════════ -->
+      <!-- 05 � ABOUT -->
       <section class="panel" id="about">
         <div class="inner">
           <div class="eyebrow reveal"><span class="e-num">05</span> About</div>
@@ -1663,7 +1622,7 @@
                 <div class="bar">
                   <span class="bl">Dutch</span
                   ><span class="bt"><span class="bf" data-w="100"></span></span
-                  ><span class="bp">fluent</span>
+                  ><span class="bp">native</span>
                 </div>
                 <div class="bar">
                   <span class="bl">English</span
@@ -1690,49 +1649,47 @@
           </div>
 
           <div class="row reveal">
-            <div class="r-k">Countries</div>
+            <div class="r-k">Background</div>
             <div class="r-v">
-              46 visited. Lived and worked in NL · DE · IT · ES. IAC Milan ·
-              presented to 200+ space professionals.
+              46 countries. Grew up across NL � DE � IT � ES. Presented at IAC
+              Milan. Built things in four languages.
             </div>
           </div>
 
           <div class="row reveal">
             <div class="r-k">Outside work</div>
             <div class="r-v">
-              Judo, Ironman training, tennis, gym. Dutch Red Cross first-aid
-              volunteer. A relentless language-learner.
+              Training for an Ironman. Judo, tennis, gym. Dutch Red Cross
+              volunteer. Guitar.
             </div>
           </div>
 
           <div class="row reveal">
             <div class="r-k">How I work</div>
             <div class="r-v">
-              Clean, direct, empirical. Consistent beats intensive — compound
-              everything. I approach code the same way I'd approach a trajectory
-              problem: get the model right first, then optimise. Ship something
-              real and imperfect before you architect the perfect thing on
-              paper.
+              Direct. Ship something real before you architect the perfect
+              thing. I care more about what works than what sounds good. The
+              goal is space � everything else is how I get there.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ═══════════ 06 · UPLINK ═══════════ -->
+      <!-- 06 � UPLINK -->
       <section class="panel" id="uplink">
         <div class="inner">
-          <div class="touchdown reveal">● Touchdown — 0 km</div>
+          <div class="touchdown reveal">? 0 km � Amsterdam</div>
           <div class="big-cta reveal d1">
-            Let's build<br />something that<br /><a
+            If you're building<br />something that matters,<br /><a
               href="mailto:jasper@barens.org"
-              >leaves orbit.</a
+              >let's talk.</a
             >
           </div>
           <div class="links reveal d2">
             <a class="link-item" href="mailto:jasper@barens.org">
               <span class="lp">Email</span
               ><span class="lh">jasper@barens.org</span
-              ><span class="la">→</span>
+              ><span class="la">?</span>
             </a>
             <a
               class="link-item"
@@ -1741,7 +1698,7 @@
               rel="noopener"
             >
               <span class="lp">LinkedIn</span
-              ><span class="lh">in / jbarens</span><span class="la">→</span>
+              ><span class="lh">in / jbarens</span><span class="la">?</span>
             </a>
             <a
               class="link-item"
@@ -1750,7 +1707,7 @@
               rel="noopener"
             >
               <span class="lp">GitHub</span><span class="lh">JBarens</span
-              ><span class="la">→</span>
+              ><span class="la">?</span>
             </a>
           </div>
         </div>
@@ -1758,8 +1715,8 @@
     </main>
 
     <footer>
-      <div>Jasper Barens · Amsterdam, NL</div>
-      <div id="utc">UTC —</div>
+      <div>Jasper Barens � Amsterdam, NL</div>
+      <div id="utc">UTC �</div>
     </footer>
 
     <script>
@@ -1769,7 +1726,6 @@
           "(prefers-reduced-motion: reduce)",
         ).matches;
 
-        /* ─── Starfield with parallax depth ─────────────────── */
         var cv = document.getElementById("stars");
         var ctx = cv.getContext("2d");
         var W,
@@ -1792,10 +1748,10 @@
         function seed() {
           stars = [];
           for (var i = 0; i < STAR_N; i++) {
-            var depth = Math.random(); // 0 far → 1 near
+            var depth = Math.random();
             stars.push({
               x: Math.random() * W,
-              y: Math.random() * (H * 6), // span beyond viewport for parallax
+              y: Math.random() * (H * 6),
               z: depth,
               r: 0.3 + depth * 1.4,
               base: 0.25 + depth * 0.65,
@@ -1807,7 +1763,6 @@
           }
         }
 
-        /* ─── Scroll state with smoothing ───────────────────── */
         var targetY = window.pageYOffset || 0;
         var smoothY = targetY;
         var maxScroll = 1;
@@ -1832,21 +1787,17 @@
           recalc();
         });
 
-        /* parallax elements */
-        var pxEls = [].slice.call(document.querySelectorAll("[data-parallax]"));
         var earth = document.querySelector(".earth-wrap");
         var altEl = document.getElementById("alt");
         var phaseEl = document.getElementById("phase");
         var hudProg = document.getElementById("hud-progress");
-        var scanEl = document.querySelector(".scan-line");
         var lastPhase = "";
-
-        /* altitude phases */
         var GEO = 35786;
+
         function phaseFor(alt) {
           if (alt > 30000) return "Geostationary";
           if (alt > 5000) return "Medium Earth orbit";
-          if (alt > 1500) return "MEO → LEO transfer";
+          if (alt > 1500) return "MEO ? LEO transfer";
           if (alt > 300) return "Low Earth orbit";
           if (alt > 80) return "Re-entry interface";
           if (alt > 5) return "Atmospheric descent";
@@ -1872,19 +1823,16 @@
         }
 
         function frame() {
-          /* smooth scroll value */
           smoothY += (targetY - smoothY) * 0.085;
           var prog = Math.min(1, Math.max(0, smoothY / maxScroll));
 
-          /* ── starfield ── */
           ctx.clearRect(0, 0, W, H);
           var t = performance.now() * 0.001;
           for (var i = 0; i < stars.length; i++) {
             var s = stars[i];
-            // parallax: nearer stars move faster against scroll
             var py = (s.y - smoothY * (0.15 + s.z * 0.9)) % (H * 6);
             if (py < 0) py += H * 6;
-            var yy = py - H; // center band in viewport
+            var yy = py - H;
             if (yy < -20 || yy > H + 20) continue;
             var tw = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * s.tws + s.tw);
             var starFade = Math.max(0, 1 - Math.max(0, prog - 0.7) / 0.3);
@@ -1898,20 +1846,11 @@
             ctx.fill();
           }
 
-          /* ── DOM parallax ── */
-          for (var j = 0; j < pxEls.length; j++) {
-            var el = pxEls[j];
-            var d = parseFloat(el.getAttribute("data-parallax")) || 0;
-            el.style.transform = "translateY(" + smoothY * d + "px)";
-          }
-
-          /* mouse smoothing — always run */
           if (!reduce) {
             mouseX += (mTX - mouseX) * 0.06;
             mouseY += (mTY - mouseY) * 0.06;
           }
 
-          /* ── Earth rises, grows, and floats with mouse ── */
           if (earth) {
             var rise = 92 - prog * 78;
             var scale = 1 + prog * 0.5;
@@ -1929,7 +1868,6 @@
               ")";
           }
 
-          /* ── Altitude HUD (ease-in so most of the journey is high) ── */
           var altProg = Math.pow(prog, 2.0);
           var alt = GEO * (1 - altProg);
           if (altEl) altEl.textContent = fmt(alt);
@@ -1945,13 +1883,11 @@
           requestAnimationFrame(frame);
         }
 
-        /* ─── Reveal on scroll ──────────────────────────────── */
         var io = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (e) {
               if (e.isIntersecting) {
                 e.target.classList.add("in");
-                // fire language bars
                 if (e.target.querySelector) {
                   var bars = e.target.querySelectorAll(".bf[data-w]");
                   bars.forEach(function (b, k) {
@@ -1975,7 +1911,6 @@
             io.observe(el);
           });
 
-        /* ─── Clocks ────────────────────────────────────────── */
         var t0 = Date.now();
         var metEl = document.getElementById("met");
         var utcEl = document.getElementById("utc");
@@ -2003,11 +1938,10 @@
         clocks();
         setInterval(clocks, 1000);
 
-        /* ─── Boot ──────────────────────────────────────────── */
         size();
         seed();
         recalc();
-        setTimeout(recalc, 600); // after fonts/layout settle
+        setTimeout(recalc, 600);
         window.addEventListener("load", recalc);
         requestAnimationFrame(frame);
       })();
