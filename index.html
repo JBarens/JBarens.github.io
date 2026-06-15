@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jasper Barens � Aerospace � AI � Consulting</title>
+    <title>Jasper Barens · Aerospace · AI · Consulting</title>
     <meta
       name="description"
-      content="Jasper Barens � Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X. Building at the intersection of space and AI."
+      content="Jasper Barens · Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X. Building at the intersection of space and AI."
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -15,7 +15,7 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Jasper Barens � Aerospace � AI � Consulting"
+      content="Jasper Barens · Aerospace · AI · Consulting"
     />
     <meta
       property="og:description"
@@ -28,7 +28,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Jasper Barens � Aerospace � AI � Consulting"
+      content="Jasper Barens · Aerospace · AI · Consulting"
     />
     <meta
       name="twitter:description"
@@ -626,6 +626,32 @@
         border-color: var(--line);
       }
 
+      .log-link {
+        margin-top: 48px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .log-link a {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--green);
+        text-decoration: none;
+        border: 1px solid rgba(80,255,160,0.3);
+        padding: 10px 20px;
+        transition: background 0.2s, border-color 0.2s;
+      }
+      .log-link a:hover {
+        background: rgba(80,255,160,0.07);
+        border-color: rgba(80,255,160,0.6);
+      }
+      .log-link span {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        color: var(--ink-3);
+      }
+
       .entry {
         display: grid;
         grid-template-columns: 200px 1fr;
@@ -675,7 +701,7 @@
         margin-bottom: 3px;
       }
       .e-list li::before {
-        content: "�";
+        content: "·";
         position: absolute;
         left: 0;
         color: var(--ink-4);
@@ -1124,7 +1150,7 @@
     <aside class="hud" aria-hidden="true">
       <div class="hud-label">Altitude</div>
       <div class="hud-alt"><span id="alt">35,786</span></div>
-      <div class="hud-unit">KM � AGL</div>
+      <div class="hud-unit">KM · AGL</div>
       <div class="hud-phase" id="phase">Geostationary</div>
       <div class="hud-tape">
         <div class="hud-tick" style="top: 10%"></div>
@@ -1137,17 +1163,16 @@
     </aside>
 
     <header>
-      <div class="brand">JT<span class="b-dot">�</span>BARENS</div>
+      <div class="brand">JT<span class="b-dot">·</span>BARENS</div>
       <nav>
         <a href="#signal">Signal</a>
         <a href="#missions">Missions</a>
-        <a href="#log">Log</a>
         <a href="#systems">Systems</a>
         <a href="#about">About</a>
         <a href="#uplink">Uplink</a>
       </nav>
       <div class="telemetry">
-        MET <b id="met">T+00:00:00</b> &nbsp;�&nbsp;
+        MET <b id="met">T+00:00:00</b> &nbsp;·&nbsp;
         <a
           href="https://github.com/JBarens"
           target="_blank"
@@ -1163,11 +1188,11 @@
     </header>
 
     <main class="shell">
-      <!-- 01 � SIGNAL -->
+      <!-- 01 · SIGNAL -->
       <section class="panel" id="signal">
         <div class="inner">
           <div class="pre reveal">
-            <span class="live-dot"></span>Amsterdam � Active
+            <span class="live-dot"></span>Amsterdam · Active
           </div>
 
           <h1 class="hero-name reveal d1">
@@ -1177,7 +1202,7 @@
 
           <p class="hero-sub reveal d2">
             Aerospace engineer turned AI builder.
-            <b>MSc spaceflight dynamics � TU Delft</b> � orbital mechanics
+            <b>MSc spaceflight dynamics · TU Delft</b> · orbital mechanics
             research at <b>Airbus D&S</b>, GNC at <b>Ecosmic</b>, now building
             AI systems for industry at <b>Accenture</b>. Long-term bet:
             <b>space.</b>
@@ -1190,25 +1215,25 @@
           <div class="facts reveal d3">
             <div class="fact">
               <div class="v">8.0<small> /10</small></div>
-              <div class="k">MSc GPA � TU Delft</div>
+              <div class="k">MSc GPA · TU Delft</div>
             </div>
             <div class="fact">
               <div class="v">200+</div>
-              <div class="k">IAC audience � Milan</div>
+              <div class="k">IAC audience · Milan</div>
             </div>
             <div class="fact">
               <div class="v">4</div>
               <div class="k">Build missions</div>
             </div>
             <div class="fact">
-              <div class="v">�50k</div>
-              <div class="k">EU grant led � Cassini</div>
+              <div class="v">€50k</div>
+              <div class="k">EU grant led · Cassini</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 02 � MISSIONS -->
+      <!-- 02 · MISSIONS -->
       <section class="panel" id="missions">
         <div class="inner">
           <div class="eyebrow reveal">
@@ -1220,7 +1245,7 @@
             <article class="mission reveal">
               <div class="m-meta">
                 <span class="status live"><span class="s-dot"></span>Live</span>
-                <div class="m-id">MSN-01 � 2026</div>
+                <div class="m-id">MSN-01 · 2026</div>
               </div>
               <div>
                 <h3 class="m-title">Orbital Mechanics Simulator</h3>
@@ -1228,13 +1253,13 @@
                   Real-time 3D satellite propagation on a photorealistic globe.
                   Add any object by NORAD ID and watch live SGP4 physics:
                   ground-track trails, day/night terminator shading, a time
-                  scrubber (T�hh:mm:ss), orbital-elements readout, conjunction
+                  scrubber (T+hh:mm:ss), orbital-elements readout, conjunction
                   detection (CDM), and a true-scale Sun and Moon.
                 </p>
                 <p class="m-note">
                   Browser-side TLE fetch to route around Railway's outbound
-                  network limits � ES256 JWKS authentication written from
-                  scratch � per-user data isolation � satellites rendered at
+                  network limits · ES256 JWKS authentication written from
+                  scratch · per-user data isolation · satellites rendered at
                   true orbital altitude.
                 </p>
                 <div class="chips">
@@ -1244,7 +1269,7 @@
                   ><span class="chip">R3F</span>
                   <span class="chip">FastAPI</span
                   ><span class="chip">Python</span>
-                  <span class="chip">Skyfield � SGP4</span
+                  <span class="chip">Skyfield · SGP4</span
                   ><span class="chip">PostgreSQL</span>
                   <span class="chip">Supabase</span
                   ><span class="chip">Docker</span
@@ -1253,7 +1278,7 @@
                 <div class="m-preview">
                   <img
                     src="msn-01.png"
-                    alt="Orbital Simulator � GOES-18 at GEO with conjunction detection active"
+                    alt="Orbital Simulator · GOES-18 at GEO with conjunction detection active"
                     loading="lazy"
                   />
                 </div>
@@ -1263,14 +1288,14 @@
                     href="https://orbital-simulator.up.railway.app/"
                     target="_blank"
                     rel="noopener"
-                    >? Live demo</a
+                    >↗ Live demo</
                   >
                   <a
                     class="m-link muted"
                     href="https://github.com/JBarens/orbital-simulator"
                     target="_blank"
                     rel="noopener"
-                    >? Source</a
+                    >↗ Source</
                   >
                 </div>
               </div>
@@ -1282,12 +1307,12 @@
                 <span class="status build"
                   ><span class="s-dot"></span>Build</span
                 >
-                <div class="m-id">MSN-02 � Started Jun 2026</div>
+                <div class="m-id">MSN-02 · Started Jun 2026</div>
               </div>
               <div>
                 <h3 class="m-title">Geopolitical Risk Map</h3>
                 <p class="m-desc">
-                  An interactive world map � click any country to surface a live
+                  An interactive world map · click any country to surface a live
                   risk profile: conflict history, alliances, trade flows, and an
                   instability index. Built on live data pipelines from GDELT,
                   the World Bank, and SIPRI.
@@ -1308,7 +1333,7 @@
                 <span class="status build"
                   ><span class="s-dot"></span>Build</span
                 >
-                <div class="m-id">MSN-03 � Started Jun 2026</div>
+                <div class="m-id">MSN-03 · Started Jun 2026</div>
               </div>
               <div>
                 <h3 class="m-title">Space Race Strategy Game</h3>
@@ -1331,10 +1356,10 @@
             <article class="mission reveal">
               <div class="m-meta">
                 <span class="status plan"><span class="s-dot"></span>Plan</span>
-                <div class="m-id">MSN-04 � 2027</div>
+                <div class="m-id">MSN-04 · 2027</div>
               </div>
               <div>
-                <h3 class="m-title">OrbitIQ � Mission Feasibility SaaS</h3>
+                <h3 class="m-title">OrbitIQ · Mission Feasibility SaaS</h3>
                 <p class="m-desc">
                   An AI feasibility analyser for smallsat teams and NewSpace
                   startups. Natural-language input ? a structured report:
@@ -1349,7 +1374,7 @@
                   <span class="chip">React</span
                   ><span class="chip">FastAPI</span>
                   <span class="chip">Azure OpenAI</span
-                  ><span class="chip">RAG � LangChain</span>
+                  ><span class="chip">RAG · LangChain</span>
                   <span class="chip">LangGraph</span
                   ><span class="chip">Supabase</span>
                   <span class="chip">Stripe</span
@@ -1364,7 +1389,7 @@
                 <span class="status done"
                   ><span class="s-dot"></span>Published</span
                 >
-                <div class="m-id">RES-01 � 2025</div>
+                <div class="m-id">RES-01 · 2025</div>
               </div>
               <div>
                 <h3 class="m-title">
@@ -1374,18 +1399,18 @@
                   MSc thesis at Airbus Defence &amp; Space, Friedrichshafen.
                   Developed admissible-region methods to generate initial orbit
                   catalogues for untracked LEO objects detected by ground-based
-                  optical telescopes � bridging astrodynamics, estimation
+                  optical telescopes · bridging astrodynamics, estimation
                   theory, and sensor geometry to address a live problem in space
                   situational awareness.
                 </p>
                 <p class="m-note">
-                  Supervised jointly by TU Delft and Airbus D&amp;S � Published
-                  in TU Delft repository � MSc GPA 8.0 / 10
+                  Supervised jointly by TU Delft and Airbus D&amp;S · Published
+                  in TU Delft repository · MSc GPA 8.0 / 10
                 </p>
                 <div class="chips">
                   <span class="chip">Python</span
                   ><span class="chip">PowerShell</span>
-                  <span class="chip">Skyfield � SGP4</span
+                  <span class="chip">Skyfield · SGP4</span
                   ><span class="chip">Kalman filters</span>
                   <span class="chip">Optical telescope data</span
                   ><span class="chip">Estimation theory</span>
@@ -1397,16 +1422,20 @@
                     href="https://repository.tudelft.nl/record/uuid:0a7bc86a-ce91-4c85-901b-5bea3856b40a"
                     target="_blank"
                     rel="noopener"
-                    >? TU Delft Repository</a
+                    >↗ TU Delft Repository</
                   >
                 </div>
               </div>
             </article>
           </div>
+          <div class="log-link reveal">
+            <a href="/log">Read the Log ↗</a>
+            <span>Writing on space, AI, and industry</span>
+          </div>
         </div>
       </section>
 
-      <!-- 03 � FLIGHT LOG -->
+      <!-- 03 · FLIGHT LOG -->
       <section class="panel" id="log">
         <div class="inner">
           <div class="eyebrow reveal">
@@ -1419,11 +1448,11 @@
               <div>
                 <div class="e-co">Accenture Netherlands</div>
                 <div class="e-role">
-                  Manufacturing &amp; Operations Consulting Analyst � Industry X
+                  Manufacturing &amp; Operations Consulting Analyst · Industry X
                 </div>
                 <ul class="e-list">
                   <li>
-                    Embedded with industrial clients � currently Tata Steel �
+                    Embedded with industrial clients · currently Tata Steel ·
                     working across data integration, stakeholder alignment, and
                     AI tooling
                   </li>
@@ -1440,11 +1469,11 @@
             </div>
 
             <div class="entry reveal">
-              <div class="e-when"><b>Apr � Sep 2025</b>Friedrichshafen, DE</div>
+              <div class="e-when"><b>Apr – Sep 2025</b>Friedrichshafen, DE</div>
               <div>
                 <div class="e-co">Airbus Defence &amp; Space</div>
                 <div class="e-role">
-                  MSc Thesis � Space Situational Awareness
+                  MSc Thesis · Space Situational Awareness
                 </div>
                 <ul class="e-list">
                   <li>
@@ -1452,7 +1481,7 @@
                     LEO objects from ground-based optical telescopes
                   </li>
                   <li>
-                    Orbital mechanics, sensor geometry, and estimation theory �
+                    Orbital mechanics, sensor geometry, and estimation theory ·
                     applied to a real SSA problem inside Airbus
                   </li>
                   <li>Published. GPA 8.0.</li>
@@ -1461,7 +1490,7 @@
             </div>
 
             <div class="entry reveal">
-              <div class="e-when"><b>Aug 2024 � Jan 2025</b>Turin, IT</div>
+              <div class="e-when"><b>Aug 2024 – Jan 2025</b>Turin, IT</div>
               <div>
                 <div class="e-co">
                   Ecosmic
@@ -1471,27 +1500,27 @@
                       font-weight: 400;
                       font-size: 11px;
                     "
-                    >� deep-tech space startup</span
+                    >· deep-tech space startup</span
                   >
                 </div>
                 <div class="e-role">GNC Engineer</div>
                 <ul class="e-list">
                   <li>
                     GNC systems for space situational awareness and collision
-                    avoidance � 8-person team, real ownership from day one
+                    avoidance · 8-person team, real ownership from day one
                   </li>
-                  <li>Led a �50k Cassini Challenge EU grant application</li>
+                  <li>Led a €50k Cassini Challenge EU grant application</li>
                   <li>Presented at IAC Milan to 200+ professionals</li>
                 </ul>
               </div>
             </div>
 
             <div class="entry reveal">
-              <div class="e-when"><b>2020 � 2025</b>Delft, NL</div>
+              <div class="e-when"><b>2020 – 2025</b>Delft, NL</div>
               <div>
                 <div class="e-co">TU Delft</div>
                 <div class="e-role">
-                  MSc Spaceflight Dynamics � BSc Aerospace Engineering � GPA 8.0
+                  MSc Spaceflight Dynamics · BSc Aerospace Engineering · GPA 8.0
                   / 10
                 </div>
                 <ul class="e-list">
@@ -1500,11 +1529,11 @@
                     space situational awareness
                   </li>
                   <li>
-                    Minor in Economics &amp; Finance � Universidad Carlos III de
-                    Madrid � Athens Programme (Big Data)
+                    Minor in Economics &amp; Finance · Universidad Carlos III de
+                    Madrid · Athens Programme (Big Data)
                   </li>
                   <li>
-                    Entrepreneurship coursework alongside the technical track �
+                    Entrepreneurship coursework alongside the technical track ·
                     deliberate, not accidental
                   </li>
                 </ul>
@@ -1518,8 +1547,8 @@
               <div>
                 <div class="a-name">Roland Berger Jury Prize</div>
                 <div class="a-body">
-                  �5k � TU Delft Ready to Startup � EV-battery repurposing for
-                  residential energy storage � led financial modelling and
+                  €5k · TU Delft Ready to Startup · EV-battery repurposing for
+                  residential energy storage · led financial modelling and
                   market analysis
                 </div>
               </div>
@@ -1530,7 +1559,7 @@
               <div>
                 <div class="a-name">EC Space Career Voucher</div>
                 <div class="a-body">
-                  Chosen from 500+ applicants across Europe � one of roughly 20
+                  Chosen from 500+ applicants across Europe · one of roughly 20
                   early-career space professionals recognised by the European
                   Commission
                 </div>
@@ -1541,7 +1570,7 @@
         </div>
       </section>
 
-      <!-- 04 � SYSTEMS -->
+      <!-- 04 · SYSTEMS -->
       <section class="panel" id="systems">
         <div class="inner">
           <div class="eyebrow reveal">
@@ -1554,43 +1583,43 @@
               <div class="c-list">
                 <div class="c-item hi">Orbital mechanics</div>
                 <div class="c-item hi">Space situational awareness</div>
-                <div class="c-item hi">GNC � estimation theory</div>
+                <div class="c-item hi">GNC · estimation theory</div>
                 <div class="c-item soon">ML for space autonomy</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">AI / Data</div>
               <div class="c-list">
-                <div class="c-item soon">RAG � LangChain</div>
-                <div class="c-item soon">LangGraph � Agents</div>
-                <div class="c-item soon">PyTorch � fast.ai</div>
-                <div class="c-item hi">SQL � data modelling</div>
+                <div class="c-item soon">RAG · LangChain</div>
+                <div class="c-item soon">LangGraph · Agents</div>
+                <div class="c-item soon">PyTorch · fast.ai</div>
+                <div class="c-item hi">SQL · data modelling</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">Frontend</div>
               <div class="c-list">
-                <div class="c-item hi">React � TypeScript</div>
-                <div class="c-item hi">Three.js � React Three Fiber</div>
-                <div class="c-item hi">Vite � HTML / CSS</div>
+                <div class="c-item hi">React · TypeScript</div>
+                <div class="c-item hi">Three.js · React Three Fiber</div>
+                <div class="c-item hi">Vite · HTML / CSS</div>
                 <div class="c-item soon">D3.js</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">Backend</div>
               <div class="c-list">
-                <div class="c-item hi">Python � FastAPI</div>
-                <div class="c-item hi">SQLAlchemy � PostgreSQL</div>
-                <div class="c-item hi">Supabase � JWT / JWKS</div>
-                <div class="c-item hi">Skyfield � SGP4</div>
+                <div class="c-item hi">Python · FastAPI</div>
+                <div class="c-item hi">SQLAlchemy · PostgreSQL</div>
+                <div class="c-item hi">Supabase · JWT / JWKS</div>
+                <div class="c-item hi">Skyfield · SGP4</div>
               </div>
             </div>
             <div class="cell">
               <div class="c-label">Infrastructure</div>
               <div class="c-list">
-                <div class="c-item hi">Docker � Docker Compose</div>
+                <div class="c-item hi">Docker · Docker Compose</div>
                 <div class="c-item hi">Railway</div>
-                <div class="c-item hi">Git � Linux � Bash</div>
+                <div class="c-item hi">Git · Linux · Bash</div>
                 <div class="c-item soon">Azure (AZ-900 in progress)</div>
               </div>
             </div>
@@ -1610,7 +1639,7 @@
         </div>
       </section>
 
-      <!-- 05 � ABOUT -->
+      <!-- 05 · ABOUT -->
       <section class="panel" id="about">
         <div class="inner">
           <div class="eyebrow reveal"><span class="e-num">05</span> About</div>
@@ -1651,7 +1680,7 @@
           <div class="row reveal">
             <div class="r-k">Background</div>
             <div class="r-v">
-              46 countries. Grew up across NL � DE � IT � ES. Presented at IAC
+              46 countries. Grew up across NL · DE · IT · ES. Presented at IAC
               Milan. Built things in four languages.
             </div>
           </div>
@@ -1669,16 +1698,16 @@
             <div class="r-v">
               Direct. Ship something real before you architect the perfect
               thing. I care more about what works than what sounds good. The
-              goal is space � everything else is how I get there.
+              goal is space · everything else is how I get there.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 06 � UPLINK -->
+      <!-- 06 · UPLINK -->
       <section class="panel" id="uplink">
         <div class="inner">
-          <div class="touchdown reveal">? 0 km � Amsterdam</div>
+          <div class="touchdown reveal">· 0 km · Amsterdam</div>
           <div class="big-cta reveal d1">
             If you're building<br />something that matters,<br /><a
               href="mailto:jasper@barens.org"
@@ -1715,8 +1744,8 @@
     </main>
 
     <footer>
-      <div>Jasper Barens � Amsterdam, NL</div>
-      <div id="utc">UTC �</div>
+      <div>Jasper Barens · Amsterdam, NL</div>
+      <div id="utc">UTC ·</div>
     </footer>
 
     <script>
