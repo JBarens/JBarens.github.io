@@ -1,1136 +1,2016 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Jasper Barens — Aerospace → AI Engineering</title>
-<meta name="description" content="Jasper Barens · Building toward AI engineering · full-stack software with an aerospace edge (orbital mechanics, TU Delft, Airbus D&S)." />
-
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-<!-- Open Graph / social -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Jasper Barens — Aerospace → AI Engineering" />
-<meta property="og:description" content="Full-stack builder with an aerospace edge. MSc spaceflight dynamics (TU Delft), space-situational-awareness work at Airbus & Ecosmic, now AI at Accenture." />
-<meta property="og:url" content="https://jbarens.github.io/" />
-<meta property="og:image" content="https://jbarens.github.io/og.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Jasper Barens — Aerospace → AI Engineering" />
-<meta name="twitter:description" content="Full-stack builder with an aerospace edge. Orbital mechanics, full-stack software, AI engineering." />
-<meta name="twitter:image" content="https://jbarens.github.io/og.png" />
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg:        #04040a;
-    --bg-2:      #070810;
-    --ink-1:     rgba(255,255,255,0.92);
-    --ink-2:     rgba(255,255,255,0.50);
-    --ink-3:     rgba(255,255,255,0.26);
-    --ink-4:     rgba(255,255,255,0.12);
-    --line:      rgba(255,255,255,0.08);
-    --line-2:    rgba(255,255,255,0.14);
-    --green:     #50ffa0;
-    --blue:      #5aa9ff;
-    --amber:     #ffb454;
-    --red:       #ff5a5a;
-    --disp:      'Chakra Petch', sans-serif;
-    --mono:      'JetBrains Mono', monospace;
-  }
-
-  html { scroll-behavior: smooth; }
-  html.no-smooth { scroll-behavior: auto; }
-
-  body {
-    background: var(--bg);
-    color: var(--ink-1);
-    font-family: var(--mono);
-    font-size: 13px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    position: relative;
-  }
-
-  ::selection { background: rgba(80,255,160,0.22); color: #fff; }
-
-  /* ─── Fixed cosmic backdrop ──────────────────────────── */
-  .space {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-    background:
-      radial-gradient(1200px 800px at 78% -10%, rgba(90,169,255,0.07), transparent 60%),
-      radial-gradient(900px 700px at 10% 110%, rgba(80,255,160,0.05), transparent 55%),
-      linear-gradient(180deg, #04040a 0%, #060710 50%, #04050c 100%);
-  }
-
-  #stars { position: absolute; inset: 0; width: 100%; height: 100%; }
-
-  /* faint engineering grid */
-  .grid-overlay {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(120% 120% at 50% 30%, #000 35%, transparent 78%);
-    -webkit-mask-image: radial-gradient(120% 120% at 50% 30%, #000 35%, transparent 78%);
-  }
-
-  /* The Earth that rises as you descend */
-  .earth-wrap {
-    position: fixed;
-    left: 50%;
-    bottom: 0;
-    width: 230vw;
-    max-width: 2600px;
-    aspect-ratio: 1 / 1;
-    transform: translate(-50%, 92%);
-    z-index: 1;
-    pointer-events: none;
-    will-change: transform;
-  }
-  .earth {
-    position: absolute; inset: 0;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 36% 30%, #3a7bd5 0%, #1f4f9c 26%, #11203f 55%, #060c1a 78%, #03060f 100%);
-    box-shadow:
-      inset -60px -50px 160px rgba(0,0,0,0.85),
-      inset 50px 40px 120px rgba(90,169,255,0.18);
-  }
-  /* atmosphere rim */
-  .earth::before {
-    content: '';
-    position: absolute; inset: -3px;
-    border-radius: 50%;
-    box-shadow:
-      0 0 60px 6px rgba(90,169,255,0.35),
-      0 0 140px 30px rgba(90,169,255,0.18);
-    z-index: 3;
-  }
-  /* landmasses */
-  .earth-land {
-    position: absolute; inset: 0;
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 1;
-  }
-  .earth-land svg { width: 100%; height: 100%; display: block; opacity: 0.9; }
-  /* terminator + day-side highlight, painted over land + ocean */
-  .earth-shade {
-    position: absolute; inset: 0;
-    border-radius: 50%;
-    z-index: 2;
-    background:
-      radial-gradient(circle at 36% 28%, rgba(120,185,255,0.20) 0%, transparent 40%),
-      radial-gradient(circle at 50% 6%, rgba(80,255,160,0.10), transparent 28%),
-      radial-gradient(circle at 72% 76%, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.42) 40%, transparent 68%);
-  }
-
-  /* ─── Altitude HUD (left rail) ───────────────────────── */
-  .hud {
-    position: fixed;
-    top: 0; left: 0;
-    height: 100vh;
-    width: 132px;
-    z-index: 40;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 26px;
-    border-right: 1px solid var(--line);
-    background: linear-gradient(90deg, rgba(4,4,10,0.55), transparent);
-  }
-  .hud-label {
-    font-size: 8px; letter-spacing: 0.34em; color: var(--ink-3);
-    text-transform: uppercase; margin-bottom: 10px;
-  }
-  .hud-alt {
-    font-family: var(--disp);
-    font-size: 30px; font-weight: 600; line-height: 1;
-    color: var(--green);
-    letter-spacing: 0.01em;
-    text-shadow: 0 0 18px rgba(80,255,160,0.4);
-    font-variant-numeric: tabular-nums;
-  }
-  .hud-unit { font-size: 11px; color: var(--ink-2); margin-top: 4px; letter-spacing: 0.2em; }
-  .hud-phase {
-    margin-top: 22px; font-size: 9px; letter-spacing: 0.2em;
-    color: var(--blue); text-transform: uppercase;
-    min-height: 12px;
-  }
-  /* vertical tape */
-  .hud-tape {
-    position: absolute; right: 0; top: 0; bottom: 0; width: 1px;
-  }
-  .hud-tick {
-    position: absolute; right: 0; width: 9px; height: 1px;
-    background: var(--ink-4);
-  }
-  .hud-progress {
-    position: absolute; right: -0.5px; width: 2px;
-    background: var(--green);
-    box-shadow: 0 0 10px var(--green);
-    top: 0; height: 0;
-  }
-
-  /* ─── Top status bar ─────────────────────────────────── */
-  header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
-    height: 44px;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 28px 0 168px;
-    background: linear-gradient(180deg, rgba(4,4,10,0.82), rgba(4,4,10,0));
-    backdrop-filter: blur(2px);
-  }
-  .brand {
-    font-family: var(--disp); font-weight: 600; font-size: 13px;
-    letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-1);
-  }
-  .brand .b-dot { color: var(--green); }
-  nav { display: flex; gap: 26px; }
-  nav a {
-    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-3); text-decoration: none; transition: color .2s;
-    position: relative;
-  }
-  nav a:hover { color: var(--ink-1); }
-  .telemetry { font-size: 9px; letter-spacing: 0.14em; color: var(--ink-3); }
-  .telemetry b { color: var(--green); font-weight: 500; }
-
-  /* ─── Content shell ──────────────────────────────────── */
-  .shell { position: relative; z-index: 10; }
-  .panel {
-    position: relative;
-    min-height: 100vh;
-    padding: 120px 64px 120px 200px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .inner { max-width: 920px; }
-
-  .eyebrow {
-    display: flex; align-items: center; gap: 14px;
-    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--ink-3); margin-bottom: 30px;
-  }
-  .eyebrow .e-num { color: var(--green); }
-  .eyebrow::after { content:''; flex:1; height:1px; background: var(--line); }
-
-  /* ─── HERO ───────────────────────────────────────────── */
-  #signal { padding-top: 44px; }
-  .pre {
-    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--blue); margin-bottom: 26px;
-  }
-  .pre .live-dot {
-    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green); box-shadow: 0 0 8px var(--green);
-    margin-right: 9px; animation: blink 1.6s infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
-
-  .hero-name {
-    font-family: var(--disp);
-    font-weight: 300;
-    font-size: clamp(46px, 11vw, 152px);
-    line-height: 0.92;
-    letter-spacing: -0.02em;
-    color: var(--ink-1);
-  }
-  .hero-name .last { font-weight: 700; }
-  .hero-name .last span { color: var(--green); }
-
-  .hero-sub {
-    margin-top: 34px;
-    font-size: 14px; line-height: 1.9; color: var(--ink-2);
-    max-width: 600px;
-  }
-  .hero-sub b { color: var(--ink-1); font-weight: 500; }
-
-  .scroll-cue {
-    margin-top: 56px;
-    display: inline-flex; align-items: center; gap: 12px;
-    font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--ink-3);
-  }
-  .scroll-cue .bar {
-    width: 40px; height: 1px; background: var(--ink-3);
-    position: relative; overflow: hidden;
-  }
-  .scroll-cue .bar::after {
-    content:''; position:absolute; left:-40px; top:0; width:40px; height:1px;
-    background: var(--green); animation: sweep 2.4s infinite;
-  }
-  @keyframes sweep { to { left: 40px; } }
-
-  /* fact strip */
-  .facts {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1px; margin-top: 64px;
-    border: 1px solid var(--line); background: var(--line);
-  }
-  .fact { background: rgba(7,8,16,0.7); padding: 18px 20px; }
-  .fact .v {
-    font-family: var(--disp); font-weight: 600; font-size: 24px;
-    color: var(--ink-1); line-height: 1;
-  }
-  .fact .v small { font-size: 12px; color: var(--green); font-weight: 500; }
-  .fact .k {
-    margin-top: 9px; font-size: 9px; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--ink-3);
-  }
-
-  /* ─── MISSIONS ───────────────────────────────────────── */
-  .missions { display: flex; flex-direction: column; }
-  .mission {
-    display: grid; grid-template-columns: 96px 1fr;
-    gap: 0 28px; padding: 40px 0;
-    border-top: 1px solid var(--line);
-  }
-  .mission:last-child { border-bottom: 1px solid var(--line); }
-  .m-meta { padding-top: 4px; }
-  .status {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
-  }
-  .status .s-dot { width: 7px; height: 7px; border-radius: 50%; }
-  .status.live { color: var(--green); }
-  .status.live .s-dot { background: var(--green); box-shadow:0 0 8px var(--green); animation: blink 2s infinite; }
-  .status.build { color: var(--ink-3); }
-  .status.build .s-dot { background: var(--ink-3); }
-  .status.plan { color: var(--ink-4); }
-  .status.plan .s-dot { background: var(--ink-4); }
-  .m-id { margin-top: 12px; font-size: 9px; letter-spacing: 0.2em; color: var(--ink-3); }
-
-  .m-title {
-    font-family: var(--disp); font-weight: 600; font-size: 26px;
-    color: var(--ink-1); line-height: 1.1; margin-bottom: 14px;
-    transition: color .25s;
-  }
-  .mission:hover .m-title { color: var(--green); }
-  .m-desc { font-size: 13px; color: var(--ink-2); line-height: 1.8; max-width: 640px; margin-bottom: 14px; }
-  .m-note {
-    font-size: 11.5px; font-style: italic; color: var(--ink-3);
-    line-height: 1.7; padding-left: 14px; border-left: 1px solid var(--line-2);
-    max-width: 620px; margin-bottom: 18px;
-  }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip {
-    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--ink-3); border: 1px solid var(--line); padding: 4px 9px;
-    transition: color .2s, border-color .2s;
-  }
-  .chip:hover { color: var(--ink-1); border-color: var(--line-2); }
-  .m-links { margin-top: 20px; display: flex; gap: 22px; }
-  .m-link {
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--green); text-decoration: none;
-    border-bottom: 1px solid rgba(80,255,160,0.25); padding-bottom: 2px;
-    transition: border-color .2s;
-  }
-  .m-link:hover { border-color: var(--green); }
-  .m-link.muted { color: var(--ink-3); border-color: var(--line); }
-
-  /* ─── FLIGHT LOG ─────────────────────────────────────── */
-  .log { }
-  .entry {
-    display: grid; grid-template-columns: 200px 1fr; gap: 0 28px;
-    padding: 30px 0; border-top: 1px solid var(--line);
-  }
-  .entry:last-of-type { border-bottom: 1px solid var(--line); }
-  .e-when {
-    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--ink-3); padding-top: 5px; line-height: 1.6;
-  }
-  .e-when b { display:block; color: var(--blue); font-weight:500; letter-spacing:0.1em; }
-  .e-co { font-family: var(--disp); font-weight: 600; font-size: 17px; color: var(--ink-1); margin-bottom: 3px; }
-  .e-role { font-size: 11px; color: var(--blue); letter-spacing: 0.04em; margin-bottom: 12px; }
-  .e-list { list-style: none; }
-  .e-list li {
-    font-size: 12.5px; color: var(--ink-2); line-height: 1.75;
-    padding-left: 18px; position: relative; margin-bottom: 3px;
-  }
-  .e-list li::before { content:'—'; position:absolute; left:0; color: var(--ink-4); }
-
-  .awards { margin-top: 46px; }
-  .award {
-    display: grid; grid-template-columns: 22px 1fr 62px; gap: 0 16px;
-    padding: 16px 0; border-top: 1px solid var(--line); align-items: start;
-  }
-  .award .ico { color: var(--amber); font-size: 11px; padding-top: 3px; }
-  .award .a-name { font-family: var(--disp); font-weight: 600; font-size: 14px; color: var(--ink-1); margin-bottom: 3px; }
-  .award .a-body { font-size: 11.5px; color: var(--ink-2); line-height: 1.6; }
-  .award .a-yr { font-size: 10px; color: var(--ink-3); text-align: right; letter-spacing: 0.06em; }
-
-  /* ─── SYSTEMS ────────────────────────────────────────── */
-  .stack {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--line); border-left: 1px solid var(--line);
-  }
-  .cell {
-    padding: 26px 26px 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  }
-  .cell .c-label {
-    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--green); margin-bottom: 18px;
-  }
-  .cell .c-list { display: flex; flex-direction: column; gap: 8px; }
-  .cell .c-item { font-size: 12.5px; color: var(--ink-2); }
-  .cell .c-item.hi { color: var(--ink-1); }
-  .cell .c-item.soon::after { content:' ◦'; color: var(--amber); font-size: 10px; }
-  .stack-note { margin-top: 18px; font-size: 10px; letter-spacing: 0.08em; color: var(--ink-3); }
-  .stack-note span { color: var(--amber); }
-
-  /* ─── ABOUT ──────────────────────────────────────────── */
-  .row { display: grid; grid-template-columns: 150px 1fr; gap: 0 28px; padding: 18px 0; border-top: 1px solid var(--line); align-items: start; }
-  .row:last-child { border-bottom: 1px solid var(--line); }
-  .r-k { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
-  .r-v { font-size: 13px; color: var(--ink-2); line-height: 1.7; }
-  .bars { display: flex; flex-direction: column; gap: 11px; }
-  .bar { display: grid; grid-template-columns: 84px 1fr 86px; align-items: center; gap: 14px; }
-  .bar .bl { font-size: 11.5px; color: var(--ink-2); }
-  .bar .bt { height: 2px; background: rgba(255,255,255,0.07); position: relative; overflow: hidden; }
-  .bar .bf { height: 100%; width: 0; background: var(--green); opacity: .6; transition: width 1.1s cubic-bezier(.2,.7,.2,1); }
-  .bar .bf.b { background: var(--blue); }
-  .bar .bf.d { background: var(--ink-3); opacity: .9; }
-  .bar .bp { font-size: 10px; color: var(--ink-3); text-align: right; letter-spacing: 0.04em; }
-
-  /* ─── UPLINK ─────────────────────────────────────────── */
-  #uplink { text-align: left; padding-bottom: 200px; }
-  .touchdown {
-    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--green); margin-bottom: 24px;
-  }
-  .big-cta {
-    font-family: var(--disp); font-weight: 300;
-    font-size: clamp(34px, 7vw, 84px); line-height: 1; letter-spacing: -0.01em;
-    color: var(--ink-1); margin-bottom: 40px;
-  }
-  .big-cta a { color: var(--green); text-decoration: none; border-bottom: 2px solid rgba(80,255,160,0.3); transition: border-color .25s; }
-  .big-cta a:hover { border-color: var(--green); }
-  .links {
-    display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); max-width: 720px;
-  }
-  .link-item {
-    display: flex; flex-direction: column; gap: 7px; padding: 24px;
-    text-decoration: none; border-right: 1px solid var(--line); transition: background .2s;
-  }
-  .link-item:last-child { border-right: none; }
-  .link-item:hover { background: rgba(255,255,255,0.025); }
-  .link-item .lp { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
-  .link-item .lh { font-size: 13px; color: var(--ink-1); }
-  .link-item .la { font-size: 11px; color: var(--green); margin-top: 8px; }
-
-  footer {
-    position: relative; z-index: 10;
-    padding: 26px 64px 26px 200px;
-    display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid var(--line);
-    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
-  }
-
-  /* ─── Reveal ─────────────────────────────────────────── */
-  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
-  .reveal.in { opacity: 1; transform: none; }
-  .reveal.d1 { transition-delay: .08s; }
-  .reveal.d2 { transition-delay: .16s; }
-  .reveal.d3 { transition-delay: .24s; }
-
-  /* ─── Responsive ─────────────────────────────────────── */
-  @media (max-width: 880px) {
-    .panel { padding: 110px 26px 110px 26px; }
-    .hud { display: none; }
-    header { padding: 0 18px; }
-    nav { display: none; }
-    footer { padding: 24px 26px; flex-direction: column; gap: 8px; text-align: center; }
-    .facts { grid-template-columns: repeat(2, 1fr); }
-    .mission { grid-template-columns: 1fr; }
-    .m-meta { margin-bottom: 14px; display: flex; gap: 18px; align-items: center; }
-    .m-id { margin-top: 0; }
-    .entry { grid-template-columns: 1fr; }
-    .e-when { margin-bottom: 8px; }
-    .stack { grid-template-columns: repeat(1, 1fr); }
-    .row { grid-template-columns: 120px 1fr; }
-    .links { grid-template-columns: 1fr; }
-    .link-item { border-right: none; border-bottom: 1px solid var(--line); }
-    .link-item:last-child { border-bottom: none; }
-    .earth-wrap { width: 320vw; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .scroll-cue .bar::after, .pre .live-dot, .status .s-dot { animation: none; }
-  }
-
-  /* ─── Mission preview image ─────────────────────────── */
-  .m-preview {
-    margin-bottom: 18px;
-    border: 1px solid var(--line);
-    overflow: hidden;
-    position: relative;
-  }
-  .m-preview img {
-    width: 100%; display: block;
-    opacity: 0.78; filter: brightness(0.9) contrast(1.05);
-    transition: opacity .3s, filter .3s;
-  }
-  .mission:hover .m-preview img { opacity: 1; filter: brightness(1) contrast(1); }
-
-  /* ─── Status: published research ───────────────────── */
-  .status.done { color: var(--amber); }
-  .status.done .s-dot { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
-
-  /* ─── Systems grid hierarchy ────────────────────────── */
-  .cell.dim .c-label { color: var(--ink-3); }
-  .cell.dim .c-item { color: var(--ink-3); }
-  .cell.dim .c-item.hi { color: var(--ink-3); }
-
-  /* ─── Phase scan-line flash ─────────────────────────── */
-  .scan-line {
-    position: fixed; left: 0; right: 0; top: 50%;
-    height: 1px; z-index: 200; pointer-events: none;
-    background: linear-gradient(90deg, transparent 0%, var(--green) 20%, var(--green) 80%, transparent 100%);
-    opacity: 0; transform: scaleX(0); transform-origin: left;
-  }
-  @keyframes scan-sweep {
-    0%   { opacity: 0;   transform: scaleX(0); }
-    15%  { opacity: 0.9; transform: scaleX(1); }
-    75%  { opacity: 0.4; transform: scaleX(1); }
-    100% { opacity: 0;   transform: scaleX(1); }
-  }
-  .scan-line.fire { animation: scan-sweep 0.4s cubic-bezier(.2,.7,.2,1) forwards; }
-</style>
-</head>
-<body>
-
-<!-- ═══ Cosmic backdrop ═══ -->
-<div class="scan-line" aria-hidden="true"></div>
-
-<!-- ═══ Cosmic backdrop ═══ -->
-<div class="space" aria-hidden="true">
-  <canvas id="stars"></canvas>
-  <div class="grid-overlay"></div>
-</div>
-<div class="earth-wrap" aria-hidden="true">
-  <div class="earth">
-    <div class="earth-land">
-      <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#4f9a64"/>
-            <stop offset="1" stop-color="#2c6442"/>
-          </linearGradient>
-        </defs>
-        <g fill="url(#land)">
-          <path d="M 38 60 C 30 45 55 32 72 38 C 90 44 96 58 88 72 C 82 84 60 88 48 80 C 38 74 42 68 38 60 Z"/>
-          <path d="M 105 55 C 120 42 155 44 168 58 C 178 68 172 82 158 86 C 140 92 122 88 112 78 C 102 70 98 64 105 55 Z"/>
-          <path d="M 78 100 C 72 92 92 90 100 98 C 110 108 108 128 98 142 C 90 152 78 150 74 138 C 70 124 84 112 78 100 Z"/>
-          <path d="M 142 132 C 150 126 166 130 170 140 C 173 148 165 156 154 154 C 144 152 136 140 142 132 Z"/>
-          <path d="M 30 116 C 34 110 46 112 48 120 C 50 128 40 132 34 128 C 29 124 27 120 30 116 Z"/>
-        </g>
-      </svg>
-    </div>
-    <div class="earth-shade"></div>
-  </div>
-</div>
-
-<!-- ═══ Altitude HUD ═══ -->
-<aside class="hud" aria-hidden="true">
-  <div class="hud-label">Altitude</div>
-  <div class="hud-alt"><span id="alt">35,786</span></div>
-  <div class="hud-unit">KM · AGL</div>
-  <div class="hud-phase" id="phase">Geostationary</div>
-  <div class="hud-tape">
-    <div class="hud-tick" style="top:10%"></div>
-    <div class="hud-tick" style="top:28%"></div>
-    <div class="hud-tick" style="top:46%"></div>
-    <div class="hud-tick" style="top:64%"></div>
-    <div class="hud-tick" style="top:82%"></div>
-    <div class="hud-progress" id="hud-progress"></div>
-  </div>
-</aside>
-
-<!-- ═══ Top bar ═══ -->
-<header>
-  <div class="brand">JB<span class="b-dot">·</span>BARENS</div>
-  <nav>
-    <a href="#signal">Signal</a>
-    <a href="#missions">Missions</a>
-    <a href="#log">Log</a>
-    <a href="#systems">Systems</a>
-    <a href="#about">About</a>
-    <a href="#uplink">Uplink</a>
-  </nav>
-  <div class="telemetry">MET <b id="met">T+00:00:00</b> &nbsp;·&nbsp; <a href="https://github.com/JBarens" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;letter-spacing:0.1em;">GH ↗</a></div>
-</header>
-
-<main class="shell">
-
-  <!-- ═══════════ 01 · SIGNAL ═══════════ -->
-  <section class="panel" id="signal">
-    <div class="inner">
-      <div class="pre reveal"><span class="live-dot"></span>Inbound from geostationary orbit</div>
-
-      <h1 class="hero-name reveal d1">
-        <span class="first">Jasper</span><br>
-        <span class="last">Bare<span>ns</span></span>
-      </h1>
-
-      <p class="hero-sub reveal d2">
-        Aerospace engineer who codes. <b>MSc spaceflight dynamics · TU Delft</b> —
-        GNC work at <b>Airbus D&amp;S</b> and <b>Ecosmic</b> — now building AI-powered
-        software at <b>Accenture</b> and full-stack on the side.
-        The goal: <b>AI at the intersection of space.</b>
-      </p>
-
-      <div class="scroll-cue reveal d3">
-        <span class="bar"></span> Scroll to begin descent
-      </div>
-
-      <div class="facts reveal d3">
-        <div class="fact"><div class="v">8.0<small> /10</small></div><div class="k">MSc GPA · TU Delft</div></div>
-        <div class="fact"><div class="v">200+</div><div class="k">IAC audience · Milan</div></div>
-        <div class="fact"><div class="v">4</div><div class="k">Build missions</div></div>
-        <div class="fact"><div class="v">€50k</div><div class="k">EU grant led · Cassini</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 02 · MISSIONS ═══════════ -->
-  <section class="panel" id="missions">
-    <div class="inner">
-      <div class="eyebrow reveal"><span class="e-num">02</span> Missions</div>
-
-      <div class="missions">
-        <!-- P1 -->
-        <article class="mission reveal">
-          <div class="m-meta">
-            <span class="status live"><span class="s-dot"></span>Live</span>
-            <div class="m-id">MSN-01 · 2026</div>
-          </div>
-          <div>
-            <h3 class="m-title">Orbital Mechanics Simulator</h3>
-            <p class="m-desc">
-              Real-time 3D satellite propagation on a photorealistic globe. Add any object by
-              NORAD ID and watch live SGP4 physics: ground-track trails, day/night terminator
-              shading, a time scrubber (T±hh:mm:ss), orbital-elements readout, conjunction
-              detection (CDM), and a true-scale Sun and Moon.
-            </p>
-            <p class="m-note">
-              Browser-side TLE fetch to route around Railway's outbound network limits ·
-              ES256 JWKS authentication written from scratch · per-user data isolation ·
-              satellites rendered at true orbital altitude.
-            </p>
-            <div class="chips">
-              <span class="chip">React</span><span class="chip">TypeScript</span>
-              <span class="chip">Three.js</span><span class="chip">R3F</span>
-              <span class="chip">FastAPI</span><span class="chip">Python</span>
-              <span class="chip">Skyfield · SGP4</span><span class="chip">PostgreSQL</span>
-              <span class="chip">Supabase</span><span class="chip">Docker</span><span class="chip">Railway</span>
-            </div>
-            <div class="m-preview">
-              <img src="msn-01.png" alt="Orbital Simulator — GOES-18 at GEO with conjunction detection active" loading="lazy" />
-            </div>
-            <div class="m-links">
-              <a class="m-link" href="https://orbital-simulator.up.railway.app/" target="_blank" rel="noopener">↗ Live demo</a>
-              <a class="m-link muted" href="https://github.com/JBarens/orbital-simulator" target="_blank" rel="noopener">↗ Source</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- P2 -->
-        <article class="mission reveal">
-          <div class="m-meta">
-            <span class="status build"><span class="s-dot"></span>Build</span>
-            <div class="m-id">MSN-02 · Started Jun 2026</div>
-          </div>
-          <div>
-            <h3 class="m-title">Geopolitical Risk Map</h3>
-            <p class="m-desc">
-              An interactive world map — click any country to surface a live risk profile:
-              conflict history, alliances, trade flows, and an instability index. Built on live
-              data pipelines from GDELT, the World Bank, and SIPRI.
-            </p>
-            <div class="chips">
-              <span class="chip">React</span><span class="chip">D3.js</span>
-              <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
-              <span class="chip">GDELT</span><span class="chip">World Bank API</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- P3 -->
-        <article class="mission reveal">
-          <div class="m-meta">
-            <span class="status build"><span class="s-dot"></span>Build</span>
-            <div class="m-id">MSN-03 · Started Jun 2026</div>
-          </div>
-          <div>
-            <h3 class="m-title">Space Race Strategy Game</h3>
-            <p class="m-desc">
-              A turn-based browser game: run a space agency, allocate budget, climb a technology
-              tree, and respond to geopolitical events that reshape your funding and mission
-              priorities. Persistent game state and a logic engine.
-            </p>
-            <div class="chips">
-              <span class="chip">React</span><span class="chip">TypeScript</span>
-              <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- P4 -->
-        <article class="mission reveal">
-          <div class="m-meta">
-            <span class="status plan"><span class="s-dot"></span>Plan</span>
-            <div class="m-id">MSN-04 · 2027</div>
-          </div>
-          <div>
-            <h3 class="m-title">OrbitIQ — Mission Feasibility SaaS</h3>
-            <p class="m-desc">
-              An AI feasibility analyser for smallsat teams and NewSpace startups. Natural-language
-              input → a structured report: delta-v budget, launch windows, risk flags, and cost
-              benchmarking against historical missions.
-            </p>
-            <p class="m-note">
-              Moat: MSc-level orbital-mechanics expertise paired with a curated NASA/ESA RAG
-              knowledge base.
-            </p>
-            <div class="chips">
-              <span class="chip">React</span><span class="chip">FastAPI</span>
-              <span class="chip">Azure OpenAI</span><span class="chip">RAG · LangChain</span>
-              <span class="chip">LangGraph</span><span class="chip">Supabase</span>
-              <span class="chip">Stripe</span><span class="chip">PostgreSQL</span>
-            </div>
-          </div>
-        </article>
-        <!-- RES-01 -->
-        <article class="mission reveal">
-          <div class="m-meta">
-            <span class="status done"><span class="s-dot"></span>Published</span>
-            <div class="m-id">RES-01 · 2025</div>
-          </div>
-          <div>
-            <h3 class="m-title">Admissible Regions for Untracked LEO Debris</h3>
-            <p class="m-desc">
-              MSc thesis at Airbus Defence &amp; Space, Friedrichshafen. Developed admissible-region
-              methods to generate initial orbit catalogues for untracked LEO objects detected by
-              ground-based optical telescopes — bridging astrodynamics, estimation theory, and
-              sensor geometry to address a live problem in space situational awareness.
-            </p>
-            <p class="m-note">
-              Supervised jointly by TU Delft and Airbus D&amp;S · Published in TU Delft repository · MSc GPA 8.0 / 10
-            </p>
-            <div class="chips">
-              <span class="chip">Python</span><span class="chip">PowerShell</span>
-              <span class="chip">Skyfield · SGP4</span><span class="chip">Kalman filters</span>
-              <span class="chip">Optical telescope data</span><span class="chip">Estimation theory</span>
-              <span class="chip">Space situational awareness</span>
-            </div>
-            <div class="m-links">
-              <a class="m-link" href="https://repository.tudelft.nl/record/uuid:0a7bc86a-ce91-4c85-901b-5bea3856b40a" target="_blank" rel="noopener">↗ TU Delft Repository</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 03 · FLIGHT LOG ═══════════ -->
-  <section class="panel" id="log">
-    <div class="inner">
-      <div class="eyebrow reveal"><span class="e-num">03</span> Flight Log</div>
-
-      <div class="log">
-        <div class="entry reveal">
-          <div class="e-when"><b>May 2026 →</b>Amsterdam, NL</div>
-          <div>
-            <div class="e-co">Accenture Netherlands</div>
-            <div class="e-role">Manufacturing &amp; Operations Consulting Analyst · Industry X</div>
-            <ul class="e-list">
-              <li>Help industrial &amp; manufacturing clients navigate complex transformations — from AI adoption to supply-chain redesign</li>
-              <li>Operate across the full stack: data analysis, client communications, and building AI-powered tools that create operational value</li>
-              <li>Building AI tools that automate analysis and generate client-ready outputs — engineering the work, not just advising on it</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="entry reveal">
-          <div class="e-when"><b>Apr – Sep 2025</b>Friedrichshafen, DE</div>
-          <div>
-            <div class="e-co">Airbus Defence &amp; Space</div>
-            <div class="e-role">MSc Thesis · Space Situational Awareness</div>
-            <ul class="e-list">
-              <li>Researched admissible-region methods to generate catalogues of untracked LEO objects from ground-based optical telescopes</li>
-              <li>Work at the intersection of orbital mechanics, sensor geometry, and estimation theory</li>
-              <li>Bridged academic rigour with an active industrial problem inside Airbus D&amp;S</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="entry reveal">
-          <div class="e-when"><b>Aug 2024 – Jan 2025</b>Turin, IT</div>
-          <div>
-            <div class="e-co">Ecosmic <span style="color:var(--ink-3);font-weight:400;font-size:11px;">· deep-tech space startup</span></div>
-            <div class="e-role">GNC Engineer</div>
-            <ul class="e-list">
-              <li>Guidance, navigation &amp; control for space-situational-awareness and collision-avoidance systems</li>
-              <li>Early-stage development at an 8-person startup — broad scope, real ownership</li>
-              <li>Led a €50k Cassini Challenge EU grant application · presented at IAC Milan to 200+ professionals</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="entry reveal">
-          <div class="e-when"><b>2020 – 2025</b>Delft, NL</div>
-          <div>
-            <div class="e-co">TU Delft</div>
-            <div class="e-role">MSc Spaceflight Dynamics · BSc Aerospace Engineering · MSc GPA 8.0 / 10</div>
-            <ul class="e-list">
-              <li>Specialised in spaceflight dynamics — orbital mechanics, estimation, space situational awareness</li>
-              <li>Coursework: Space Systems Engineering, Orbital Dynamics, Entrepreneurship &amp; Start-Ups</li>
-              <li>Minor in Economics &amp; Finance · Universidad Carlos III de Madrid · Athens Programme (Big Data)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="awards">
-        <div class="award reveal">
-          <div class="ico">▲</div>
-          <div>
-            <div class="a-name">Roland Berger Jury Prize</div>
-            <div class="a-body">€5k · TU Delft Ready to Startup · EV-battery repurposing for residential energy storage — led financial modelling and market analysis</div>
-          </div>
-          <div class="a-yr">2024</div>
-        </div>
-        <div class="award reveal">
-          <div class="ico">▲</div>
-          <div>
-            <div class="a-name">EC Space Career Voucher</div>
-            <div class="a-body">Chosen from 500+ applicants across Europe — one of roughly 20 early-career space professionals recognised by the European Commission as a rising contributor to the sector</div>
-          </div>
-          <div class="a-yr">2025</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 04 · SYSTEMS ═══════════ -->
-  <section class="panel" id="systems">
-    <div class="inner">
-      <div class="eyebrow reveal"><span class="e-num">04</span> Systems</div>
-
-      <div class="stack reveal">
-        <div class="cell">
-          <div class="c-label">Domain</div>
-          <div class="c-list">
-            <div class="c-item hi">Orbital mechanics</div>
-            <div class="c-item hi">Space situational awareness</div>
-            <div class="c-item hi">GNC · estimation theory</div>
-            <div class="c-item soon">ML for space autonomy</div>
-          </div>
-        </div>
-        <div class="cell">
-          <div class="c-label">AI / Data</div>
-          <div class="c-list">
-            <div class="c-item soon">RAG · LangChain</div>
-            <div class="c-item soon">LangGraph · Agents</div>
-            <div class="c-item soon">PyTorch · fast.ai</div>
-            <div class="c-item hi">SQL · data modelling</div>
-          </div>
-        </div>
-        <div class="cell">
-          <div class="c-label">Frontend</div>
-          <div class="c-list">
-            <div class="c-item hi">React · TypeScript</div>
-            <div class="c-item hi">Three.js · React Three Fiber</div>
-            <div class="c-item hi">Vite · HTML / CSS</div>
-            <div class="c-item soon">D3.js</div>
-          </div>
-        </div>
-        <div class="cell">
-          <div class="c-label">Backend</div>
-          <div class="c-list">
-            <div class="c-item hi">Python · FastAPI</div>
-            <div class="c-item hi">SQLAlchemy · PostgreSQL</div>
-            <div class="c-item hi">Supabase · JWT / JWKS</div>
-            <div class="c-item hi">Skyfield · SGP4</div>
-          </div>
-        </div>
-        <div class="cell">
-          <div class="c-label">Infrastructure</div>
-          <div class="c-list">
-            <div class="c-item hi">Docker · Docker Compose</div>
-            <div class="c-item hi">Railway</div>
-            <div class="c-item hi">Git · Linux · Bash</div>
-            <div class="c-item soon">Azure (AZ-900 in progress)</div>
-          </div>
-        </div>
-        <div class="cell">
-          <div class="c-label">Consulting</div>
-          <div class="c-list">
-            <div class="c-item hi">Stakeholder management</div>
-            <div class="c-item hi">Financial modelling</div>
-            <div class="c-item hi">EU grant writing</div>
-            <div class="c-item hi">Go-to-market strategy</div>
-          </div>
-        </div>
-      </div>
-      <div class="stack-note reveal">Items marked <span>◦</span> are in active study.</div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 05 · ABOUT ═══════════ -->
-  <section class="panel" id="about">
-    <div class="inner">
-      <div class="eyebrow reveal"><span class="e-num">05</span> About</div>
-
-      <div class="row reveal">
-        <div class="r-k">Languages</div>
-        <div class="r-v">
-          <div class="bars">
-            <div class="bar"><span class="bl">Dutch</span><span class="bt"><span class="bf" data-w="100"></span></span><span class="bp">fluent</span></div>
-            <div class="bar"><span class="bl">English</span><span class="bt"><span class="bf" data-w="100"></span></span><span class="bp">fluent</span></div>
-            <div class="bar"><span class="bl">Spanish</span><span class="bt"><span class="bf" data-w="90"></span></span><span class="bp">fluent</span></div>
-            <div class="bar"><span class="bl">German</span><span class="bt"><span class="bf b" data-w="42"></span></span><span class="bp">working</span></div>
-            <div class="bar"><span class="bl">Italian</span><span class="bt"><span class="bf b" data-w="42"></span></span><span class="bp">working</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row reveal">
-        <div class="r-k">Countries</div>
-        <div class="r-v">46 visited. Lived and worked in NL · DE · IT · ES. IAC Milan · presented to 200+ space professionals.</div>
-      </div>
-
-      <div class="row reveal">
-        <div class="r-k">Outside work</div>
-        <div class="r-v">Judo, Ironman training, tennis, gym. Dutch Red Cross first-aid volunteer. A relentless language-learner.</div>
-      </div>
-
-      <div class="row reveal">
-        <div class="r-k">How I work</div>
-        <div class="r-v">Clean, direct, empirical. Consistent beats intensive — compound everything. I approach code the same way I'd approach a trajectory problem: get the model right first, then optimise. Ship something real and imperfect before you architect the perfect thing on paper.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 06 · UPLINK ═══════════ -->
-  <section class="panel" id="uplink">
-    <div class="inner">
-      <div class="touchdown reveal">● Touchdown — 0 km</div>
-      <div class="big-cta reveal d1">
-        Let's build<br>something that<br><a href="mailto:jasper@barens.org">leaves orbit.</a>
-      </div>
-      <div class="links reveal d2">
-        <a class="link-item" href="mailto:jasper@barens.org">
-          <span class="lp">Email</span><span class="lh">jasper@barens.org</span><span class="la">→</span>
-        </a>
-        <a class="link-item" href="https://linkedin.com/in/jbarens" target="_blank" rel="noopener">
-          <span class="lp">LinkedIn</span><span class="lh">in / jbarens</span><span class="la">→</span>
-        </a>
-        <a class="link-item" href="https://github.com/JBarens" target="_blank" rel="noopener">
-          <span class="lp">GitHub</span><span class="lh">JBarens</span><span class="la">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div>Jasper Barens · Amsterdam, NL</div>
-  <div id="utc">UTC —</div>
-</footer>
-
-<script>
-(function () {
-  'use strict';
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ─── Starfield with parallax depth ─────────────────── */
-  var cv = document.getElementById('stars');
-  var ctx = cv.getContext('2d');
-  var W, H, DPR, stars = [];
-  var STAR_N = 500;
-
-  function size() {
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth; H = window.innerHeight;
-    cv.width = W * DPR; cv.height = H * DPR;
-    cv.style.width = W + 'px'; cv.style.height = H + 'px';
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  }
-
-  function seed() {
-    stars = [];
-    for (var i = 0; i < STAR_N; i++) {
-      var depth = Math.random();           // 0 far → 1 near
-      stars.push({
-        x: Math.random() * W,
-        y: Math.random() * (H * 6),        // span beyond viewport for parallax
-        z: depth,
-        r: 0.3 + depth * 1.4,
-        base: 0.25 + depth * 0.65,
-        tw: Math.random() * Math.PI * 2,
-        tws: 0.6 + Math.random() * 1.4,
-        hue: Math.random() < 0.12 ? (Math.random() < 0.5 ? 'b' : 'g') : 'w'
-      });
-    }
-  }
-
-  /* ─── Scroll state with smoothing ───────────────────── */
-  var targetY = window.pageYOffset || 0;
-  var smoothY = targetY;
-  var maxScroll = 1;
-
-  function recalc() { maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight); }
-
-  window.addEventListener('scroll', function () { targetY = window.pageYOffset; }, { passive: true });
-  window.addEventListener('resize', function () { size(); seed(); recalc(); });
-
-  /* parallax elements */
-  var pxEls = [].slice.call(document.querySelectorAll('[data-parallax]'));
-  var earth = document.querySelector('.earth-wrap');
-  var altEl = document.getElementById('alt');
-  var phaseEl = document.getElementById('phase');
-  var hudProg = document.getElementById('hud-progress');
-  var scanEl = document.querySelector('.scan-line');
-  var lastPhase = '';
-
-  /* altitude phases */
-  var GEO = 35786;
-  function phaseFor(alt) {
-    if (alt > 30000) return 'Geostationary';
-    if (alt > 5000)  return 'Medium Earth orbit';
-    if (alt > 1500)  return 'MEO → LEO transfer';
-    if (alt > 300)   return 'Low Earth orbit';
-    if (alt > 80)    return 'Re-entry interface';
-    if (alt > 5)     return 'Atmospheric descent';
-    return 'Touchdown';
-  }
-  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
-
-  var mouseX = 0, mouseY = 0, mTX = 0, mTY = 0;
-  if (!reduce) {
-    window.addEventListener('mousemove', function (e) {
-      mTX = (e.clientX / window.innerWidth - 0.5);
-      mTY = (e.clientY / window.innerHeight - 0.5);
-    }, { passive: true });
-  }
-
-  function frame() {
-    /* smooth scroll value */
-    smoothY += (targetY - smoothY) * 0.085;
-    var prog = Math.min(1, Math.max(0, smoothY / maxScroll));
-
-    /* ── starfield ── */
-    ctx.clearRect(0, 0, W, H);
-    var t = performance.now() * 0.001;
-    for (var i = 0; i < stars.length; i++) {
-      var s = stars[i];
-      // parallax: nearer stars move faster against scroll
-      var py = ((s.y - smoothY * (0.15 + s.z * 0.9)) % (H * 6));
-      if (py < 0) py += H * 6;
-      var yy = py - H;                      // center band in viewport
-      if (yy < -20 || yy > H + 20) continue;
-      var tw = reduce ? 1 : (0.7 + 0.3 * Math.sin(t * s.tws + s.tw));
-      var starFade = Math.max(0, 1 - Math.max(0, prog - 0.7) / 0.3);
-      var a = s.base * tw * starFade;
-      ctx.beginPath();
-      ctx.arc(s.x + mTX * (4 + s.z * 26), yy, s.r, 0, 6.2832);
-      if (s.hue === 'b') ctx.fillStyle = 'rgba(150,195,255,' + a + ')';
-      else if (s.hue === 'g') ctx.fillStyle = 'rgba(140,255,200,' + a + ')';
-      else ctx.fillStyle = 'rgba(255,255,255,' + a + ')';
-      ctx.fill();
-    }
-
-    /* ── DOM parallax ── */
-    for (var j = 0; j < pxEls.length; j++) {
-      var el = pxEls[j];
-      var d = parseFloat(el.getAttribute('data-parallax')) || 0;
-      el.style.transform = 'translateY(' + (smoothY * d) + 'px)';
-    }
-
-    /* mouse smoothing — always run */
-    if (!reduce) {
-      mouseX += (mTX - mouseX) * 0.06;
-      mouseY += (mTY - mouseY) * 0.06;
-    }
-
-    /* ── Earth rises, grows, and floats with mouse ── */
-    if (earth) {
-      var rise = 92 - prog * 78;
-      var scale = 1 + prog * 0.5;
-      var emx = !reduce ? (mouseX * 6).toFixed(2) : 0;
-      var emy = !reduce ? (mouseY * 6).toFixed(2) : 0;
-      earth.style.transform = 'translate(calc(-50% + ' + emx + 'px), calc(' + rise + '% + ' + emy + 'px)) scale(' + scale + ')';
-    }
-
-    /* ── Altitude HUD (ease-in so most of the journey is high) ── */
-    var altProg = Math.pow(prog, 2.0);
-    var alt = GEO * (1 - altProg);
-    if (altEl) altEl.textContent = fmt(alt);
-    if (phaseEl) {
-      var ph = phaseFor(alt);
-      if (ph !== lastPhase) {
-        lastPhase = ph;
-        phaseEl.textContent = ph;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jasper Barens — Aerospace → AI Engineering</title>
+    <meta
+      name="description"
+      content="Jasper Barens · Building toward AI engineering · full-stack software with an aerospace edge (orbital mechanics, TU Delft, Airbus D&S)."
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Jasper Barens — Aerospace → AI Engineering"
+    />
+    <meta
+      property="og:description"
+      content="Full-stack builder with an aerospace edge. MSc spaceflight dynamics (TU Delft), space-situational-awareness work at Airbus & Ecosmic, now AI at Accenture."
+    />
+    <meta property="og:url" content="https://jbarens.github.io/" />
+    <meta property="og:image" content="https://jbarens.github.io/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Jasper Barens — Aerospace → AI Engineering"
+    />
+    <meta
+      name="twitter:description"
+      content="Full-stack builder with an aerospace edge. Orbital mechanics, full-stack software, AI engineering."
+    />
+    <meta name="twitter:image" content="https://jbarens.github.io/og.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-    }
-    if (hudProg) hudProg.style.height = (prog * 100) + '%';
 
-    requestAnimationFrame(frame);
-  }
+      :root {
+        --bg: #04040a;
+        --bg-2: #070810;
+        --ink-1: rgba(255, 255, 255, 0.92);
+        --ink-2: rgba(255, 255, 255, 0.5);
+        --ink-3: rgba(255, 255, 255, 0.26);
+        --ink-4: rgba(255, 255, 255, 0.12);
+        --line: rgba(255, 255, 255, 0.08);
+        --line-2: rgba(255, 255, 255, 0.14);
+        --green: #50ffa0;
+        --blue: #5aa9ff;
+        --amber: #ffb454;
+        --red: #ff5a5a;
+        --disp: "Chakra Petch", sans-serif;
+        --mono: "JetBrains Mono", monospace;
+      }
 
-  /* ─── Reveal on scroll ──────────────────────────────── */
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        // fire language bars
-        if (e.target.querySelector) {
-          var bars = e.target.querySelectorAll('.bf[data-w]');
-          bars.forEach(function (b, k) {
-            setTimeout(function () { b.style.width = b.getAttribute('data-w') + '%'; }, 120 + k * 90);
-          });
+      html {
+        scroll-behavior: smooth;
+      }
+      html.no-smooth {
+        scroll-behavior: auto;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink-1);
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      ::selection {
+        background: rgba(80, 255, 160, 0.22);
+        color: #fff;
+      }
+
+      /* ─── Fixed cosmic backdrop ──────────────────────────── */
+      .space {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            1200px 800px at 78% -10%,
+            rgba(90, 169, 255, 0.07),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 700px at 10% 110%,
+            rgba(80, 255, 160, 0.05),
+            transparent 55%
+          ),
+          linear-gradient(180deg, #04040a 0%, #060710 50%, #04050c 100%);
+      }
+
+      #stars {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* faint engineering grid */
+      .grid-overlay {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+          );
+        background-size: 64px 64px;
+        mask-image: radial-gradient(
+          120% 120% at 50% 30%,
+          #000 35%,
+          transparent 78%
+        );
+        -webkit-mask-image: radial-gradient(
+          120% 120% at 50% 30%,
+          #000 35%,
+          transparent 78%
+        );
+      }
+
+      /* The Earth that rises as you descend */
+      .earth-wrap {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        width: 230vw;
+        max-width: 2600px;
+        aspect-ratio: 1 / 1;
+        transform: translate(-50%, 92%);
+        z-index: 1;
+        pointer-events: none;
+        will-change: transform;
+      }
+      .earth {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 36% 30%,
+          #3a7bd5 0%,
+          #1f4f9c 26%,
+          #11203f 55%,
+          #060c1a 78%,
+          #03060f 100%
+        );
+        box-shadow:
+          inset -60px -50px 160px rgba(0, 0, 0, 0.85),
+          inset 50px 40px 120px rgba(90, 169, 255, 0.18);
+      }
+      /* atmosphere rim */
+      .earth::before {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        box-shadow:
+          0 0 60px 6px rgba(90, 169, 255, 0.35),
+          0 0 140px 30px rgba(90, 169, 255, 0.18);
+        z-index: 3;
+      }
+      /* landmasses */
+      .earth-land {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .earth-land svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        opacity: 0.9;
+      }
+      /* terminator + day-side highlight, painted over land + ocean */
+      .earth-shade {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        z-index: 2;
+        background:
+          radial-gradient(
+            circle at 36% 28%,
+            rgba(120, 185, 255, 0.2) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 50% 6%,
+            rgba(80, 255, 160, 0.1),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 72% 76%,
+            rgba(0, 0, 0, 0.88) 0%,
+            rgba(0, 0, 0, 0.42) 40%,
+            transparent 68%
+          );
+      }
+
+      /* ─── Altitude HUD (left rail) ───────────────────────── */
+      .hud {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 132px;
+        z-index: 40;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 26px;
+        border-right: 1px solid var(--line);
+        background: linear-gradient(90deg, rgba(4, 4, 10, 0.55), transparent);
+      }
+      .hud-label {
+        font-size: 8px;
+        letter-spacing: 0.34em;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .hud-alt {
+        font-family: var(--disp);
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--green);
+        letter-spacing: 0.01em;
+        text-shadow: 0 0 18px rgba(80, 255, 160, 0.4);
+        font-variant-numeric: tabular-nums;
+      }
+      .hud-unit {
+        font-size: 11px;
+        color: var(--ink-2);
+        margin-top: 4px;
+        letter-spacing: 0.2em;
+      }
+      .hud-phase {
+        margin-top: 22px;
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        color: var(--blue);
+        text-transform: uppercase;
+        min-height: 12px;
+      }
+      /* vertical tape */
+      .hud-tape {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+      }
+      .hud-tick {
+        position: absolute;
+        right: 0;
+        width: 9px;
+        height: 1px;
+        background: var(--ink-4);
+      }
+      .hud-progress {
+        position: absolute;
+        right: -0.5px;
+        width: 2px;
+        background: var(--green);
+        box-shadow: 0 0 10px var(--green);
+        top: 0;
+        height: 0;
+      }
+
+      /* ─── Top status bar ─────────────────────────────────── */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 60;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px 0 168px;
+        background: linear-gradient(
+          180deg,
+          rgba(4, 4, 10, 0.82),
+          rgba(4, 4, 10, 0)
+        );
+        backdrop-filter: blur(2px);
+      }
+      .brand {
+        font-family: var(--disp);
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-1);
+      }
+      .brand .b-dot {
+        color: var(--green);
+      }
+      nav {
+        display: flex;
+        gap: 26px;
+      }
+      nav a {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        text-decoration: none;
+        transition: color 0.2s;
+        position: relative;
+      }
+      nav a:hover {
+        color: var(--ink-1);
+      }
+      .telemetry {
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        color: var(--ink-3);
+      }
+      .telemetry b {
+        color: var(--green);
+        font-weight: 500;
+      }
+
+      /* ─── Content shell ──────────────────────────────────── */
+      .shell {
+        position: relative;
+        z-index: 10;
+      }
+      .panel {
+        position: relative;
+        min-height: 100vh;
+        padding: 120px 64px 120px 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .inner {
+        max-width: 920px;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 9px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 30px;
+      }
+      .eyebrow .e-num {
+        color: var(--green);
+      }
+      .eyebrow::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      /* ─── HERO ───────────────────────────────────────────── */
+      #signal {
+        padding-top: 44px;
+      }
+      .pre {
+        font-size: 11px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 26px;
+      }
+      .pre .live-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 8px var(--green);
+        margin-right: 9px;
+        animation: blink 1.6s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
         }
-        io.unobserve(e.target);
+        50% {
+          opacity: 0.35;
+        }
       }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-  [].slice.call(document.querySelectorAll('.reveal')).forEach(function (el) { io.observe(el); });
 
-  /* ─── Clocks ────────────────────────────────────────── */
-  var t0 = Date.now();
-  var metEl = document.getElementById('met');
-  var utcEl = document.getElementById('utc');
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function clocks() {
-    var el = Math.floor((Date.now() - t0) / 1000);
-    metEl.textContent = 'T+' + pad(Math.floor(el / 3600)) + ':' + pad(Math.floor(el / 60) % 60) + ':' + pad(el % 60);
-    var d = new Date();
-    utcEl.textContent = 'UTC ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds());
-  }
-  clocks(); setInterval(clocks, 1000);
+      .hero-name {
+        font-family: var(--disp);
+        font-weight: 300;
+        font-size: clamp(46px, 11vw, 152px);
+        line-height: 0.92;
+        letter-spacing: -0.02em;
+        color: var(--ink-1);
+      }
+      .hero-name .last {
+        font-weight: 700;
+      }
+      .hero-name .last span {
+        color: var(--green);
+      }
 
-  /* ─── Boot ──────────────────────────────────────────── */
-  size(); seed(); recalc();
-  setTimeout(recalc, 600);              // after fonts/layout settle
-  window.addEventListener('load', recalc);
-  requestAnimationFrame(frame);
-})();
-</script>
-</body>
+      .hero-sub {
+        margin-top: 34px;
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--ink-2);
+        max-width: 600px;
+      }
+      .hero-sub b {
+        color: var(--ink-1);
+        font-weight: 500;
+      }
+
+      .scroll-cue {
+        margin-top: 56px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 9px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+      .scroll-cue .bar {
+        width: 40px;
+        height: 1px;
+        background: var(--ink-3);
+        position: relative;
+        overflow: hidden;
+      }
+      .scroll-cue .bar::after {
+        content: "";
+        position: absolute;
+        left: -40px;
+        top: 0;
+        width: 40px;
+        height: 1px;
+        background: var(--green);
+        animation: sweep 2.4s infinite;
+      }
+      @keyframes sweep {
+        to {
+          left: 40px;
+        }
+      }
+
+      /* fact strip */
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        margin-top: 64px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+      .fact {
+        background: rgba(7, 8, 16, 0.7);
+        padding: 18px 20px;
+      }
+      .fact .v {
+        font-family: var(--disp);
+        font-weight: 600;
+        font-size: 24px;
+        color: var(--ink-1);
+        line-height: 1;
+      }
+      .fact .v small {
+        font-size: 12px;
+        color: var(--green);
+        font-weight: 500;
+      }
+      .fact .k {
+        margin-top: 9px;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+
+      /* ─── MISSIONS ───────────────────────────────────────── */
+      .missions {
+        display: flex;
+        flex-direction: column;
+      }
+      .mission {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 0 28px;
+        padding: 40px 0;
+        border-top: 1px solid var(--line);
+      }
+      .mission:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+      .m-meta {
+        padding-top: 4px;
+      }
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .status .s-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+      }
+      .status.live {
+        color: var(--green);
+      }
+      .status.live .s-dot {
+        background: var(--green);
+        box-shadow: 0 0 8px var(--green);
+        animation: blink 2s infinite;
+      }
+      .status.build {
+        color: var(--ink-3);
+      }
+      .status.build .s-dot {
+        background: var(--ink-3);
+      }
+      .status.plan {
+        color: var(--ink-4);
+      }
+      .status.plan .s-dot {
+        background: var(--ink-4);
+      }
+      .m-id {
+        margin-top: 12px;
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        color: var(--ink-3);
+      }
+
+      .m-title {
+        font-family: var(--disp);
+        font-weight: 600;
+        font-size: 26px;
+        color: var(--ink-1);
+        line-height: 1.1;
+        margin-bottom: 14px;
+        transition: color 0.25s;
+      }
+      .mission:hover .m-title {
+        color: var(--green);
+      }
+      .m-desc {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.8;
+        max-width: 640px;
+        margin-bottom: 14px;
+      }
+      .m-note {
+        font-size: 11.5px;
+        font-style: italic;
+        color: var(--ink-3);
+        line-height: 1.7;
+        padding-left: 14px;
+        border-left: 1px solid var(--line-2);
+        max-width: 620px;
+        margin-bottom: 18px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .chip {
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        border: 1px solid var(--line);
+        padding: 4px 9px;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .chip:hover {
+        color: var(--ink-1);
+        border-color: var(--line-2);
+      }
+      .m-links {
+        margin-top: 20px;
+        display: flex;
+        gap: 22px;
+      }
+      .m-link {
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--green);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(80, 255, 160, 0.25);
+        padding-bottom: 2px;
+        transition: border-color 0.2s;
+      }
+      .m-link:hover {
+        border-color: var(--green);
+      }
+      .m-link.muted {
+        color: var(--ink-3);
+        border-color: var(--line);
+      }
+
+      /* ─── FLIGHT LOG ─────────────────────────────────────── */
+      .log {
+      }
+      .entry {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 0 28px;
+        padding: 30px 0;
+        border-top: 1px solid var(--line);
+      }
+      .entry:last-of-type {
+        border-bottom: 1px solid var(--line);
+      }
+      .e-when {
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        padding-top: 5px;
+        line-height: 1.6;
+      }
+      .e-when b {
+        display: block;
+        color: var(--blue);
+        font-weight: 500;
+        letter-spacing: 0.1em;
+      }
+      .e-co {
+        font-family: var(--disp);
+        font-weight: 600;
+        font-size: 17px;
+        color: var(--ink-1);
+        margin-bottom: 3px;
+      }
+      .e-role {
+        font-size: 11px;
+        color: var(--blue);
+        letter-spacing: 0.04em;
+        margin-bottom: 12px;
+      }
+      .e-list {
+        list-style: none;
+      }
+      .e-list li {
+        font-size: 12.5px;
+        color: var(--ink-2);
+        line-height: 1.75;
+        padding-left: 18px;
+        position: relative;
+        margin-bottom: 3px;
+      }
+      .e-list li::before {
+        content: "—";
+        position: absolute;
+        left: 0;
+        color: var(--ink-4);
+      }
+
+      .awards {
+        margin-top: 46px;
+      }
+      .award {
+        display: grid;
+        grid-template-columns: 22px 1fr 62px;
+        gap: 0 16px;
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+        align-items: start;
+      }
+      .award .ico {
+        color: var(--amber);
+        font-size: 11px;
+        padding-top: 3px;
+      }
+      .award .a-name {
+        font-family: var(--disp);
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--ink-1);
+        margin-bottom: 3px;
+      }
+      .award .a-body {
+        font-size: 11.5px;
+        color: var(--ink-2);
+        line-height: 1.6;
+      }
+      .award .a-yr {
+        font-size: 10px;
+        color: var(--ink-3);
+        text-align: right;
+        letter-spacing: 0.06em;
+      }
+
+      /* ─── SYSTEMS ────────────────────────────────────────── */
+      .stack {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid var(--line);
+        border-left: 1px solid var(--line);
+      }
+      .cell {
+        padding: 26px 26px 28px;
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .cell .c-label {
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 18px;
+      }
+      .cell .c-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .cell .c-item {
+        font-size: 12.5px;
+        color: var(--ink-2);
+      }
+      .cell .c-item.hi {
+        color: var(--ink-1);
+      }
+      .cell .c-item.soon::after {
+        content: " ◦";
+        color: var(--amber);
+        font-size: 10px;
+      }
+      .stack-note {
+        margin-top: 18px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        color: var(--ink-3);
+      }
+      .stack-note span {
+        color: var(--amber);
+      }
+
+      /* ─── ABOUT ──────────────────────────────────────────── */
+      .row {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 0 28px;
+        padding: 18px 0;
+        border-top: 1px solid var(--line);
+        align-items: start;
+      }
+      .row:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+      .r-k {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        padding-top: 3px;
+      }
+      .r-v {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.7;
+      }
+      .bars {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+      .bar {
+        display: grid;
+        grid-template-columns: 84px 1fr 86px;
+        align-items: center;
+        gap: 14px;
+      }
+      .bar .bl {
+        font-size: 11.5px;
+        color: var(--ink-2);
+      }
+      .bar .bt {
+        height: 2px;
+        background: rgba(255, 255, 255, 0.07);
+        position: relative;
+        overflow: hidden;
+      }
+      .bar .bf {
+        height: 100%;
+        width: 0;
+        background: var(--green);
+        opacity: 0.6;
+        transition: width 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .bar .bf.b {
+        background: var(--blue);
+      }
+      .bar .bf.d {
+        background: var(--ink-3);
+        opacity: 0.9;
+      }
+      .bar .bp {
+        font-size: 10px;
+        color: var(--ink-3);
+        text-align: right;
+        letter-spacing: 0.04em;
+      }
+
+      /* ─── UPLINK ─────────────────────────────────────────── */
+      #uplink {
+        text-align: left;
+        padding-bottom: 200px;
+      }
+      .touchdown {
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 24px;
+      }
+      .big-cta {
+        font-family: var(--disp);
+        font-weight: 300;
+        font-size: clamp(34px, 7vw, 84px);
+        line-height: 1;
+        letter-spacing: -0.01em;
+        color: var(--ink-1);
+        margin-bottom: 40px;
+      }
+      .big-cta a {
+        color: var(--green);
+        text-decoration: none;
+        border-bottom: 2px solid rgba(80, 255, 160, 0.3);
+        transition: border-color 0.25s;
+      }
+      .big-cta a:hover {
+        border-color: var(--green);
+      }
+      .links {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid var(--line);
+        max-width: 720px;
+      }
+      .link-item {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        padding: 24px;
+        text-decoration: none;
+        border-right: 1px solid var(--line);
+        transition: background 0.2s;
+      }
+      .link-item:last-child {
+        border-right: none;
+      }
+      .link-item:hover {
+        background: rgba(255, 255, 255, 0.025);
+      }
+      .link-item .lp {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+      .link-item .lh {
+        font-size: 13px;
+        color: var(--ink-1);
+      }
+      .link-item .la {
+        font-size: 11px;
+        color: var(--green);
+        margin-top: 8px;
+      }
+
+      footer {
+        position: relative;
+        z-index: 10;
+        padding: 26px 64px 26px 200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid var(--line);
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+
+      /* ─── Reveal ─────────────────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal.d1 {
+        transition-delay: 0.08s;
+      }
+      .reveal.d2 {
+        transition-delay: 0.16s;
+      }
+      .reveal.d3 {
+        transition-delay: 0.24s;
+      }
+
+      /* ─── Responsive ─────────────────────────────────────── */
+      @media (max-width: 880px) {
+        .panel {
+          padding: 110px 26px 110px 26px;
+        }
+        .hud {
+          display: none;
+        }
+        header {
+          padding: 0 18px;
+        }
+        nav {
+          display: none;
+        }
+        footer {
+          padding: 24px 26px;
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+        }
+        .facts {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .mission {
+          grid-template-columns: 1fr;
+        }
+        .m-meta {
+          margin-bottom: 14px;
+          display: flex;
+          gap: 18px;
+          align-items: center;
+        }
+        .m-id {
+          margin-top: 0;
+        }
+        .entry {
+          grid-template-columns: 1fr;
+        }
+        .e-when {
+          margin-bottom: 8px;
+        }
+        .stack {
+          grid-template-columns: repeat(1, 1fr);
+        }
+        .row {
+          grid-template-columns: 120px 1fr;
+        }
+        .links {
+          grid-template-columns: 1fr;
+        }
+        .link-item {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+        .link-item:last-child {
+          border-bottom: none;
+        }
+        .earth-wrap {
+          width: 320vw;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .scroll-cue .bar::after,
+        .pre .live-dot,
+        .status .s-dot {
+          animation: none;
+        }
+      }
+
+      /* ─── Mission preview image ─────────────────────────── */
+      .m-preview {
+        margin-bottom: 18px;
+        border: 1px solid var(--line);
+        overflow: hidden;
+        position: relative;
+      }
+      .m-preview img {
+        width: 100%;
+        display: block;
+        opacity: 0.78;
+        filter: brightness(0.9) contrast(1.05);
+        transition:
+          opacity 0.3s,
+          filter 0.3s;
+      }
+      .mission:hover .m-preview img {
+        opacity: 1;
+        filter: brightness(1) contrast(1);
+      }
+
+      /* ─── Status: published research ───────────────────── */
+      .status.done {
+        color: var(--amber);
+      }
+      .status.done .s-dot {
+        background: var(--amber);
+        box-shadow: 0 0 8px var(--amber);
+      }
+
+      /* ─── Systems grid hierarchy ────────────────────────── */
+      .cell.dim .c-label {
+        color: var(--ink-3);
+      }
+      .cell.dim .c-item {
+        color: var(--ink-3);
+      }
+      .cell.dim .c-item.hi {
+        color: var(--ink-3);
+      }
+
+      /* ─── Phase scan-line flash ─────────────────────────── */
+      .scan-line {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        z-index: 200;
+        pointer-events: none;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          var(--green) 20%,
+          var(--green) 80%,
+          transparent 100%
+        );
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+      @keyframes scan-sweep {
+        0% {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+        15% {
+          opacity: 0.9;
+          transform: scaleX(1);
+        }
+        75% {
+          opacity: 0.4;
+          transform: scaleX(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scaleX(1);
+        }
+      }
+      .scan-line.fire {
+        animation: scan-sweep 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══ Cosmic backdrop ═══ -->
+    <div class="scan-line" aria-hidden="true"></div>
+
+    <!-- ═══ Cosmic backdrop ═══ -->
+    <div class="space" aria-hidden="true">
+      <canvas id="stars"></canvas>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="earth-wrap" aria-hidden="true">
+      <div class="earth">
+        <div class="earth-land">
+          <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#4f9a64" />
+                <stop offset="1" stop-color="#2c6442" />
+              </linearGradient>
+            </defs>
+            <g fill="url(#land)">
+              <path
+                d="M 38 60 C 30 45 55 32 72 38 C 90 44 96 58 88 72 C 82 84 60 88 48 80 C 38 74 42 68 38 60 Z"
+              />
+              <path
+                d="M 105 55 C 120 42 155 44 168 58 C 178 68 172 82 158 86 C 140 92 122 88 112 78 C 102 70 98 64 105 55 Z"
+              />
+              <path
+                d="M 78 100 C 72 92 92 90 100 98 C 110 108 108 128 98 142 C 90 152 78 150 74 138 C 70 124 84 112 78 100 Z"
+              />
+              <path
+                d="M 142 132 C 150 126 166 130 170 140 C 173 148 165 156 154 154 C 144 152 136 140 142 132 Z"
+              />
+              <path
+                d="M 30 116 C 34 110 46 112 48 120 C 50 128 40 132 34 128 C 29 124 27 120 30 116 Z"
+              />
+            </g>
+          </svg>
+        </div>
+        <div class="earth-shade"></div>
+      </div>
+    </div>
+
+    <!-- ═══ Altitude HUD ═══ -->
+    <aside class="hud" aria-hidden="true">
+      <div class="hud-label">Altitude</div>
+      <div class="hud-alt"><span id="alt">35,786</span></div>
+      <div class="hud-unit">KM · AGL</div>
+      <div class="hud-phase" id="phase">Geostationary</div>
+      <div class="hud-tape">
+        <div class="hud-tick" style="top: 10%"></div>
+        <div class="hud-tick" style="top: 28%"></div>
+        <div class="hud-tick" style="top: 46%"></div>
+        <div class="hud-tick" style="top: 64%"></div>
+        <div class="hud-tick" style="top: 82%"></div>
+        <div class="hud-progress" id="hud-progress"></div>
+      </div>
+    </aside>
+
+    <!-- ═══ Top bar ═══ -->
+    <header>
+      <div class="brand">JT<span class="b-dot">·</span>BARENS</div>
+      <nav>
+        <a href="#signal">Signal</a>
+        <a href="#missions">Missions</a>
+        <a href="#log">Log</a>
+        <a href="#systems">Systems</a>
+        <a href="#about">About</a>
+        <a href="#uplink">Uplink</a>
+      </nav>
+      <div class="telemetry">
+        MET <b id="met">T+00:00:00</b> &nbsp;·&nbsp;
+        <a
+          href="https://github.com/JBarens"
+          target="_blank"
+          rel="noopener"
+          style="
+            color: var(--green);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+          "
+          >GH ↗</a
+        >
+      </div>
+    </header>
+
+    <main class="shell">
+      <!-- ═══════════ 01 · SIGNAL ═══════════ -->
+      <section class="panel" id="signal">
+        <div class="inner">
+          <div class="pre reveal">
+            <span class="live-dot"></span>Inbound from geostationary orbit
+          </div>
+
+          <h1 class="hero-name reveal d1">
+            <span class="first">Jasper</span><br />
+            <span class="last">Bare<span>ns</span></span>
+          </h1>
+
+          <p class="hero-sub reveal d2">
+            Aerospace engineer who codes.
+            <b>MSc spaceflight dynamics · TU Delft</b> — GNC work at
+            <b>Airbus D&amp;S</b> and <b>Ecosmic</b> — now building AI-powered
+            software at <b>Accenture</b> and full-stack on the side. The goal:
+            <b>AI at the intersection of space.</b>
+          </p>
+
+          <div class="scroll-cue reveal d3">
+            <span class="bar"></span> Scroll to begin descent
+          </div>
+
+          <div class="facts reveal d3">
+            <div class="fact">
+              <div class="v">8.0<small> /10</small></div>
+              <div class="k">MSc GPA · TU Delft</div>
+            </div>
+            <div class="fact">
+              <div class="v">200+</div>
+              <div class="k">IAC audience · Milan</div>
+            </div>
+            <div class="fact">
+              <div class="v">4</div>
+              <div class="k">Build missions</div>
+            </div>
+            <div class="fact">
+              <div class="v">€50k</div>
+              <div class="k">EU grant led · Cassini</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 02 · MISSIONS ═══════════ -->
+      <section class="panel" id="missions">
+        <div class="inner">
+          <div class="eyebrow reveal">
+            <span class="e-num">02</span> Missions
+          </div>
+
+          <div class="missions">
+            <!-- P1 -->
+            <article class="mission reveal">
+              <div class="m-meta">
+                <span class="status live"><span class="s-dot"></span>Live</span>
+                <div class="m-id">MSN-01 · 2026</div>
+              </div>
+              <div>
+                <h3 class="m-title">Orbital Mechanics Simulator</h3>
+                <p class="m-desc">
+                  Real-time 3D satellite propagation on a photorealistic globe.
+                  Add any object by NORAD ID and watch live SGP4 physics:
+                  ground-track trails, day/night terminator shading, a time
+                  scrubber (T±hh:mm:ss), orbital-elements readout, conjunction
+                  detection (CDM), and a true-scale Sun and Moon.
+                </p>
+                <p class="m-note">
+                  Browser-side TLE fetch to route around Railway's outbound
+                  network limits · ES256 JWKS authentication written from
+                  scratch · per-user data isolation · satellites rendered at
+                  true orbital altitude.
+                </p>
+                <div class="chips">
+                  <span class="chip">React</span
+                  ><span class="chip">TypeScript</span>
+                  <span class="chip">Three.js</span
+                  ><span class="chip">R3F</span>
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">Python</span>
+                  <span class="chip">Skyfield · SGP4</span
+                  ><span class="chip">PostgreSQL</span>
+                  <span class="chip">Supabase</span
+                  ><span class="chip">Docker</span
+                  ><span class="chip">Railway</span>
+                </div>
+                <div class="m-preview">
+                  <img
+                    src="msn-01.png"
+                    alt="Orbital Simulator — GOES-18 at GEO with conjunction detection active"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="m-links">
+                  <a
+                    class="m-link"
+                    href="https://orbital-simulator.up.railway.app/"
+                    target="_blank"
+                    rel="noopener"
+                    >↗ Live demo</a
+                  >
+                  <a
+                    class="m-link muted"
+                    href="https://github.com/JBarens/orbital-simulator"
+                    target="_blank"
+                    rel="noopener"
+                    >↗ Source</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- P2 -->
+            <article class="mission reveal">
+              <div class="m-meta">
+                <span class="status build"
+                  ><span class="s-dot"></span>Build</span
+                >
+                <div class="m-id">MSN-02 · Started Jun 2026</div>
+              </div>
+              <div>
+                <h3 class="m-title">Geopolitical Risk Map</h3>
+                <p class="m-desc">
+                  An interactive world map — click any country to surface a live
+                  risk profile: conflict history, alliances, trade flows, and an
+                  instability index. Built on live data pipelines from GDELT,
+                  the World Bank, and SIPRI.
+                </p>
+                <div class="chips">
+                  <span class="chip">React</span><span class="chip">D3.js</span>
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">PostgreSQL</span>
+                  <span class="chip">GDELT</span
+                  ><span class="chip">World Bank API</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- P3 -->
+            <article class="mission reveal">
+              <div class="m-meta">
+                <span class="status build"
+                  ><span class="s-dot"></span>Build</span
+                >
+                <div class="m-id">MSN-03 · Started Jun 2026</div>
+              </div>
+              <div>
+                <h3 class="m-title">Space Race Strategy Game</h3>
+                <p class="m-desc">
+                  A turn-based browser game: run a space agency, allocate
+                  budget, climb a technology tree, and respond to geopolitical
+                  events that reshape your funding and mission priorities.
+                  Persistent game state and a logic engine.
+                </p>
+                <div class="chips">
+                  <span class="chip">React</span
+                  ><span class="chip">TypeScript</span>
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">PostgreSQL</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- P4 -->
+            <article class="mission reveal">
+              <div class="m-meta">
+                <span class="status plan"><span class="s-dot"></span>Plan</span>
+                <div class="m-id">MSN-04 · 2027</div>
+              </div>
+              <div>
+                <h3 class="m-title">OrbitIQ — Mission Feasibility SaaS</h3>
+                <p class="m-desc">
+                  An AI feasibility analyser for smallsat teams and NewSpace
+                  startups. Natural-language input → a structured report:
+                  delta-v budget, launch windows, risk flags, and cost
+                  benchmarking against historical missions.
+                </p>
+                <p class="m-note">
+                  Moat: MSc-level orbital-mechanics expertise paired with a
+                  curated NASA/ESA RAG knowledge base.
+                </p>
+                <div class="chips">
+                  <span class="chip">React</span
+                  ><span class="chip">FastAPI</span>
+                  <span class="chip">Azure OpenAI</span
+                  ><span class="chip">RAG · LangChain</span>
+                  <span class="chip">LangGraph</span
+                  ><span class="chip">Supabase</span>
+                  <span class="chip">Stripe</span
+                  ><span class="chip">PostgreSQL</span>
+                </div>
+              </div>
+            </article>
+            <!-- RES-01 -->
+            <article class="mission reveal">
+              <div class="m-meta">
+                <span class="status done"
+                  ><span class="s-dot"></span>Published</span
+                >
+                <div class="m-id">RES-01 · 2025</div>
+              </div>
+              <div>
+                <h3 class="m-title">
+                  Admissible Regions for Untracked LEO Debris
+                </h3>
+                <p class="m-desc">
+                  MSc thesis at Airbus Defence &amp; Space, Friedrichshafen.
+                  Developed admissible-region methods to generate initial orbit
+                  catalogues for untracked LEO objects detected by ground-based
+                  optical telescopes — bridging astrodynamics, estimation
+                  theory, and sensor geometry to address a live problem in space
+                  situational awareness.
+                </p>
+                <p class="m-note">
+                  Supervised jointly by TU Delft and Airbus D&amp;S · Published
+                  in TU Delft repository · MSc GPA 8.0 / 10
+                </p>
+                <div class="chips">
+                  <span class="chip">Python</span
+                  ><span class="chip">PowerShell</span>
+                  <span class="chip">Skyfield · SGP4</span
+                  ><span class="chip">Kalman filters</span>
+                  <span class="chip">Optical telescope data</span
+                  ><span class="chip">Estimation theory</span>
+                  <span class="chip">Space situational awareness</span>
+                </div>
+                <div class="m-links">
+                  <a
+                    class="m-link"
+                    href="https://repository.tudelft.nl/record/uuid:0a7bc86a-ce91-4c85-901b-5bea3856b40a"
+                    target="_blank"
+                    rel="noopener"
+                    >↗ TU Delft Repository</a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 03 · FLIGHT LOG ═══════════ -->
+      <section class="panel" id="log">
+        <div class="inner">
+          <div class="eyebrow reveal">
+            <span class="e-num">03</span> Flight Log
+          </div>
+
+          <div class="log">
+            <div class="entry reveal">
+              <div class="e-when"><b>May 2026 →</b>Amsterdam, NL</div>
+              <div>
+                <div class="e-co">Accenture Netherlands</div>
+                <div class="e-role">
+                  Manufacturing &amp; Operations Consulting Analyst · Industry X
+                </div>
+                <ul class="e-list">
+                  <li>
+                    Help industrial &amp; manufacturing clients navigate complex
+                    transformations — from AI adoption to supply-chain redesign
+                  </li>
+                  <li>
+                    Operate across the full stack: data analysis, client
+                    communications, and building AI-powered tools that create
+                    operational value
+                  </li>
+                  <li>
+                    Building AI tools that automate analysis and generate
+                    client-ready outputs — engineering the work, not just
+                    advising on it
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="entry reveal">
+              <div class="e-when"><b>Apr – Sep 2025</b>Friedrichshafen, DE</div>
+              <div>
+                <div class="e-co">Airbus Defence &amp; Space</div>
+                <div class="e-role">
+                  MSc Thesis · Space Situational Awareness
+                </div>
+                <ul class="e-list">
+                  <li>
+                    Researched admissible-region methods to generate catalogues
+                    of untracked LEO objects from ground-based optical
+                    telescopes
+                  </li>
+                  <li>
+                    Work at the intersection of orbital mechanics, sensor
+                    geometry, and estimation theory
+                  </li>
+                  <li>
+                    Bridged academic rigour with an active industrial problem
+                    inside Airbus D&amp;S
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="entry reveal">
+              <div class="e-when"><b>Aug 2024 – Jan 2025</b>Turin, IT</div>
+              <div>
+                <div class="e-co">
+                  Ecosmic
+                  <span
+                    style="
+                      color: var(--ink-3);
+                      font-weight: 400;
+                      font-size: 11px;
+                    "
+                    >· deep-tech space startup</span
+                  >
+                </div>
+                <div class="e-role">GNC Engineer</div>
+                <ul class="e-list">
+                  <li>
+                    Guidance, navigation &amp; control for
+                    space-situational-awareness and collision-avoidance systems
+                  </li>
+                  <li>
+                    Early-stage development at an 8-person startup — broad
+                    scope, real ownership
+                  </li>
+                  <li>
+                    Led a €50k Cassini Challenge EU grant application ·
+                    presented at IAC Milan to 200+ professionals
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="entry reveal">
+              <div class="e-when"><b>2020 – 2025</b>Delft, NL</div>
+              <div>
+                <div class="e-co">TU Delft</div>
+                <div class="e-role">
+                  MSc Spaceflight Dynamics · BSc Aerospace Engineering · MSc GPA
+                  8.0 / 10
+                </div>
+                <ul class="e-list">
+                  <li>
+                    Specialised in spaceflight dynamics — orbital mechanics,
+                    estimation, space situational awareness
+                  </li>
+                  <li>
+                    Coursework: Space Systems Engineering, Orbital Dynamics,
+                    Entrepreneurship &amp; Start-Ups
+                  </li>
+                  <li>
+                    Minor in Economics &amp; Finance · Universidad Carlos III de
+                    Madrid · Athens Programme (Big Data)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="awards">
+            <div class="award reveal">
+              <div class="ico">▲</div>
+              <div>
+                <div class="a-name">Roland Berger Jury Prize</div>
+                <div class="a-body">
+                  €5k · TU Delft Ready to Startup · EV-battery repurposing for
+                  residential energy storage — led financial modelling and
+                  market analysis
+                </div>
+              </div>
+              <div class="a-yr">2024</div>
+            </div>
+            <div class="award reveal">
+              <div class="ico">▲</div>
+              <div>
+                <div class="a-name">EC Space Career Voucher</div>
+                <div class="a-body">
+                  Chosen from 500+ applicants across Europe — one of roughly 20
+                  early-career space professionals recognised by the European
+                  Commission as a rising contributor to the sector
+                </div>
+              </div>
+              <div class="a-yr">2025</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 04 · SYSTEMS ═══════════ -->
+      <section class="panel" id="systems">
+        <div class="inner">
+          <div class="eyebrow reveal">
+            <span class="e-num">04</span> Systems
+          </div>
+
+          <div class="stack reveal">
+            <div class="cell">
+              <div class="c-label">Domain</div>
+              <div class="c-list">
+                <div class="c-item hi">Orbital mechanics</div>
+                <div class="c-item hi">Space situational awareness</div>
+                <div class="c-item hi">GNC · estimation theory</div>
+                <div class="c-item soon">ML for space autonomy</div>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="c-label">AI / Data</div>
+              <div class="c-list">
+                <div class="c-item soon">RAG · LangChain</div>
+                <div class="c-item soon">LangGraph · Agents</div>
+                <div class="c-item soon">PyTorch · fast.ai</div>
+                <div class="c-item hi">SQL · data modelling</div>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="c-label">Frontend</div>
+              <div class="c-list">
+                <div class="c-item hi">React · TypeScript</div>
+                <div class="c-item hi">Three.js · React Three Fiber</div>
+                <div class="c-item hi">Vite · HTML / CSS</div>
+                <div class="c-item soon">D3.js</div>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="c-label">Backend</div>
+              <div class="c-list">
+                <div class="c-item hi">Python · FastAPI</div>
+                <div class="c-item hi">SQLAlchemy · PostgreSQL</div>
+                <div class="c-item hi">Supabase · JWT / JWKS</div>
+                <div class="c-item hi">Skyfield · SGP4</div>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="c-label">Infrastructure</div>
+              <div class="c-list">
+                <div class="c-item hi">Docker · Docker Compose</div>
+                <div class="c-item hi">Railway</div>
+                <div class="c-item hi">Git · Linux · Bash</div>
+                <div class="c-item soon">Azure (AZ-900 in progress)</div>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="c-label">Consulting</div>
+              <div class="c-list">
+                <div class="c-item hi">Stakeholder management</div>
+                <div class="c-item hi">Financial modelling</div>
+                <div class="c-item hi">EU grant writing</div>
+                <div class="c-item hi">Go-to-market strategy</div>
+              </div>
+            </div>
+          </div>
+          <div class="stack-note reveal">
+            Items marked <span>◦</span> are in active study.
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 05 · ABOUT ═══════════ -->
+      <section class="panel" id="about">
+        <div class="inner">
+          <div class="eyebrow reveal"><span class="e-num">05</span> About</div>
+
+          <div class="row reveal">
+            <div class="r-k">Languages</div>
+            <div class="r-v">
+              <div class="bars">
+                <div class="bar">
+                  <span class="bl">Dutch</span
+                  ><span class="bt"><span class="bf" data-w="100"></span></span
+                  ><span class="bp">fluent</span>
+                </div>
+                <div class="bar">
+                  <span class="bl">English</span
+                  ><span class="bt"><span class="bf" data-w="100"></span></span
+                  ><span class="bp">fluent</span>
+                </div>
+                <div class="bar">
+                  <span class="bl">Spanish</span
+                  ><span class="bt"><span class="bf" data-w="90"></span></span
+                  ><span class="bp">fluent</span>
+                </div>
+                <div class="bar">
+                  <span class="bl">German</span
+                  ><span class="bt"><span class="bf b" data-w="42"></span></span
+                  ><span class="bp">working</span>
+                </div>
+                <div class="bar">
+                  <span class="bl">Italian</span
+                  ><span class="bt"><span class="bf b" data-w="42"></span></span
+                  ><span class="bp">working</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row reveal">
+            <div class="r-k">Countries</div>
+            <div class="r-v">
+              46 visited. Lived and worked in NL · DE · IT · ES. IAC Milan ·
+              presented to 200+ space professionals.
+            </div>
+          </div>
+
+          <div class="row reveal">
+            <div class="r-k">Outside work</div>
+            <div class="r-v">
+              Judo, Ironman training, tennis, gym. Dutch Red Cross first-aid
+              volunteer. A relentless language-learner.
+            </div>
+          </div>
+
+          <div class="row reveal">
+            <div class="r-k">How I work</div>
+            <div class="r-v">
+              Clean, direct, empirical. Consistent beats intensive — compound
+              everything. I approach code the same way I'd approach a trajectory
+              problem: get the model right first, then optimise. Ship something
+              real and imperfect before you architect the perfect thing on
+              paper.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 06 · UPLINK ═══════════ -->
+      <section class="panel" id="uplink">
+        <div class="inner">
+          <div class="touchdown reveal">● Touchdown — 0 km</div>
+          <div class="big-cta reveal d1">
+            Let's build<br />something that<br /><a
+              href="mailto:jasper@barens.org"
+              >leaves orbit.</a
+            >
+          </div>
+          <div class="links reveal d2">
+            <a class="link-item" href="mailto:jasper@barens.org">
+              <span class="lp">Email</span
+              ><span class="lh">jasper@barens.org</span
+              ><span class="la">→</span>
+            </a>
+            <a
+              class="link-item"
+              href="https://linkedin.com/in/jbarens"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="lp">LinkedIn</span
+              ><span class="lh">in / jbarens</span><span class="la">→</span>
+            </a>
+            <a
+              class="link-item"
+              href="https://github.com/JBarens"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="lp">GitHub</span><span class="lh">JBarens</span
+              ><span class="la">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>Jasper Barens · Amsterdam, NL</div>
+      <div id="utc">UTC —</div>
+    </footer>
+
+    <script>
+      (function () {
+        "use strict";
+        var reduce = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        /* ─── Starfield with parallax depth ─────────────────── */
+        var cv = document.getElementById("stars");
+        var ctx = cv.getContext("2d");
+        var W,
+          H,
+          DPR,
+          stars = [];
+        var STAR_N = 500;
+
+        function size() {
+          DPR = Math.min(window.devicePixelRatio || 1, 2);
+          W = window.innerWidth;
+          H = window.innerHeight;
+          cv.width = W * DPR;
+          cv.height = H * DPR;
+          cv.style.width = W + "px";
+          cv.style.height = H + "px";
+          ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        }
+
+        function seed() {
+          stars = [];
+          for (var i = 0; i < STAR_N; i++) {
+            var depth = Math.random(); // 0 far → 1 near
+            stars.push({
+              x: Math.random() * W,
+              y: Math.random() * (H * 6), // span beyond viewport for parallax
+              z: depth,
+              r: 0.3 + depth * 1.4,
+              base: 0.25 + depth * 0.65,
+              tw: Math.random() * Math.PI * 2,
+              tws: 0.6 + Math.random() * 1.4,
+              hue:
+                Math.random() < 0.12 ? (Math.random() < 0.5 ? "b" : "g") : "w",
+            });
+          }
+        }
+
+        /* ─── Scroll state with smoothing ───────────────────── */
+        var targetY = window.pageYOffset || 0;
+        var smoothY = targetY;
+        var maxScroll = 1;
+
+        function recalc() {
+          maxScroll = Math.max(
+            1,
+            document.body.scrollHeight - window.innerHeight,
+          );
+        }
+
+        window.addEventListener(
+          "scroll",
+          function () {
+            targetY = window.pageYOffset;
+          },
+          { passive: true },
+        );
+        window.addEventListener("resize", function () {
+          size();
+          seed();
+          recalc();
+        });
+
+        /* parallax elements */
+        var pxEls = [].slice.call(document.querySelectorAll("[data-parallax]"));
+        var earth = document.querySelector(".earth-wrap");
+        var altEl = document.getElementById("alt");
+        var phaseEl = document.getElementById("phase");
+        var hudProg = document.getElementById("hud-progress");
+        var scanEl = document.querySelector(".scan-line");
+        var lastPhase = "";
+
+        /* altitude phases */
+        var GEO = 35786;
+        function phaseFor(alt) {
+          if (alt > 30000) return "Geostationary";
+          if (alt > 5000) return "Medium Earth orbit";
+          if (alt > 1500) return "MEO → LEO transfer";
+          if (alt > 300) return "Low Earth orbit";
+          if (alt > 80) return "Re-entry interface";
+          if (alt > 5) return "Atmospheric descent";
+          return "Touchdown";
+        }
+        function fmt(n) {
+          return Math.round(n).toLocaleString("en-US");
+        }
+
+        var mouseX = 0,
+          mouseY = 0,
+          mTX = 0,
+          mTY = 0;
+        if (!reduce) {
+          window.addEventListener(
+            "mousemove",
+            function (e) {
+              mTX = e.clientX / window.innerWidth - 0.5;
+              mTY = e.clientY / window.innerHeight - 0.5;
+            },
+            { passive: true },
+          );
+        }
+
+        function frame() {
+          /* smooth scroll value */
+          smoothY += (targetY - smoothY) * 0.085;
+          var prog = Math.min(1, Math.max(0, smoothY / maxScroll));
+
+          /* ── starfield ── */
+          ctx.clearRect(0, 0, W, H);
+          var t = performance.now() * 0.001;
+          for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            // parallax: nearer stars move faster against scroll
+            var py = (s.y - smoothY * (0.15 + s.z * 0.9)) % (H * 6);
+            if (py < 0) py += H * 6;
+            var yy = py - H; // center band in viewport
+            if (yy < -20 || yy > H + 20) continue;
+            var tw = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * s.tws + s.tw);
+            var starFade = Math.max(0, 1 - Math.max(0, prog - 0.7) / 0.3);
+            var a = s.base * tw * starFade;
+            ctx.beginPath();
+            ctx.arc(s.x + mTX * (4 + s.z * 26), yy, s.r, 0, 6.2832);
+            if (s.hue === "b") ctx.fillStyle = "rgba(150,195,255," + a + ")";
+            else if (s.hue === "g")
+              ctx.fillStyle = "rgba(140,255,200," + a + ")";
+            else ctx.fillStyle = "rgba(255,255,255," + a + ")";
+            ctx.fill();
+          }
+
+          /* ── DOM parallax ── */
+          for (var j = 0; j < pxEls.length; j++) {
+            var el = pxEls[j];
+            var d = parseFloat(el.getAttribute("data-parallax")) || 0;
+            el.style.transform = "translateY(" + smoothY * d + "px)";
+          }
+
+          /* mouse smoothing — always run */
+          if (!reduce) {
+            mouseX += (mTX - mouseX) * 0.06;
+            mouseY += (mTY - mouseY) * 0.06;
+          }
+
+          /* ── Earth rises, grows, and floats with mouse ── */
+          if (earth) {
+            var rise = 92 - prog * 78;
+            var scale = 1 + prog * 0.5;
+            var emx = !reduce ? (mouseX * 6).toFixed(2) : 0;
+            var emy = !reduce ? (mouseY * 6).toFixed(2) : 0;
+            earth.style.transform =
+              "translate(calc(-50% + " +
+              emx +
+              "px), calc(" +
+              rise +
+              "% + " +
+              emy +
+              "px)) scale(" +
+              scale +
+              ")";
+          }
+
+          /* ── Altitude HUD (ease-in so most of the journey is high) ── */
+          var altProg = Math.pow(prog, 2.0);
+          var alt = GEO * (1 - altProg);
+          if (altEl) altEl.textContent = fmt(alt);
+          if (phaseEl) {
+            var ph = phaseFor(alt);
+            if (ph !== lastPhase) {
+              lastPhase = ph;
+              phaseEl.textContent = ph;
+            }
+          }
+          if (hudProg) hudProg.style.height = prog * 100 + "%";
+
+          requestAnimationFrame(frame);
+        }
+
+        /* ─── Reveal on scroll ──────────────────────────────── */
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                // fire language bars
+                if (e.target.querySelector) {
+                  var bars = e.target.querySelectorAll(".bf[data-w]");
+                  bars.forEach(function (b, k) {
+                    setTimeout(
+                      function () {
+                        b.style.width = b.getAttribute("data-w") + "%";
+                      },
+                      120 + k * 90,
+                    );
+                  });
+                }
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+        );
+        [].slice
+          .call(document.querySelectorAll(".reveal"))
+          .forEach(function (el) {
+            io.observe(el);
+          });
+
+        /* ─── Clocks ────────────────────────────────────────── */
+        var t0 = Date.now();
+        var metEl = document.getElementById("met");
+        var utcEl = document.getElementById("utc");
+        function pad(n) {
+          return String(n).padStart(2, "0");
+        }
+        function clocks() {
+          var el = Math.floor((Date.now() - t0) / 1000);
+          metEl.textContent =
+            "T+" +
+            pad(Math.floor(el / 3600)) +
+            ":" +
+            pad(Math.floor(el / 60) % 60) +
+            ":" +
+            pad(el % 60);
+          var d = new Date();
+          utcEl.textContent =
+            "UTC " +
+            pad(d.getUTCHours()) +
+            ":" +
+            pad(d.getUTCMinutes()) +
+            ":" +
+            pad(d.getUTCSeconds());
+        }
+        clocks();
+        setInterval(clocks, 1000);
+
+        /* ─── Boot ──────────────────────────────────────────── */
+        size();
+        seed();
+        recalc();
+        setTimeout(recalc, 600); // after fonts/layout settle
+        window.addEventListener("load", recalc);
+        requestAnimationFrame(frame);
+      })();
+    </script>
+  </body>
 </html>
