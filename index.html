@@ -1360,24 +1360,52 @@
             <!-- P3 -->
             <article class="mission reveal">
               <div class="m-meta">
-                <span class="status build"
-                  ><span class="s-dot"></span>Build</span
-                >
-                <div class="m-id">MSN-03 · Started Jun 2026</div>
+                <span class="status live"><span class="s-dot"></span>Live</span>
+                <div class="m-id">MSN-03 · Aug 2026</div>
               </div>
               <div>
-                <h3 class="m-title">Space Race Strategy Game</h3>
+                <h3 class="m-title">Historical Atlas</h3>
                 <p class="m-desc">
-                  A turn-based browser game: run a space agency, allocate
-                  budget, climb a technology tree, and respond to geopolitical
-                  events that reshape your funding and mission priorities.
-                  Persistent game state and a logic engine.
+                  Ask any question about European political and military history
+                  1900–2000 and watch the map respond: borders redraw by era,
+                  key moments surface as a timeline, and countries highlight as
+                  the narrative streams in. Click any country for an AI-generated
+                  fact card with era-accurate names, political context, and
+                  citations. Query history, PNG export, and full mobile support.
+                </p>
+                <p class="m-note">
+                  RAG pipeline over historical documents · pgvector semantic
+                  retrieval · Pydantic AI structured output for both timeline
+                  and country facts · Mapbox GL JS feature-state hover
+                  highlighting · SSE streaming with monospace typewriter
+                  rendering
                 </p>
                 <div class="chips">
                   <span class="chip">React</span
                   ><span class="chip">TypeScript</span>
-                  <span class="chip">FastAPI</span
-                  ><span class="chip">PostgreSQL</span>
+                  <span class="chip">Mapbox GL JS</span
+                  ><span class="chip">FastAPI</span>
+                  <span class="chip">Pydantic AI</span
+                  ><span class="chip">Claude Sonnet 5</span>
+                  <span class="chip">PostgreSQL</span
+                  ><span class="chip">pgvector</span>
+                  <span class="chip">SQLAlchemy</span
+                  ><span class="chip">Render</span>
+                </div>
+                <div class="m-preview">
+                  <img
+                    src="msn-03.png"
+                    alt="Historical Atlas · 1914 map with HOI4-inspired palette and query bar"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="m-links">
+                  <a
+                    class="m-link"
+                    href="https://github.com/JBarens/project-3-historical-atlas"
+                    target="_blank"
+                    rel="noopener"
+                    >↗ Source</a>
                 </div>
               </div>
             </article>
