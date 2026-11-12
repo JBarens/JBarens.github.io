@@ -28,6 +28,7 @@
       }
 
       html { scroll-behavior: smooth; }
+      .entry { scroll-margin-top: 90px; }
 
       body {
         background: var(--bg);
@@ -386,6 +387,7 @@
 
         var el = document.createElement('article');
         el.className = 'entry';
+        if (meta.slug) el.id = meta.slug;
         el.innerHTML =
           '<div class="e-header">' +
             '<span class="e-id">' + id + '</span>' +
@@ -415,6 +417,10 @@
             texts.forEach(function (text, i) {
               container.appendChild(renderEntry(text, i));
             });
+            if (location.hash) {
+              var target = document.getElementById(location.hash.slice(1));
+              if (target) target.scrollIntoView();
+            }
           });
         })
         .catch(function () {
