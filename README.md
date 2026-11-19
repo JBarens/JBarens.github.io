@@ -1,6 +1,6 @@
 # jbarens.github.io
 
-Personal portfolio of **Jasper Barens** — aerospace engineer building toward AI engineering.
+Personal portfolio of **Jasper Barens**, aerospace engineer doing technical delivery of AI at Accenture Industry X.
 
 🌍 **Live: [jbarens.github.io](https://jbarens.github.io/)**
 

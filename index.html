@@ -6,7 +6,7 @@
     <title>Jasper Barens · Aerospace · AI · Consulting</title>
     <meta
       name="description"
-      content="Jasper Barens · Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X. Building at the intersection of space and AI."
+      content="Jasper Barens · Aerospace engineer (MSc, TU Delft) doing technical delivery of AI with industrial clients at Accenture Industry X. Previously Airbus D&S and Ecosmic."
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -19,7 +19,7 @@
     />
     <meta
       property="og:description"
-      content="Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X."
+      content="Aerospace engineer (MSc, TU Delft). Technical delivery of AI at Accenture Industry X. Previously Airbus D&S and Ecosmic."
     />
     <meta property="og:url" content="https://jbarens.github.io/" />
     <meta property="og:image" content="https://jbarens.github.io/og.png" />
@@ -32,7 +32,7 @@
     />
     <meta
       name="twitter:description"
-      content="Aerospace engineer turned AI builder. MSc TU Delft, Airbus D&S, Accenture Industry X."
+      content="Aerospace engineer (MSc, TU Delft). Technical delivery of AI at Accenture Industry X. Previously Airbus D&S and Ecosmic."
     />
     <meta name="twitter:image" content="https://jbarens.github.io/og.png" />
 
@@ -1200,11 +1200,13 @@
           </h1>
 
           <p class="hero-sub reveal d2">
-            <b>MSc spaceflight dynamics · TU Delft.</b> Orbital mechanics
-            research at <b>Airbus D&S</b>, GNC at <b>Ecosmic</b>, AI
-            engineering at <b>Accenture Industry X</b>. Building LLM,
-            retrieval and agentic systems, and measuring whether they actually
-            work. Long-term goal: <b>AI that is safe and useful.</b>
+            <b>MSc Aerospace Engineering (spaceflight dynamics), TU Delft.</b>
+            Thesis on space surveillance at <b>Airbus D&S</b>, GNC internship
+            at <b>Ecosmic</b>, now technical delivery of AI with industrial
+            clients at <b>Accenture Industry X</b>. I build LLM, retrieval and
+            agent systems and measure whether they work. Working towards
+            forward-deployed roles; interested in <b>AI that is safe and
+            useful.</b>
           </p>
 
           <div class="scroll-cue reveal d3">
@@ -1217,16 +1219,16 @@
               <div class="k">MSc GPA · TU Delft</div>
             </div>
             <div class="fact">
-              <div class="v">200+</div>
-              <div class="k">IAC audience · Milan</div>
+              <div class="v">4,105</div>
+              <div class="k">Simulated campaigns · MSc thesis</div>
             </div>
             <div class="fact">
               <div class="v">5</div>
               <div class="k">Build missions</div>
             </div>
             <div class="fact">
-              <div class="v">€50k</div>
-              <div class="k">EU grant led · Cassini</div>
+              <div class="v">106</div>
+              <div class="k">Eval questions · Historical Atlas</div>
             </div>
           </div>
         </div>
@@ -1240,111 +1242,64 @@
           </div>
 
           <div class="missions">
-            <!-- P1 -->
+            <!-- P3 -->
             <article class="mission reveal">
               <div class="m-meta">
                 <span class="status done"><span class="s-dot"></span>Built</span>
-                <div class="m-id">MSN-01 · 2026</div>
+                <div class="m-id">MSN-03 · Nov 2026</div>
               </div>
               <div>
-                <h3 class="m-title">Orbital Mechanics Simulator</h3>
+                <h3 class="m-title">Historical Atlas</h3>
                 <p class="m-desc">
-                  Real-time 3D satellite propagation on a photorealistic globe.
-                  Add any object by NORAD ID and watch live SGP4 physics:
-                  ground-track trails, day/night terminator shading, a time
-                  scrubber (T+hh:mm:ss), orbital-elements readout, conjunction
-                  detection (CDM), and a true-scale Sun and Moon.
+                  Question answering over 5,082 British parliamentary speeches
+                  and 15 US diplomatic documents on five League of Nations
+                  disputes, 1920-1926. Hybrid BM25 and dense retrieval, LLM
+                  reranking and a citation for every claim; when the sources do
+                  not contain the answer it says so instead of answering from
+                  model memory. A map shows the dated borders for each answer.
                 </p>
                 <p class="m-note">
-                  ES256 JWKS authentication written from scratch · per-user
-                  satellite isolation · TLE fetched client-side · satellites
-                  rendered at true orbital altitude with SGP4 propagation
-                  updated in real time.
+                  106-question eval with labelled source passages and an LLM
+                  judge checked against my own grading · held-out test, run
+                  once: correctness 0.80 (95% CI 0.68-0.93, n=20), faithfulness
+                  0.98 · about 1 cent and 5.4 s p95 per question · the demo is
+                  static and replays real pipeline outputs
                 </p>
                 <div class="chips">
+                  <span class="chip">Python</span
+                  ><span class="chip">FastAPI</span>
+                  <span class="chip">Claude API</span
+                  ><span class="chip">BM25</span>
+                  <span class="chip">nomic-embed</span
+                  ><span class="chip">LLM judge</span>
                   <span class="chip">React</span
                   ><span class="chip">TypeScript</span>
-                  <span class="chip">Three.js</span
-                  ><span class="chip">R3F</span>
-                  <span class="chip">FastAPI</span
-                  ><span class="chip">Python</span>
-                  <span class="chip">Skyfield · SGP4</span
-                  ><span class="chip">PostgreSQL</span>
-                  <span class="chip">Supabase</span
-                  ><span class="chip">Docker</span>
-                  <span class="chip">Render</span>
+                  <span class="chip">MapLibre</span
+                  ><span class="chip">GitHub Actions</span>
                 </div>
                 <div class="m-preview">
                   <img
-                    src="msn-01.png"
-                    alt="Orbital Simulator · GOES-18 at GEO with conjunction detection active"
+                    src="msn-03.png"
+                    alt="Historical Atlas · cited answer on the Mosul question with 1926 borders"
                     loading="lazy"
                   />
                 </div>
                 <div class="m-links">
                   <a
                     class="m-link muted"
-                    href="https://github.com/JBarens/orbital-simulator"
+                    href="https://github.com/JBarens/historical-atlas"
                     target="_blank"
                     rel="noopener"
                     >↗ Source</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- P2 -->
-            <article class="mission reveal">
-              <div class="m-meta">
-                <span class="status done"><span class="s-dot"></span>Built</span>
-                <div class="m-id">MSN-02 · Jul 2026</div>
-              </div>
-              <div>
-                <h3 class="m-title">Geopolitical Intelligence Map</h3>
-                <p class="m-desc">
-                  Globe-projection world map with 20 economic and social
-                  heatmaps (GDP/cap, Gini, HDI, CO₂, life expectancy and more)
-                  across 217 countries with province-level data for all
-                  territories, US county resolution, and on-demand AI risk
-                  briefings generated by Claude Haiku — cached to Postgres so
-                  each briefing is only computed once.
-                </p>
-                <p class="m-note">
-                  Mapbox GL JS globe with terrain · Pydantic AI structured
-                  output for briefing generation · FastAPI + SQLAlchemy on
-                  Render · Supabase Postgres · Vercel frontend · World Bank API
-                  for macro indicators
-                </p>
-                <div class="chips">
-                  <span class="chip">React</span
-                  ><span class="chip">Mapbox GL JS</span>
-                  <span class="chip">FastAPI</span
-                  ><span class="chip">Pydantic AI</span>
-                  <span class="chip">Claude Haiku</span
-                  ><span class="chip">SQLAlchemy</span>
-                  <span class="chip">PostgreSQL</span
-                  ><span class="chip">Supabase</span>
-                  <span class="chip">World Bank API</span
-                  ><span class="chip">Vercel</span>
-                  <span class="chip">Render</span>
-                </div>
-                <div class="m-preview">
-                  <img
-                    src="msn-02.png"
-                    alt="Geopolitical Intelligence Map · GDP/Capita heatmap on globe projection"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="m-links">
                   <a
-                    class="m-link muted"
-                    href="https://github.com/JBarens/project-2-world-data"
+                    class="m-link"
+                    href="https://huggingface.co/spaces/JBarens310/historical-atlas"
                     target="_blank"
                     rel="noopener"
-                    >↗ Source</a>
+                    >↗ Demo</a>
                 </div>
               </div>
             </article>
-
             <!-- P4 -->
             <article class="mission reveal">
               <div class="m-meta">
@@ -1400,58 +1355,110 @@
               </div>
             </article>
 
-            <!-- P3 -->
+            <!-- P2 -->
             <article class="mission reveal">
               <div class="m-meta">
                 <span class="status done"><span class="s-dot"></span>Built</span>
-                <div class="m-id">MSN-03 · Aug 2026</div>
+                <div class="m-id">MSN-02 · Jul 2026</div>
               </div>
               <div>
-                <h3 class="m-title">Historical Atlas</h3>
+                <h3 class="m-title">Geopolitical Data Map</h3>
                 <p class="m-desc">
-                  Ask any question about European political and military history
-                  1900–2000 and watch the map respond: borders redraw by era,
-                  key moments surface as a timeline, and countries highlight as
-                  the narrative streams in. Click any country for an AI-generated
-                  fact card with era-accurate names, political context, and
-                  citations. Query history, PNG export, and full mobile support.
+                  World map on a globe projection with 20 economic and social
+                  indicators (GDP per capita, Gini, HDI, CO₂, life expectancy
+                  and more) for 217 countries, with province-level and US
+                  county data. Country risk briefings are generated on demand
+                  by Claude Haiku and cached in Postgres, so each one is
+                  generated once.
                 </p>
                 <p class="m-note">
-                  RAG pipeline over historical documents · pgvector semantic
-                  retrieval · Pydantic AI structured output for both timeline
-                  and country facts · Mapbox GL JS feature-state hover
-                  highlighting · SSE streaming with monospace typewriter
-                  rendering
+                  Mapbox GL JS globe with terrain · Pydantic AI structured
+                  output for briefing generation · FastAPI + SQLAlchemy on
+                  Render · Supabase Postgres · Vercel frontend · World Bank API
+                  for macro indicators
                 </p>
                 <div class="chips">
                   <span class="chip">React</span
-                  ><span class="chip">TypeScript</span>
-                  <span class="chip">Mapbox GL JS</span
-                  ><span class="chip">FastAPI</span>
-                  <span class="chip">Pydantic AI</span
-                  ><span class="chip">Claude Sonnet 5</span>
+                  ><span class="chip">Mapbox GL JS</span>
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">Pydantic AI</span>
+                  <span class="chip">Claude Haiku</span
+                  ><span class="chip">SQLAlchemy</span>
                   <span class="chip">PostgreSQL</span
-                  ><span class="chip">pgvector</span>
-                  <span class="chip">SQLAlchemy</span
-                  ><span class="chip">Render</span>
+                  ><span class="chip">Supabase</span>
+                  <span class="chip">World Bank API</span
+                  ><span class="chip">Vercel</span>
+                  <span class="chip">Render</span>
                 </div>
                 <div class="m-preview">
                   <img
-                    src="msn-03.png"
-                    alt="Historical Atlas · 1914 map with HOI4-inspired palette and query bar"
+                    src="msn-02.png"
+                    alt="Geopolitical Data Map · GDP per capita heatmap on a globe projection"
                     loading="lazy"
                   />
                 </div>
                 <div class="m-links">
                   <a
                     class="m-link muted"
-                    href="https://github.com/JBarens/historical-atlas"
+                    href="https://github.com/JBarens/project-2-world-data"
                     target="_blank"
                     rel="noopener"
                     >↗ Source</a>
                 </div>
               </div>
             </article>
+
+            <!-- P1 -->
+            <article class="mission reveal">
+              <div class="m-meta">
+                <span class="status done"><span class="s-dot"></span>Built</span>
+                <div class="m-id">MSN-01 · 2026</div>
+              </div>
+              <div>
+                <h3 class="m-title">Orbital Mechanics Simulator</h3>
+                <p class="m-desc">
+                  3D satellite viewer in the browser. Add an object by NORAD ID
+                  and its TLE is propagated with SGP4, with ground tracks,
+                  day/night shading, a time scrubber, an orbital-elements
+                  readout, conjunction checks (CDM) and the Sun and Moon drawn
+                  to scale.
+                </p>
+                <p class="m-note">
+                  ES256 JWKS token verification on the backend · each user
+                  sees only their own satellites · TLEs fetched client-side ·
+                  satellites drawn at their orbital altitude
+                </p>
+                <div class="chips">
+                  <span class="chip">React</span
+                  ><span class="chip">TypeScript</span>
+                  <span class="chip">Three.js</span
+                  ><span class="chip">R3F</span>
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">Python</span>
+                  <span class="chip">Skyfield · SGP4</span
+                  ><span class="chip">PostgreSQL</span>
+                  <span class="chip">Supabase</span
+                  ><span class="chip">Docker</span>
+                  <span class="chip">Render</span>
+                </div>
+                <div class="m-preview">
+                  <img
+                    src="msn-01.png"
+                    alt="Orbital Simulator · GOES-18 at GEO with conjunction detection active"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="m-links">
+                  <a
+                    class="m-link muted"
+                    href="https://github.com/JBarens/orbital-simulator"
+                    target="_blank"
+                    rel="noopener"
+                    >↗ Source</a>
+                </div>
+              </div>
+            </article>
+
             <!-- RES-01 -->
             <article class="mission reveal">
               <div class="m-meta">
@@ -1462,25 +1469,27 @@
               </div>
               <div>
                 <h3 class="m-title">
-                  Admissible Regions for Untracked LEO Debris
+                  Surveillance Strategies for LEO Catalogue Generation
                 </h3>
                 <p class="m-desc">
-                  MSc thesis at Airbus Defence &amp; Space, Friedrichshafen.
-                  Developed admissible-region methods to generate initial orbit
-                  catalogues for untracked LEO objects detected by ground-based
-                  optical telescopes · bridging astrodynamics, estimation
-                  theory, and sensor geometry to address a live problem in space
-                  situational awareness.
+                  MSc thesis at Airbus Defence &amp; Space, Friedrichshafen. An
+                  adaptive scheduling method for ground-based telescopes that
+                  uses probabilistic admissible regions to re-detect and
+                  catalogue untracked LEO objects. Over 4,105 simulated
+                  campaigns it re-detected 23.7% of LEO objects against 0% for
+                  fixed scan patterns (91.9% for MEO). Validated with
+                  observations on the Airbus Robotic Telescope, which I
+                  operated.
                 </p>
                 <p class="m-note">
-                  Supervised jointly by TU Delft and Airbus D&amp;S · Published
-                  in TU Delft repository
+                  Supervised by TU Delft and Airbus D&amp;S · Published in the
+                  TU Delft repository
                 </p>
                 <div class="chips">
                   <span class="chip">Python</span
                   ><span class="chip">PowerShell</span>
                   <span class="chip">Skyfield · SGP4</span
-                  ><span class="chip">Kalman filters</span>
+                  ><span class="chip">Gaussian mixtures</span>
                   <span class="chip">Optical telescope data</span
                   ><span class="chip">Estimation theory</span>
                   <span class="chip">Space situational awareness</span>
@@ -1512,23 +1521,35 @@
 
           <div class="log">
             <div class="entry reveal">
-              <div class="e-when"><b>May 2026 ·</b>Amsterdam, NL</div>
+              <div class="e-when"><b>May 2026 – present</b>Amsterdam, NL</div>
               <div>
                 <div class="e-co">Accenture Netherlands</div>
                 <div class="e-role">
-                  Manufacturing &amp; Operations Consulting Analyst · Industry X
+                  Consulting Analyst · Industry X (Manufacturing &amp; Operations)
                 </div>
                 <ul class="e-list">
                   <li>
-                    Control Tower for a semiconductor equipment manufacturer: shaped
-                    the architecture and directed the build of an LLM and agentic
-                    system (Python, FastAPI, PostgreSQL/pgvector, React) that turns
-                    enterprise engineering data into decisions
+                    Engineering control tower for the PLM customisation estate of
+                    a semiconductor-equipment manufacturer, in development: React
+                    and TypeScript front end with five role-based views; Python
+                    and Postgres back end that scans the code estate with an LLM
+                    agent and rolls health up to KPIs
                   </li>
                   <li>
-                    Working directly with client engineers and managers to turn messy operational data and ambiguous problems into working AI tooling
+                    Built a fictional 55-customisation test estate with an answer
+                    key, so the scanner and agent are measured rather than
+                    eyeballed
                   </li>
-                  
+                  <li>
+                    Wrote user stories and requirements for an emissions dashboard
+                    and a water-data programme, reworked with client reviewers
+                    until they matched day-to-day work
+                  </li>
+                  <li>
+                    Built client-neutral interactive demos used in client
+                    conversations
+                  </li>
+
                 </ul>
               </div>
             </div>
@@ -1538,18 +1559,23 @@
               <div>
                 <div class="e-co">Airbus Defence &amp; Space</div>
                 <div class="e-role">
-                  MSc Thesis · Space Situational Awareness
+                  MSc thesis researcher · space surveillance
                 </div>
                 <ul class="e-list">
                   <li>
-                    Developed admissible-region methods to catalogue untracked
-                    LEO objects from ground-based optical telescopes
+                    Designed an adaptive scheduling method using probabilistic
+                    admissible regions to find and catalogue untracked LEO
+                    objects from ground-based telescopes
                   </li>
                   <li>
-                    Orbital mechanics, sensor geometry, and estimation theory ·
-                    applied to a real SSA problem inside Airbus
+                    Built the Python pipeline (SGP4, tracklet correlation,
+                    Gaussian mixtures) and ran 4,105 simulated campaigns: 23.7%
+                    LEO re-detection versus 0% for fixed scans
                   </li>
-                  <li>Published.</li>
+                  <li>
+                    Operated the Airbus Robotic Telescope for validation; thesis
+                    published in the TU Delft repository
+                  </li>
                 </ul>
               </div>
             </div>
@@ -1565,17 +1591,18 @@
                       font-weight: 400;
                       font-size: 11px;
                     "
-                    >· deep-tech space startup</span
+                    >· ESA spin-off</span
                   >
                 </div>
-                <div class="e-role">GNC Engineer</div>
+                <div class="e-role">GNC and data algorithm engineer · intern</div>
                 <ul class="e-list">
                   <li>
-                    GNC systems for space situational awareness and collision
-                    avoidance · 8-person team, real ownership from day one
+                    Guidance, navigation and control for collision avoidance;
+                    optimisation for probabilistic conjunction analysis on large
+                    orbital datasets
                   </li>
-                  <li>Led a €50k Cassini Challenge EU grant application</li>
-                  <li>Presented at IAC Milan to 200+ professionals</li>
+                  <li>Contributed to an EU Cassini Challenge submission</li>
+                  <li>Presented at IAC in Milan</li>
                 </ul>
               </div>
             </div>
@@ -1585,7 +1612,8 @@
               <div>
                 <div class="e-co">TU Delft</div>
                 <div class="e-role">
-                  MSc Spaceflight Dynamics · BSc Aerospace Engineering
+                  MSc Aerospace Engineering (Spaceflight Dynamics) · BSc
+                  Aerospace Engineering
                 </div>
                 <ul class="e-list">
                   <li>
@@ -1593,10 +1621,15 @@
                     space situational awareness
                   </li>
                   <li>
-                    Minor in Economics &amp; Finance · Universidad Carlos III de
-                    Madrid · Athens Programme (Big Data)
+                    Minor in Economics &amp; Finance at Universidad Carlos III de
+                    Madrid (Erasmus+) · Athens Programme (Big Data)
                   </li>
-                  
+                  <li>
+                    2023: project manager for a team of 10 building an
+                    autonomous aerial surveillance system, from requirements to
+                    field deployment
+                  </li>
+
                 </ul>
               </div>
             </div>
@@ -1620,9 +1653,8 @@
               <div>
                 <div class="a-name">EC Space Career Voucher</div>
                 <div class="a-body">
-                  Chosen from 500+ applicants across Europe · one of roughly 20
-                  early-career space professionals recognised by the European
-                  Commission
+                  European Commission voucher for early-career space
+                  professionals
                 </div>
               </div>
               <div class="a-yr">2025</div>
@@ -1652,9 +1684,9 @@
               <div class="c-label">AI / Data</div>
               <div class="c-list">
                 <div class="c-item hi">Pydantic AI · LLM agents</div>
-                <div class="c-item hi">Claude / Anthropic API</div>
+                <div class="c-item hi">Claude API · Claude Code</div>
                 <div class="c-item hi">SQL · data modelling</div>
-                <div class="c-item soon">RAG · retrieval evaluation</div>
+                <div class="c-item hi">RAG · retrieval evaluation</div>
               </div>
             </div>
             <div class="cell">
@@ -1663,7 +1695,7 @@
                 <div class="c-item hi">React · TypeScript</div>
                 <div class="c-item hi">Three.js · React Three Fiber</div>
                 <div class="c-item hi">Vite · HTML / CSS</div>
-                <div class="c-item soon">Mapbox GL JS</div>
+                <div class="c-item hi">Mapbox GL JS · MapLibre</div>
               </div>
             </div>
             <div class="cell">
@@ -1680,7 +1712,7 @@
               <div class="c-list">
                 <div class="c-item hi">Docker · Docker Compose</div>
                 <div class="c-item hi">Render · Vercel · Supabase</div>
-                <div class="c-item hi">Git · Linux · Bash</div>
+                <div class="c-item hi">Git · GitHub Actions · Linux</div>
                 <div class="c-item soon">Azure</div>
               </div>
             </div>
@@ -1688,8 +1720,8 @@
               <div class="c-label">Consulting</div>
               <div class="c-list">
                 <div class="c-item hi">Stakeholder management</div>
-                <div class="c-item hi">Client workshops</div>
-                <div class="c-item hi">EU grant writing</div>
+                <div class="c-item hi">Discovery · requirements</div>
+                <div class="c-item hi">Client demos · hand-over</div>
                 <div class="c-item hi">Technical delivery</div>
               </div>
             </div>
@@ -1718,8 +1750,8 @@
                 </div>
                 <div class="bar">
                   <span class="bl">Spanish</span
-                  ><span class="bt"><span class="bf" data-w="90"></span></span
-                  ><span class="bp">fluent</span>
+                  ><span class="bt"><span class="bf" data-w="100"></span></span
+                  ><span class="bp">native</span>
                 </div>
                 <div class="bar">
                   <span class="bl">German</span
@@ -1738,24 +1770,25 @@
           <div class="row reveal">
             <div class="r-k">Background</div>
             <div class="r-v">
-              46 countries. Grew up across NL · DE · IT · ES. Presented at IAC
-              Milan. 
+              46 countries. Grew up across NL · DE · IT · ES. EU and Australian
+              citizen.
             </div>
           </div>
 
           <div class="row reveal">
             <div class="r-k">Outside work</div>
             <div class="r-v">
-              Training for an Ironman. Judo, tennis, gym. Dutch Red Cross
-              volunteer. Guitar.
+              Training for an Ironman. Judo, tennis, gym. Red Cross event
+              first aider. Guitar.
             </div>
           </div>
 
           <div class="row reveal">
             <div class="r-k">How I work</div>
             <div class="r-v">
-              Direct. Ship something real before you architect the perfect
-              thing. I care more about what works than what sounds good. The goal is AI that holds up in the real world, and space is where I learned to care about that.
+              Direct. I get a working version in front of the people who will
+              use it early, then measure it against an answer key before I
+              trust it. I care more about what works than what sounds good.
             </div>
           </div>
         </div>
@@ -1766,7 +1799,7 @@
         <div class="inner">
           <div class="touchdown reveal">· 0 km · Amsterdam</div>
           <div class="big-cta reveal d1">
-            If you're building<br />something that matters,<br /><a
+            If you're putting AI<br />in front of real users,<br /><a
               href="mailto:jasper@barens.org"
               >let's talk.</a
             >
