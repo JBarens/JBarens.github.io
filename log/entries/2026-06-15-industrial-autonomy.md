@@ -7,6 +7,6 @@ slug: industrial-autonomy
 
 Everyone talks about the rocket. Nobody talks about what happens after you land.
 
-Getting to Mars is a solved problem in the sense that we know how to do it. The hard part is building something there — mining, manufacturing, maintaining systems — in an environment where you can't send a technician and a radio signal takes up to 24 minutes each way.
+The hard part is building and running things where you can't send a technician: mining, manufacturing and maintaining systems somewhere a radio signal takes up to 24 minutes each way.
 
 That's not a propulsion problem. That's an industrial autonomy problem. And we haven't solved it on Earth yet.
