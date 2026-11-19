@@ -15,7 +15,7 @@ So the rebuild started with the eval, and the eval turned out to be most of the 
 
 The eval set has 106 items: answerable questions, questions the corpus cannot answer, ambiguous ones, follow-ups, calculations and cross-case questions. Each answerable item is labelled with a verbatim passage that I checked against the source. That makes retrieval measurable: the passage is in the top 5 or it is not.
 
-The labels were also the first thing to break. Chunking by speech, a better embedding model, hybrid BM25 plus dense search and reranking took recall at 5 on the dev set from 0.20 to 0.44. When I went through the 25 remaining misses, 19 were eval errors, not retrieval errors. I tightened the labelling rules and rebuilt the set. With the first labels I would have kept tuning against noise.
+The labels were also the first thing to break. Chunking by speech, a better embedding model, hybrid BM25 plus dense search and reranking took recall at 5 on the dev set to 0.44. When I went through the 25 remaining misses, 18 were eval errors, not retrieval errors: 10 labels that did not really answer the question and 8 questions that could not be answered as asked. I tightened the labelling rules and rebuilt the set. With the first labels I would have kept tuning against noise.
 
 The split had its own bug. I grouped near-duplicate questions into clusters so that paraphrases could not land in both dev and test. Embedding only the question text put all four calculation items, which share a question and differ only in their history, into one cluster, and so all of them into dev. The test set has no calculations.
 
